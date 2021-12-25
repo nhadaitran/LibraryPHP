@@ -10,10 +10,9 @@
 
         public static function getSession(){
             try {
-                $conn = new PDO("mysql:host = self::SERVER_NAME; dbname = self::DB_NAME", self::USER_NAME, self::PASSWORD);
+                $conn = new PDO("mysql:host = self::SERVER_NAME; dbname = self::DB_NAME", self::USER_NAME, self::PASSWORD,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                echo "Connected successfully";
               } catch(PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
               }
