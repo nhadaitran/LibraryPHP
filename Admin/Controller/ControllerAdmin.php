@@ -1,6 +1,24 @@
 <?php
 include '../../util/Regex.php';
 
+class ControllerAdmin
+{
+    public static function responseAdminHome($admin)
+    {
+        if ($admin != null) {
+            session_start();
+            $_SESSION['admin'] = $admin;
+            header("Location:./ControllerPage.php?page=home");
+        } else {
+            header('Location:../view/index.php?errorLogin=1');
+        }
+    }
+}
+
+
+
+
+
 //method get
 if(!empty($_GET['action'])){
     $page=$_GET['action'];
@@ -13,18 +31,20 @@ if(!empty($_GET['action'])){
             break;
     }
 }
+
+
 //method post
 if (sizeof($_POST)>0 && $_POST['action']!=null){
-    $action=$_POST['action'];
+    $action = $_POST['action'];
     switch ($action){
         case 'login':
-            $username=$_POST['username'];
-            $password=$_POST['password'];
+            $username = $_POST['username'];
+            $password = $_POST['password'];
             if(true){
                 include_once "../Model/ModelAdmin.php";
-                $modelAdmin=new ModelAdmin();
-                $Admin=$modelAdmin->checkLogin($username,$password);
-                responseAdminHome($Admin);
+                $modelAdmin = new ModelAdmin();
+                $admin = $modelAdmin->checkLogin($username,$password);
+                ControllerAdmin::responseAdminHome($admin);
             }
             break;
         case 'register':
@@ -33,20 +53,6 @@ if (sizeof($_POST)>0 && $_POST['action']!=null){
         default:
             break;
     }
-}
-function responseAdminHome($Admin){
-    if($Admin!=null){
-       session_start();
-//        $_SESSION['admin']=$Admin;
-//        include_once "../view/home.php";
-        $_SESSION['admin']=$Admin;
-        header("Location:./ControllerPage.php?page=home");
-
-
-    }else{
-        header('Location:../view/index.php?errorLogin=1');
-    }
-
 }
 
 

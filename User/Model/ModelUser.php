@@ -24,7 +24,7 @@ class ModelUser
             $result = $stmt->fetchAll();
             if (sizeof($result) == 1) {
                 foreach ($result as $value) {
-                    return new Students($value["id"], $value["name"], $value["username"], $value["password"], $value["email"]);
+                    return $result[0];
                 }
             }
             return null;

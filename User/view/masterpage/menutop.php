@@ -1,7 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] ."/webThuVien/Entity/Students.php";
-session_start();
-$user= $_SESSION['user'];
+$user = $_SESSION['user'];
 ?>
 
 <header class="topbar-nav">
@@ -24,23 +22,23 @@ $user= $_SESSION['user'];
                                 <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
                                 <div class="media-body">
                                     <h6 class="mt-2 user-title">
-                                    <?php
-                                            if( $_SESSION['user']!=null){
-                                                echo $user->getName();
-                                            }else{
-                                                echo "Lỗi hiển thị";
-                                            }
+                                        <?php
+                                        if (!empty($user)) {
+                                            echo $user['name'];
+                                        } else {
+                                            echo "Lỗi hiển thị";
+                                        }
                                         ?>
                                     </h6>
                                     <p class="user-subtitle">
-                                    <?php
-                                        if( $_SESSION['user']!=null){
-                                            echo $user->getEmail();
-                                        }else{
+                                        <?php
+                                        if (!empty($user)) {
+                                            echo $user['email'];
+                                        } else {
                                             echo "Lỗi hiển thị";
-                                        }                                        
+                                        }
                                         ?>
-                                        
+
                                     </p>
                                 </div>
                             </div>
@@ -72,9 +70,9 @@ $user= $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="news_post.php"><i class="fa fa-newspaper-o mr-2"></i>Chi tiết tin tức</a></li>                                        
+                    <li class="dropdown-item"><a href="news_post.php"><i class="fa fa-newspaper-o mr-2"></i>Chi tiết tin tức</a></li>
                 </ul>
             </li>
         </ul>
     </nav>
-    </header>
+</header>

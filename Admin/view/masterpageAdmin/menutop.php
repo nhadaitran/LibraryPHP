@@ -1,8 +1,6 @@
 
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/Entity/Admin.php";
-session_start();
-$admin= $_SESSION['admin'];
+    $admin = $_SESSION['admin'];
 ?>
 
 
@@ -33,8 +31,8 @@ $admin= $_SESSION['admin'];
                                 <div class="media-body">
                                     <h6 class="mt-2 user-title">
                                         <?php
-                                            if($_SESSION['admin']!=null){
-                                                echo $admin->getFullname();
+                                            if(!empty($_SESSION['admin'])){
+                                                echo $admin['fullname'];
                                             }else{
                                                 echo "Lỗi hiển thị";
                                             }
@@ -42,8 +40,8 @@ $admin= $_SESSION['admin'];
                                     </h6>
                                     <p class="user-subtitle">
                                         <?php
-                                        if($_SESSION['admin']!=null){
-                                            echo $admin->getEmail();
+                                        if(!empty($_SESSION['admin'])){
+                                            echo $admin['username'];
                                         }else{
                                             echo "Lỗi hiển thị";
                                         }

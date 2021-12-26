@@ -23,9 +23,10 @@ class ModelAdmin
             $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
             $result=$stmt->fetchAll();
             if(sizeof($result)==1){
-                foreach ($result as $value){
-                    return new Admin($value["aid"], $value["fullname"], $value["username"], $value["password"], $value["email"]);
-                }
+//                foreach ($result as $value){
+//                    return new Admin($value["aid"], $value["fullname"], $value["username"], $value["password"], $value["email"]);
+//                }
+                return $result[0];
             }
             return null;
         } catch (Exception $e) {
