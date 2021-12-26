@@ -68,4 +68,25 @@ class ModelBook
         }
         return $bookArray;
     }
+
+    // public function searchBooksByCategory($id)
+    // {
+    //     $bookArray = array();
+    //     try {
+    //         $sql = "SELECT * FROM quanlythuvien.books";
+    //         if ($id != "0") {
+    //             $sql .= " WHERE name like '%$title%'";
+    //         }
+    //         $stmt = $this->conn->prepare($sql);
+    //         $stmt->execute();
+    //         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //         foreach ($result as $value) {
+    //             $book = new Book($value["id"], $value["aid"], $value["name"], $value["author"], $value["status"], $value["description"], $value["date"], $value["image"]);
+    //             array_push($bookArray, $book);
+    //         }
+    //     } catch (Exception $e) {
+    //         return null;
+    //     }
+    //     return $bookArray;
+    // }
 }

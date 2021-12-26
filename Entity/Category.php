@@ -1,38 +1,19 @@
 <?php
 
-class Book
+class Category
 {
-    private $id;
-    private $aid;
+    private $id; 
     private $name;
-    private $author;
-    private $status;
-    private $description;
-    private $date;
-    private $image;
-
     /**
      * @param $id
-     * @param $aid
      * @param $name
-     * @param $author
-     * @param $status
-     * @param $description
-     * @param $date
-     * @param $image
      */
-    public function __construct($id, $aid, $name, $author, $status, $description, $date, $image)
+    public function __construct($id, $name)
     {
        if($id!=null){
            $this->id = $id;
        }
-        $this->aid = $aid;
         $this->name = $name;
-        $this->author = $author;
-        $this->status = $status;
-        $this->description = $description;
-        $this->date = $date;
-        $this->image = $image;
     }
 
     /**

@@ -7,6 +7,10 @@ function responsePageHome(){
     $modelBook = new ModelBook();
     $listBook=$modelBook->getAll();
 
+    include_once "../Model/ModelCategory.php";
+    $modelCategory = new ModelCategory();
+    $listCat=$modelCategory->getAll();
+    
     // include_once "../Model/ModelUser.php";
     // $modeUser = new ModelUser();
     // $countUser = $modeUser->countUser();

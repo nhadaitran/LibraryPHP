@@ -1,4 +1,3 @@
-
 <div class="tab-pane active" id="find">
     <div class="container-fluid">
         <div class="col-lg-12">
@@ -9,34 +8,20 @@
                             <button class="btn btn-light mb-5" type="button" data-toggle="collapse" data-target="#collapseOne"
                                     aria-expanded="true" aria-controls="collapseOne">
                                 + Yêu Cầu Sách
-                            </button>
-                            <div class="form-row col-md-2">
+                            </button>                            
+                            <div class="form-row col-md-2">                            
                                 <select name="category" class="form-control" required>
-                                    <option value="cid" selected="selected" disabled>- - Danh Mục - -</option>
-                                    <option value="All">- - All - -</option>
-                                    <option value="Literary Fiction">Literary Fiction</option>
-                                    <option value="Mystery">Mystery</option>
-                                    <option value="Thriller">Thriller</option>
-                                    <option value="Horror">Horror</option>
-                                    <option value="Historical">Historical</option>
-                                    <option value="Romance">Romance</option>
-                                    <option value="Western">Western</option>
-                                    <option value="Science Fiction">Science Fiction</option>
-                                    <option value="Fantasy">Fantasy</option>
-                                    <option value="Magical Realism">Magical Realism</option>
-                                    <option value="Realist Literature">Realist Literature</option>
+                                    <option value="0" selected="selected">Danh Mục</option>
+                                    <?php
+                                    foreach ($listCat as $cat){
+                                    echo '<option value="'.$cat->getId().'">'.$cat->getName().'</option>';
+                                    }
+                                    ?>
                                 </select>
                             </div>
 
                             <div class="form-row col-md" >
-                                <!-- <form class="form-row col-md">
-                                    <div class="col-md"> -->
                                         <input class="form-control" type="text" name="search" id="search" placeholder="Tìm kiếm bằng tiêu đề sách..." onkeyup="search_data()">
-                                    <!-- </div>
-                                    <div class="col-md-0">
-                                        <button class="btn btn-light" type="submit">Tìm Kiếm</button>
-                                    </div>
-                                </form> -->
                             </div>
                             <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOne ">
                                 <form class="form-row col-md">
