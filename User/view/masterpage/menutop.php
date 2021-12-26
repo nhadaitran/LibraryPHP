@@ -38,8 +38,9 @@ $user= $_SESSION['user'];
                                             echo $user->getEmail();
                                         }else{
                                             echo "Lỗi hiển thị";
-                                        }
+                                        }                                        
                                         ?>
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -52,10 +53,9 @@ $user= $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="../index.php"><i class="fa fa-sign-out mr-2"></i> Đăng Xuất</a></li>
+                    <li class="dropdown-item"><a href="./ControllerUser.php?action=logout" method="post" value="logout"><i class="fa fa-sign-out mr-2"></i> Đăng Xuất</a></li>
                 </ul>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link dropdown-toggle dropdown-toggle-nocaret badge badge-primary" data-toggle="dropdown" href="#">
                     Danh sách trang
@@ -72,9 +72,7 @@ $user= $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="news_post.php"><i class="fa fa-newspaper-o mr-2"></i>Chi tiết tin tức</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="../index.php"><i class="fa fa-sign-out mr-2"></i> Đăng Xuất</a></li>
+                    <li class="dropdown-item"><a href="news_post.php"><i class="fa fa-newspaper-o mr-2"></i>Chi tiết tin tức</a></li>                                        
                 </ul>
             </li>
         </ul>

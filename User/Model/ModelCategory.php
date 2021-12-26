@@ -26,7 +26,7 @@ class ModelCategory
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             foreach ($result as $value) {
-                $cat = new Category ($value["cid"], $value["cname"]);
+                $cat = new Category ($value["id"], $value["name"]);
                 array_push($catArray, $cat);
             }
         } catch (Exception $e) {

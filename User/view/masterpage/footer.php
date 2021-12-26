@@ -36,10 +36,19 @@
             data: {search: search},            
             success: function(data) {
                 jQuery('#search_table').html(data);            
-            },
-            error: function(e) {         
-                console.info(search);
             }
+        });
+    }
+
+    function search_cat() {
+        var category = jQuery('#category').val();        
+        jQuery.ajax({
+            method: 'post',
+            url: 'ControllerBook.php',
+            data: {category: category},            
+            success: function(data) {
+                jQuery('#search_table').html(data);            
+            }            
         });
     }
 </script>

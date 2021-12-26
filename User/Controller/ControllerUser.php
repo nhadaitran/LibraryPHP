@@ -2,10 +2,10 @@
 include '../../util/Regex.php';
 
 //method get
-if(!empty($_GET['action'])){
-    $page=$_GET['action'];
-    switch ($page){
-        case 'logout' :
+if (!empty($_GET['action'])) {
+    $page = $_GET['action'];
+    switch ($page) {
+        case 'logout':
             session_destroy();
             header('Location: ../view/login.php');
             break;
@@ -13,35 +13,58 @@ if(!empty($_GET['action'])){
             break;
     }
 }
-//method post
-if (sizeof($_POST)>0 && $_POST['action']!=null){
-    $action=$_POST['action'];
-    switch ($action){
+
+if (sizeof($_POST) > 0 && $_POST['action'] != null) {
+    $action = $_POST['action'];
+    switch ($action) {
         case 'login':
-            $username=$_POST['username'];
-            $password=$_POST['password'];
-            if(true){
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            if (true) {
                 include_once "../Model/ModelUser.php";
-                $modelUser=new ModelUser();
-                $User=$modelUser->checkLogin($username,$password);
+                $modelUser = new ModelUser();
+                $User = $modelUser->checkLogin($username, $password);
+                if ($User == null) {
+                    $User = "login";
+                }
                 responseHomePage($User);
             }
             break;
         case 'register':
-            echo 'register';
+            $username = $_POST['username'];
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            if (true) {
+                include_once "../Model/ModelUser.php";
+                $modelUser = new ModelUser();                
+                if ($modelUser->checkRegister($username, $email)==true) {
+                    if ($modelUser->insertUser($username, $name, $email, $password)==true) {
+                        $User = $modelUser->checkLogin($username, $password);
+                    }
+                }else{
+                    $User = "register_failed";
+                }
+                responseHomePage($User);
+            }
             break;
         default:
             break;
     }
 }
-function responseHomePage($User){
-    if($User!=null){
-       session_start();
-        $_SESSION['user']=$User;
-        header("Location:./ControllerPage.php?page=home");
-
-
-    }else{
-        header('Location:../view/login.php?errorLogin=1');
+function responseHomePage($User)
+{
+    switch ($User) {
+        case 'login':
+            header('Location:../view/login.php?error=1');
+            break;        
+        case 'register_failed':
+            header('Location:../view/register.php?error=1');
+            break;
+        default:
+            session_start();
+            $_SESSION['user'] = $User;
+            header("Location:./ControllerPage.php?page=home");
+            break;
     }
 }

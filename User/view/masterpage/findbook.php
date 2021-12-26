@@ -9,12 +9,13 @@
                                     aria-expanded="true" aria-controls="collapseOne">
                                 + Yêu Cầu Sách
                             </button>                            
-                            <div class="form-row col-md-2">                            
-                                <select name="category" class="form-control" required>
-                                    <option value="0" selected="selected">Danh Mục</option>
+                            <div class="form-row col-md-2">            
+                            <form method="post" action="../Controller/ControllerBook.php">
+                                <select name="category" id="category" class="form-control" required onchange="search_cat();">
+                                    <option value="0">Danh Mục</option>
                                     <?php
                                     foreach ($listCat as $cat){
-                                    echo '<option value="'.$cat->getId().'">'.$cat->getName().'</option>';
+                                    echo '<option value="'.$cat->getId().'"><a href=?category='.$cat->getId().'>'.$cat->getName().'</a></option>';
                                     }
                                     ?>
                                 </select>
@@ -54,10 +55,11 @@
                         ?>
                         <tbody>
                             <?php 
+                            var_dump( $_SESSION['user']);
                             foreach($listBook as $book){
                                 echo '<tr role="row">';
                                 echo '<td>' . $book->getId() . '</td>';
-                                echo '<td><a href="book.php">' . $book->getName() . '</a></td>';
+                                echo '<td><a href=?=bookid=>' . $book->getName() . '</a></td>';
                                 echo '<td>' . $book->getAuthor() . '</td>';
                                 if($book->getStatus() ==1){
                                     echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';

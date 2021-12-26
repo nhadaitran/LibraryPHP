@@ -13,7 +13,6 @@ class Book
 
     /**
      * @param $id
-     * @param $aid
      * @param $name
      * @param $author
      * @param $status
@@ -21,12 +20,11 @@ class Book
      * @param $date
      * @param $image
      */
-    public function __construct($id, $aid, $name, $author, $status, $description, $date, $image)
+    public function __construct($id, $name, $author, $status, $description, $date, $image)
     {
        if($id!=null){
            $this->id = $id;
        }
-        $this->aid = $aid;
         $this->name = $name;
         $this->author = $author;
         $this->status = $status;
@@ -49,22 +47,6 @@ class Book
     public function setId($id): void
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getaid()
-    {
-        return $this->aid;
-    }
-
-    /**
-     * @param mixed $aid
-     */
-    public function setaid($aid): void
-    {
-        $this->aid = $aid;
     }
 
     /**
