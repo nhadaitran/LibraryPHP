@@ -14,6 +14,16 @@ class ControllerPage
 
         include_once "../view/home.php";
     }
+
+    public static function responsePageLogin()
+    {
+        include_once "../view/login.php";        
+    }
+
+    public static function responsePageRegister()
+    {
+        include_once "../view/register.php";
+    }
 }
 
 if (!empty($_GET['page'])) {
@@ -29,7 +39,13 @@ if (!empty($_GET['page'])) {
             } else {
                 header("Location:./ControllerUser.php?action=logout");
             }
-
+            break;
+        case 'login':
+            ControllerPage::responsePageLogin();
+            break;
+        case 'register':
+            ControllerPage::responsePageRegister();
+            break;
         default:
             break;
     }

@@ -1,4 +1,8 @@
 
+
+<?php
+    $admin = $_SESSION['admin'];
+?>
 <!DOCTYPE html>
 <html lang="en">
     <?php include "masterpageAdmin/header.php" ?>
@@ -38,15 +42,11 @@
                                     <form action="#" class="row">
                                         <div class="form-group col-lg-5">
                                             <label for="input-6">Họ và tên</label>
-                                            <input type="text" class="form-control form-control-rounded" id="input-6" placeholder="Nhập họ và tên">
+                                            <input type="text" class="form-control form-control-rounded" value="<?php echo $admin['fullname'] ?>" id="input-6" placeholder="Nhập họ và tên">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="input-7"> Địa chỉ Email</label>
-                                            <input type="text" class="form-control form-control-rounded" id="input-7" placeholder="Nhập địa chỉ email">
-                                        </div>
-                                        <div class="form-group col-lg-3">
-                                            <label for="input-8">Số điện thoại</label>
-                                            <input type="text" class="form-control form-control-rounded" id="input-8" placeholder="Nhập số điện thoại">
+                                            <input type="text" class="form-control form-control-rounded" id="input-7" value="<?php echo $admin['email'] ?>" placeholder="Nhập địa chỉ email">
                                         </div>
                                         <div class="form-group col-lg-4">
                                             <label for="input-9">Mật khẩu cũ</label>
@@ -63,7 +63,6 @@
                                                 <input type="submit" class="btn btn-light btn-round px-5 ml-3 " value="Cập Nhật" id="applyBtn" />
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>

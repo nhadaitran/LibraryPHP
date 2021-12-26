@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include "masterpage/header.php" ?>
+<?php include_once __DIR__."/masterpage/header.php" ?>
 
 <body class="bg-theme bg-theme2">
 
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="card-content p-2">
                     <div class="text-center">
-                        <img src="assets/images/logo-icon.png" alt="logo icon">
+                        <img src="../view/assets/images/logo-icon.png" alt="logo icon">
                     </div>
                     <div class="card-title text-uppercase text-center py-3">Đăng Nhập</div>
                     <form method="post" action="../Controller/ControllerUser.php">

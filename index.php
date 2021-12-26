@@ -12,8 +12,6 @@
     <script src="User/view/assets/js/pace.min.js"></script>
     <!--favicon-->
     <link rel="icon" href="User/view/assets/images/favicon.ico" type="image/x-icon">
-    <!-- Vector CSS -->
-    <link href="../User/view/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet"/>
     <!-- simplebar CSS-->
     <link href="User/view/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet"/>
     <!-- Bootstrap core CSS-->
@@ -43,12 +41,12 @@
 
             <ul class="navbar-nav align-items-center right-nav-link">
                 <li class="nav-item">
-                    <a class="nav-link fa fa-user-circle" href="User/view/login.php">
+                    <a class="nav-link fa fa-user-circle" href="./User/Controller/ControllerPage.php?page=login">
                         Đăng nhập
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fa fa-plus-circle" href="User/view/register.php">
+                    <a class="nav-link fa fa-plus-circle" href="./User/Controller/ControllerPage.php?page=register">
                         Đăng ký
                     </a>
                 </li>

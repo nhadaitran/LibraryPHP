@@ -28,10 +28,25 @@ class ControllerPage{
         include_once "../Model/ModelIssue.php";
         $modelIssue = new ModelIssue();
         $issueList = $modelIssue->getAllIssue();
+
+        include_once "../Model/ModelReturn.php";
+        $modelReturn = new ModelReturn();
+        $returnList = $modelReturn->getAllReturn();
+
         include_once "../view/transaction.php";
     }
 
     public static function responseDirectoryManagementPage(){
+
+        include_once "../Model/ModelNewCategories.php";
+        $modelNewCategories = new ModelNewCategories();
+        $newCategoriesList = $modelNewCategories->getAllNewCategroies();
+
+        include_once "../Model/ModelNews.php";
+        $modelNew = new ModelNews();
+        $newList = $modelNew -> getAllNews();
+
+
         include_once "../view/directorymanagement.php";
     }
 

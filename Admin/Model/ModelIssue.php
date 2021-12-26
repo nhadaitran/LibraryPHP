@@ -35,14 +35,31 @@ class ModelIssue
     public function getAllIssue(){
         try {
             $sql = " SELECT i.id, i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name as nameBook FROM quanlythuvien.issue i "
-                    ." LEFT JOIN quanlythuvien.admin a ON i.aid = a.aid "
-                    ." LEFT JOIN quanlythuvien.students st ON i.sid = st.id "
-                    ." LEFT JOIN quanlythuvien.books bo ON i.bid = bo.id ";
+                    ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
+                    ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
+                    ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
+                    ." WHERE i.status = 0";
             $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             return $result;
         } catch (Exception $e) {
             return null;
         }
+    }
+
+    public function findByIdIssueOrIdBook($id){
+        try{
+            $sql = " SELECT i.id, i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name as nameBook FROM quanlythuvien.issue i "
+                ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
+                ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
+                ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
+                ." WHERE i.status = 0 AND i.id = $id OR bo.id = $id";
+            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+
     }
 }

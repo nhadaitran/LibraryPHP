@@ -1,11 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!--    ajax-->
-
-<script>
-</script>
-
 
 
     <?php include "masterpageAdmin/header.php" ?>
@@ -55,17 +50,16 @@
                                                                     <select name="category" class="form-control" required>
                                                                         <option value="sid">- - ID Thành viên - -</option>
                                                                         <option value="bid" selected="selected">- - ID Sách - -</option>
-
                                                                     </select>
                                                                 </div>
 
                                                                 <div class="form-row col-md" style="margin-bottom: 3%;">
-                                                                    <form id="searchIssue" class="form-row col-md">
+                                                                    <form method="get" id="searchIssue" action="../Controller/ControllerIssue.php" class="form-row col-md">
                                                                         <div class="col-md">
-                                                                            <input class="form-control" type="search" placeholder="Nhập ID Thành Viên Hoặc ID Sách...">
+                                                                            <input  name="idIssueOrBook" class="form-control" type="number" placeholder="Nhập ID Thành Viên Hoặc ID Sách...">
                                                                         </div>
                                                                         <div class="col-md-0">
-                                                                            <button class="btn btn-light" type="submit">Tìm kiếm</button>
+                                                                            <button name="action" value="searchIssue" class="btn btn-light" type="submit">Tìm kiếm</button>
                                                                         </div>
                                                                     </form>
                                                                 </div>
@@ -90,18 +84,19 @@
                                                                 <thead>
                                                                 <tr>
                                                                     <th scope="col">ID</th>
-                                                                    <th scope="col">Admin Name</th>
-                                                                    <th scope="col">Student Name</th>
-                                                                    <th scope="col">Book Name</th>
+                                                                    <th scope="col">Name Admin</th>
+                                                                    <th scope="col">Name Student</th>
+                                                                    <th scope="col">Name Book</th>
                                                                     <th scope="col">Date issue</th>
                                                                     <th scope="col">Setting</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
+
                                                                     <?php
                                                                         if(!empty($issueList)){
                                                                             foreach ($issueList as $issue){
+                                                                                echo "<tr>";
                                                                                 echo "<th scope='row'>" . $issue['id'] . "</th>";
                                                                                 echo "<td>" . $issue['nameAdmin'] . "</td>";
                                                                                 echo "<td>" . $issue['nameStudent'] . "</td>";
@@ -111,21 +106,10 @@
                                                                                             <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
                                                                                             <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
                                                                                         </td>";
+                                                                                echo "</tr>";
                                                                             }
                                                                         }
                                                                     ?>
-<!---->
-<!--                                                                    <td>Mark</td>-->
-<!--                                                                    <td>Otto</td>-->
-<!--                                                                    <td>john</td>-->
-<!--                                                                    <td>2</td>-->
-<!--                                                                    <td>1/1/2021</td>-->
-<!--                                                                    <td>-->
-<!--                                                                        <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>-->
-<!--                                                                        <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>-->
-<!--                                                                    </td>-->
-                                                                </tr>
-
                                                                 </tbody>
                                                             </table>
 
@@ -149,9 +133,9 @@
                                             </div>
                                         </div>
                                     </div>
-<!--                                End table Isuue-->
+                                <!--End table Isuue-->
 
-<!--                                    start table return-->
+                            <!--start table return-->
 
                                     <div class="tab-pane" id="return">
                                         <div class="container-fluid">
@@ -205,28 +189,31 @@
                                                                 <thead>
                                                                 <tr>
                                                                     <th scope="col">ID</th>
-                                                                    <th scope="col">Admin ID</th>
-                                                                    <th scope="col">Student ID</th>
-                                                                    <th scope="col">Name</th>
-                                                                    <th scope="col">Book ID</th>
+                                                                    <th scope="col">Name Admin</th>
+                                                                    <th scope="col">Name Student</th>
+                                                                    <th scope="col">Name Book</th>
                                                                     <th scope="col">Date return</th>
                                                                     <th scope="col">Setting</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                <tr>
-                                                                    <th scope="row">1</th>
-                                                                    <td>Mark</td>
-                                                                    <td>Otto</td>
-                                                                    <td>john</td>
-                                                                    <td>2</td>
-                                                                    <td>1/1/2022</td>
-                                                                    <td>
-                                                                        <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
-                                                                        <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
-                                                                    </td>
-                                                                </tr>
-
+                                                                <?php
+                                                                    if(!empty($returnList)){
+                                                                        foreach ($returnList as $return){
+                                                                            echo "<tr>";
+                                                                            echo "<th scope='row'>" . $return['id'] . "</th>";
+                                                                            echo "<td>" . $return['nameAdmin'] . "</td>";
+                                                                            echo "<td>" . $return['nameStudent'] . "</td>";
+                                                                            echo "<td>" . $return['nameBook'] . "</td>";
+                                                                            echo "<td>" . $return['datereturn'] . "</td>";
+                                                                            echo " <td>
+                                                                                       <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
+                                                                                       <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
+                                                                                  </td>";
+                                                                            echo "</tr>";
+                                                                        }
+                                                                    }
+                                                                ?>
                                                                 </tbody>
                                                             </table>
 
@@ -252,10 +239,7 @@
                                         </div>
                                     </div>
 
-<!--                                    end table isuue-->
-
-
-                                    
+                                        <!--end table return-->
                                 </div>
                             </div>
                         </div>
@@ -276,4 +260,7 @@
 
 
 </body>
+    <!--    ajax-->
+
+
 </html>

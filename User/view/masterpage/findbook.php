@@ -54,8 +54,7 @@
                         <?php                         
                         ?>
                         <tbody>
-                            <?php 
-                            var_dump( $_SESSION['user']);
+                            <?php
                             foreach($listBook as $book){
                                 echo '<tr role="row">';
                                 echo '<td>' . $book->getId() . '</td>';
@@ -90,4 +89,3 @@
         </div>
     </div>
 </div>
-
