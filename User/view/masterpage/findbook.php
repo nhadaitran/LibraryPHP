@@ -29,14 +29,14 @@
                             </div>
 
                             <div class="form-row col-md" >
-                                <form class="form-row col-md">
-                                    <div class="col-md">
-                                        <input class="form-control" type="search" placeholder="Tìm kiếm bằng tiêu đề sách hoặc tác giả...">
-                                    </div>
+                                <!-- <form class="form-row col-md">
+                                    <div class="col-md"> -->
+                                        <input class="form-control" type="text" name="search" id="search" placeholder="Tìm kiếm bằng tiêu đề sách..." onkeyup="search_data()">
+                                    <!-- </div>
                                     <div class="col-md-0">
                                         <button class="btn btn-light" type="submit">Tìm Kiếm</button>
                                     </div>
-                                </form>
+                                </form> -->
                             </div>
                             <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordionOne ">
                                 <form class="form-row col-md">
@@ -55,7 +55,7 @@
                     </div> 
                 </div>
 
-                <div class="table-responsive">
+                <div class="table-responsive" id="search_table">
                     <table class="table table-hover">
                         <thead>
                             <tr>                      
@@ -80,11 +80,11 @@
                                 else{
                                     echo ' <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
                                 }
+                                echo '</tr>';
                             }
                             ?>
                         </tbody>
                     </table>
-
                 </div>
                 <nav class="mt-3">
                     <ul class="pagination justify-content-center">

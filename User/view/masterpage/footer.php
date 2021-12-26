@@ -22,9 +22,24 @@
 
 <!-- Toast -->
 <script>
-    $(document).ready(function () {
-        $("#applyBtn").click(function () {
+    $(document).ready(function() {
+        $("#applyBtn").click(function() {
             $('.toast').toast('show');
         });
     });
+
+    function search_data() {
+        var search = jQuery('#search').val();        
+        jQuery.ajax({
+            method: 'post',
+            url: 'ControllerSearch.php',                        
+            data: {search: search},            
+            success: function(data) {
+                jQuery('#search_table').html(data);            
+            },
+            error: function(e) {         
+                console.info(search);
+            }
+        });
+    }
 </script>
