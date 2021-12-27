@@ -8,25 +8,22 @@ class ControllerUser
         if ($user == null) {
             header('Location:../view/login.php?error=1');
         } else if ($user == -1) {
-            header('Location:../view/register.php?error=1');            
-        }else{
+            header('Location:../view/register.php?error=1');
+        } else {
             session_start();
             $_SESSION['user'] = $user;
             header("Location:./ControllerPage.php?page=home");
         }
     }
-}
-
-//method get
-if (!empty($_GET['action'])) {
-    $page = $_GET['action'];
-    switch ($page) {
-        case 'logout':
-            session_destroy();
-            header('Location: ../view/login.php');
-            break;
-        default:
-            break;
+    public static function responseAdminHome($admin)
+    {
+        if ($admin != null) {
+            session_start();
+            $_SESSION['admin'] = $admin;
+            header("Location:../../Admin/Controller/ControllerPage.php?page=home");
+        } else {
+            header('Location:../view/index.php?errorLogin=1');
+        }
     }
 }
 
@@ -39,8 +36,15 @@ if (sizeof($_POST) > 0 && $_POST['action'] != null) {
             if (true) {
                 include_once "../Model/ModelUser.php";
                 $modelUser = new ModelUser();
-                $user = $modelUser->checkLogin($username, $password);
-                ControllerUser::responseHomePage($user);
+                include_once "../Model/ModelAdmin.php";
+                $modelAdmin = new ModelAdmin();
+                $user = $modelAdmin->checkLogin($username, $password);
+                if ($user != null) {
+                    ControllerUser::responseAdminHome($user);
+                } else {
+                    $user = $modelUser->checkLogin($username, $password);
+                    ControllerUser::responseHomePage($user);
+                }
             }
             break;
         case 'register':
@@ -56,7 +60,7 @@ if (sizeof($_POST) > 0 && $_POST['action'] != null) {
                         $user = $modelUser->checkLogin($username, $password);
                     }
                 } else {
-                    ControllerUser::responseHomePage($user=-1);
+                    ControllerUser::responseHomePage($user = -1);
                 }
                 ControllerUser::responseHomePage($user);
             }

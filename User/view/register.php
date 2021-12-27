@@ -77,10 +77,10 @@
                 </div>
             </div>
             <div class="card-footer text-center py-3">
-                <p class="text-warning mb-0">Bạn đã có tài khoản? <a href="login.php"> Đăng Nhập</a></p>
+                <p class="text-warning mb-0">Bạn đã có tài khoản? <a href="./ControllerPage.php?page=login"> Đăng Nhập</a></p>
             </div>
             <div class="card-footer text-center py-3">
-                <a class="btn btn-link" href="../../index.php"> Quay lại</a>
+                <a class="btn btn-link" href="../../"> Quay lại</a>
             </div>
         </div>
 

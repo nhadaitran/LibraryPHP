@@ -56,10 +56,10 @@
                             <button name="action" value="login" type="submit" class="btn btn-light btn-block">Đăng Nhập</button>
                         </form>
                     </div>
-                </div>
+                </div>                
                 <div class="card-footer text-center py-3">
-                    <a class="btn btn-link" href="../user/login.php"> Student Here</a>
-                </div>
+                <a class="btn btn-link" href="../../"> Quay lại</a>
+            </div>
             </div>
 
 

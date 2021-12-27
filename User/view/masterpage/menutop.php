@@ -5,7 +5,7 @@ $user = $_SESSION['user'];
 <header class="topbar-nav">
     <nav class="navbar navbar-expand fixed-top">
         <ul class="navbar-nav mr-auto align-items-center">
-            <a class="nav-item" href="home.php">
+            <a class="nav-item" href="../../User/Controller/ControllerPage.php?page=home">
                 <img src="../view/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
                 <h5 class="logo-text">Library</h5>
             </a>
@@ -51,7 +51,7 @@ $user = $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="./ControllerUser.php?action=logout" method="post" value="logout"><i class="fa fa-sign-out mr-2"></i> Đăng Xuất</a></li>
+                    <li class="dropdown-item"><a href="./ControllerPage.php?page=login" method="post"><i class="fa fa-sign-out mr-2"></i> Đăng Xuất</a></li>
                 </ul>
             </li>
             <li class="nav-item">

@@ -1,6 +1,12 @@
 <?php
-include_once "../../util/DPO.php";
-include_once "../../Entity/Book.php";
+if (basename(getcwd()) == "Controller") {
+    include_once "../../util/DPO.php";
+    include_once "../../Entity/Book.php";
+} else if (basename(__FILE__, '.php') != "index") {
+    include_once "./util/DPO.php";
+    include_once "./Entity/Book.php";
+}
+
 class ModelBook
 {
     private $conn;
@@ -16,18 +22,6 @@ class ModelBook
     public function __destruct()
     {
         $this->conn = null;
-    }
-    public function countBook()
-    {
-        try {
-
-            $sql = "SELECT COUNT(id) as countBook FROM quanlythuvien.books";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            return $result[0]['countBook'];
-        } catch (Exception $e) {
-            return null;
-        }
     }
 
     public function getAll()
@@ -45,6 +39,20 @@ class ModelBook
             return null;
         }
         return $bookArray;
+    }
+
+    public function getByID($id)
+    {
+        try {
+            $sql = "SELECT b.id, b.name as bname, b.author, b.description, b.status, b.image, c.name as cname FROM quanlythuvien.books b "
+                . " LEFT JOIN quanlythuvien.category c ON b.id_category = c.id "
+                . " WHERE b.id='$id'";
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result[0];
+        } catch (Exception $e) {
+            return null;
+        }
     }
 
 
@@ -75,7 +83,7 @@ class ModelBook
         try {
             $sql = "SELECT * FROM quanlythuvien.books";
             if ($id != "0") {
-                $sql .= " WHERE id_category = ". $id ;
+                $sql .= " WHERE id_category = " . $id;
             }
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();

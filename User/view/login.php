@@ -69,13 +69,10 @@
                 </div>
             </div>
             <div class="card-footer text-center py-3">
-                <p class="text-warning mb-0">Bạn chưa có tài khoản? <a href="register.php"> Đăng Ký</a></p>
+                <p class="text-warning mb-0">Bạn chưa có tài khoản? <a href="./ControllerPage.php?page=register"> Đăng Ký</a></p>
             </div>
             <div class="card-footer text-center py-3">
-                <a class="btn btn-link" href="../admin/index.php"> Admin Here</a>
-            </div>
-            <div class="card-footer text-center py-3">
-                <a class="btn btn-link" href="../../index.php"> Quay lại</a>
+                <a class="btn btn-link" href="../../"> Quay lại</a>
             </div>
         </div>
 

@@ -23,9 +23,7 @@ class ModelUser
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             if (sizeof($result) == 1) {
-                foreach ($result as $value) {
-                    return $result[0];
-                }
+                return $result[0];
             }
             return null;
         } catch (Exception $e) {

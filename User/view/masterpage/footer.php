@@ -20,6 +20,9 @@
 <!-- Custom scripts -->
 <script src="../view/assets/js/app-script.js"></script>
 
+<!-- Ajax -->
+<script src="../view/assets/js/ajax.js"></script>
+
 <!-- Toast -->
 <script>
     $(document).ready(function() {
@@ -27,28 +30,4 @@
             $('.toast').toast('show');
         });
     });
-
-    function search_data() {
-        var search = jQuery('#search').val();        
-        jQuery.ajax({
-            method: 'post',
-            url: 'ControllerSearch.php',                        
-            data: {search: search},            
-            success: function(data) {
-                jQuery('#search_table').html(data);            
-            }
-        });
-    }
-
-    function search_cat() {
-        var category = jQuery('#category').val();        
-        jQuery.ajax({
-            method: 'post',
-            url: 'ControllerBook.php',
-            data: {category: category},            
-            success: function(data) {
-                jQuery('#search_table').html(data);            
-            }            
-        });
-    }
 </script>

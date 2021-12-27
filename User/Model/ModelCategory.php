@@ -1,6 +1,12 @@
 <?php
-include_once "../../util/DPO.php";
-include_once "../../Entity/Category.php";
+if(basename(getcwd()) =="Controller"){
+    include_once "../../util/DPO.php";
+    include_once "../../Entity/Category.php";
+}
+else if(basename(__FILE__,'.php') !="index"){
+    include_once "./util/DPO.php";
+    include_once "./Entity/Category.php";
+}
 class ModelCategory
 {
     private $conn;
