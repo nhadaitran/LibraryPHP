@@ -26,19 +26,17 @@ class ModelBook
 
     public function getAll()
     {
-        $bookArray = array();
         try {
             $sql = "SELECT * FROM quanlythuvien.books";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            foreach ($result as $value) {
-                $book = new Book($value["id"],  $value["name"], $value["author"], $value["id_category"], $value["status"], $value["description"], $value["date"], $value["image"]);
-                array_push($bookArray, $book);
+            if ($result != null) {
+                return $result;
             }
+            return null;
         } catch (Exception $e) {
             return null;
         }
-        return $bookArray;
     }
 
     public function getByID($id)
@@ -88,10 +86,10 @@ class ModelBook
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($result as $value) {
-                $book = new Book($value["id"],  $value["name"], $value["author"], $value["id_category"], $value["status"], $value["description"], $value["date"], $value["image"]);
-                array_push($bookArray, $book);
+            if ($result != null) {
+                return $result;
             }
+            return null;
         } catch (Exception $e) {
             return null;
         }

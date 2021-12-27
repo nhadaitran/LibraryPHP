@@ -25,10 +25,15 @@ class ModelIssue
     public function getAll($id_student)
     {
         try {
-            $sql = "SELECT * FROM quanlythuvien.issue WHERE id_student='$id_student' AND status='0'";
+            $sql = "SELECT i.id, i.dateissue, i.id_book, i.id_student, b.name, b.author FROM quanlythuvien.issue i
+            LEFT JOIN quanlythuvien.books b ON i.id_book = b.id
+            WHERE i.id_student='$id_student' AND i.status='0' AND i.id_admin IS NOT NULL";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            return $result;
+            if ($result != null) {
+                return $result;
+            }
+            return null;
         } catch (Exception $e) {
             return null;
         }
@@ -59,4 +64,17 @@ class ModelIssue
             return null;
         }
     }
+
+    public function updateBookIssue($id_book)
+    {
+        try {
+            $sql = "UPDATE quanlythuvien.books SET status=1 WHERE id='$id_book'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+    
 }

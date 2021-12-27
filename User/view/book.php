@@ -66,7 +66,7 @@
                                 } else {
                                     echo '<a class="btn btn-danger fa fa-heart-o" href="../Controller/ControllerBook.php?book=defav&id=' . $book['id'] . '&favid=' . $fav['id'] . '"></a>';
                                 }
-                                if ($issue == null) {                                                                    
+                                if ($book['status'] == 0) {
                                     echo '<a class="btn btn-success fa fa-check" href="../Controller/ControllerBook.php?book=issue&id=' . $book['id'] . '"></a>';
                                 }
                                 ?>

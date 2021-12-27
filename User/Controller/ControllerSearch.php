@@ -22,16 +22,14 @@ if (isset($listBook['0'])) {
     foreach ($listBook as $book) {
         $html .= '
         <tr role="row">
-        <td>' . $book->getId() . '</td>';
-        if ($book->getStatus() == 1) {
+        <td>' . $book['id'] . '</td>
+        <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
+        <td>' . $book['author'] . '</td>';
+        if ($book['status'] == 1) {
             $html .= ' 
-            <td>' . $book->getName() . '</td>
-            <td>' . $book->getAuthor() . '</td>
             <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
         } else {
             $html .= ' 
-            <td><a href=?book=' . $book->getId() . '>' . $book->getName() . '</a></td>
-            <td>' . $book->getAuthor() . '</td>
             <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
         }
         $html .= '</tr>';

@@ -45,7 +45,7 @@ $user = $_SESSION['user'];
                         </a>
                     </li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="favorite.php"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
+                    <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=fav"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="ContactUs.php"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
                     <li class="dropdown-divider"></li>
@@ -60,11 +60,9 @@ $user = $_SESSION['user'];
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="favorite.php"><i class="fa fa-home mr-2"></i>Trang chủ</a></li>
+                    <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=home"><i class="fa fa-home mr-2"></i>Trang chủ</a></li>                    
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="book.php"><i class="fa fa-book mr-2"></i>Thông tin sách</a></li>
-                    <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="favorite.php"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
+                    <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=fav"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="ContactUs.php"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
                     <li class="dropdown-divider"></li>

@@ -25,7 +25,9 @@ class ModelFavorite
     public function getAll($id_student)
     {
         try {
-            $sql = "SELECT * FROM quanlythuvien.favorite WHERE id_student='$id_student'";
+            $sql = "SELECT f.id, f.id_book, b.name, b.author, b.status FROM quanlythuvien.favorite f
+            LEFT JOIN quanlythuvien.books b ON f.id_book = b.id
+            WHERE f.id_student='$id_student'";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             return $result;
@@ -50,7 +52,7 @@ class ModelFavorite
     {
         try {
             $sql = "DELETE FROM  quanlythuvien.favorite WHERE id='$id'";
-            $this->conn->query($sql, PDO::FETCH_ASSOC);            
+            $this->conn->query($sql, PDO::FETCH_ASSOC);
             return true;
         } catch (Exception $e) {
             return null;
@@ -63,7 +65,7 @@ class ModelFavorite
             $sql = "SELECT * FROM quanlythuvien.favorite WHERE id_student='$id_student' AND id_book='$id_book'";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            if($result !=null){
+            if ($result != null) {
                 return $result[0];
             }
             return null;
@@ -71,5 +73,4 @@ class ModelFavorite
             return null;
         }
     }
-
 }

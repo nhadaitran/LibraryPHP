@@ -25,6 +25,7 @@ class ControllerBook
         $modelIssue = new ModelIssue();
 
         $modelIssue->insert($id_student, $id_book);
+        $modelIssue->updateBookIssue($id_book);
         header("Location:./ControllerPage.php?book=$id_book");
     }
 }

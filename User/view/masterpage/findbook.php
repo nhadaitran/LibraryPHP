@@ -34,16 +34,14 @@
                                 <th scope="col">Trạng Thái</th>
                             </tr>
                         </thead>
-                        <?php
-                        ?>
                         <tbody>
                             <?php
                             foreach ($listBook as $book) {
                                 echo '<tr role="row">';
-                                echo '<td>' . $book->getId() . '</td>';
-                                echo '<td><a href=?book=' . $book->getId() . '>' . $book->getName() . '</a></td>';
-                                echo '<td>' . $book->getAuthor() . '</td>';
-                                if ($book->getStatus() == 1) {
+                                echo '<td>' . $book['id'] . '</td>';
+                                echo '<td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>';
+                                    echo '<td>' . $book['author'] . '</td>';
+                                if ($book['status'] == 1) {
                                     echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
                                 } else {
                                     echo ' <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
