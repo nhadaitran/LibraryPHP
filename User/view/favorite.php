@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php include "masterpage/header.php" ?>
-    <body class="bg-theme bg-theme2">
+<?php include "masterpage/header.php" ?>
+
+<body class="bg-theme bg-theme2">
     <!--Start topbar header-->
-        <?php include "masterpage/menutop.php" ?>
+    <?php include "masterpage/menutop.php" ?>
     <!--End topbar header-->
 
     <div id="wrapper" class="toggled">
@@ -15,79 +16,23 @@
                 <div class="col-lg-12">
                     <div class="container card">
 
-                        <div class="card-body row d-flex justify-content-around">
-
-                            <div class="card col-md-auto">
-                                <img class="card-img-top m-1" width="100px" height="250px" src="assets/images/book.jfif">
-                                <div class="card-body md-auto" style="margin-top: -25px">
-                                    <h5 class="card-title my-4">lập trình php</h5>
-                                    <p class="card-text"></p>
-                                    <hr>
-                                    <button class="btn-primary card-link "><i class="icon-info mr-2"></i>Thông tin</button>
-                                    <button class="btn-danger card-link"><i class="icon-trash mr-2"></i>Xóa</button>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="card col-md-auto">
-                                <img class="card-img-top m-1" width="100px" height="250px" src="assets/images/book.jfif">
-                                <div class="card-body md-auto" style="margin-top: -25px">
-                                    <h5 class="card-title my-4">lập trình php</h5>
-                                    <p class="card-text"></p>
-                                    <hr>
-                                    <button class="btn-primary card-link "><i class="icon-info mr-2"></i>Thông tin</button>
-                                    <button class="btn-danger card-link"><i class="icon-trash mr-2"></i>Xóa</button>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="card col-md-auto">
-                                <img class="card-img-top m-1" width="100px" height="250px" src="assets/images/book.jfif">
-                                <div class="card-body md-auto" style="margin-top: -25px">
-                                    <h5 class="card-title my-4">lập trình php</h5>
-                                    <p class="card-text"></p>
-                                    <hr>
-                                    <button class="btn-primary card-link "><i class="icon-info mr-2"></i>Thông tin</button>
-                                    <button class="btn-danger card-link"><i class="icon-trash mr-2"></i>Xóa</button>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="card col-md-auto">
-                                <img class="card-img-top m-1" width="100px" height="250px" src="assets/images/book.jfif">
-                                <div class="card-body md-auto" style="margin-top: -25px">
-                                    <h5 class="card-title my-4">lập trình php</h5>
-                                    <p class="card-text"></p>
-                                    <hr>
-                                    <button class="btn-primary card-link "><i class="icon-info mr-2"></i>Thông tin</button>
-                                    <button class="btn-danger card-link"><i class="icon-trash mr-2"></i>Xóa</button>
-                                </div>
-
-
-
-                            </div>
-
-                            <div class="card col-md-auto">
-                                <img class="card-img-top m-1" width="100px" height="250px" src="assets/images/book.jfif">
-                                <div class="card-body md-auto" style="margin-top: -25px">
-                                    <h5 class="card-title my-4">lập trình php</h5>
-                                    <p class="card-text"></p>
-                                    <hr>
-                                    <button class="btn-primary card-link "><i class="icon-info mr-2"></i>Thông tin</button>
-                                    <button class="btn-danger card-link"><i class="icon-trash mr-2"></i>Xóa</button>
-                                </div>
-
-
-
-                            </div>
-
-
+                        <div class="card-body row d-flex justify-content-around" id="favorite">
+                            <?php
+                            foreach ($listBook as $book) {
+                                $book['name'] = strlen($book['name']) > 30 ? substr($book['name'], 0, 30) . "..." : $book['name'];
+                                echo '<div class="card col-md-auto" id="fav_item">';
+                                if($book['image']!=null){
+                                    echo '<img class="card-img-top" width="100px" height="250px" src="../../Admin/image/'.$book['image'].'">';
+                                }else{
+                                    echo '<img class="card-img-top" width="100px" height="250px" src="https://via.placeholder.com/300x400">';
+                                }
+                                echo '<div class="card-body md-auto" style="margin-top: -25px">';
+                                echo '<h5 class="card-title my-4"><a href=?book=' . $book['id_book'] . '>' . $book['name'] . '</a></h5><hr/>';
+                                echo '<div class="d-flex justify-content-center">';
+                                echo '<button class="btn btn-danger rounded fa fa-trash" onClick="delFavorite2();" id="btnDelFav" value="' . $book['id'] . '"></button>';
+                                echo '</div></div></div>';
+                            }
+                            ?>
                         </div>
 
                     </div>
@@ -109,5 +54,6 @@
         <?php include "masterpage/footer.php" ?>
         <!--End footer-->
     </div>
-    </body>
+</body>
+
 </html>

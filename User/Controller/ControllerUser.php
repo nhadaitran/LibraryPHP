@@ -65,6 +65,24 @@ if (sizeof($_POST) > 0 && $_POST['action'] != null) {
                 ControllerUser::responseHomePage($user);
             }
             break;
+            case 'update':
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $old_password = $_POST['old_password'];
+                $new_password = $_POST['new_password'];
+                if (true) {
+                    include_once "../Model/ModelUser.php";
+                    $modelUser = new ModelUser();
+                    if ($modelUser->checkRegister($username, $email) == true) {
+                        if ($modelUser->insertUser($username, $name, $email, $password) == true) {
+                            $user = $modelUser->checkLogin($username, $password);
+                        }
+                    } else {
+                        ControllerUser::responseHomePage($user = -1);
+                    }
+                    ControllerUser::responseHomePage($user);
+                }
+                break;
         default:
             break;
     }

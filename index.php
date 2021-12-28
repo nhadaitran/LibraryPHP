@@ -109,6 +109,7 @@ $listCat = $modelCategory->getAll();
                                 <tbody>
                                     <?php
                                     foreach ($listBook as $book) {
+                                        $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
                                         echo '<tr role="row">';
                                         echo '<td>' . $book['id'] . '</td>';
                                         echo '<td>' . $book['name'] . '</td>';

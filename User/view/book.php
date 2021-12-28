@@ -43,8 +43,7 @@
                                             ?>
                                         </a>
                                         <hr>
-                                        <span class="badge badge-primary"><i class="fa fa-user"></i> 120 Followers</span>
-                                        <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                                        <span class="badge badge-danger"><i class="fa fa-user"></i> 120 Followers</span>
                                         <hr>
                                         <h6>Mô tả</h6>
                                         <p>
@@ -54,22 +53,29 @@
                                         </p>
                                     </div>
                                     <div class="col-md-4">
-                                        <img class="img-fluid " src="https://via.placeholder.com/400x500" alt="book-image">
-
+                                        <?php
+                                        if($book['image']!=null){
+                                            echo '<img class="img-fluid " src="../../Admin/image/'.$book['image'].'" alt="book-image">';
+                                        }else{
+                                            echo '<img class="img-fluid " src="https://via.placeholder.com/400x500" alt="book-image">';
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <!--/row-->
-                                <a class="btn btn-light fa fa-long-arrow-left" href="../Controller/ControllerPage.php?page=home"></a>
-                                <?php
-                                if ($fav == null) {
-                                    echo '<a class="btn btn-success fa fa-heart-o" href="../Controller/ControllerBook.php?book=fav&id=' . $book['id'] . '"></a>';
-                                } else {
-                                    echo '<a class="btn btn-danger fa fa-heart-o" href="../Controller/ControllerBook.php?book=defav&id=' . $book['id'] . '&favid=' . $fav['id'] . '"></a>';
-                                }
-                                if ($book['status'] == 0) {
-                                    echo '<a class="btn btn-success fa fa-check" href="../Controller/ControllerBook.php?book=issue&id=' . $book['id'] . '"></a>';
-                                }
-                                ?>
+                                <div id="buttonBook">
+                                    <a class="btn btn-light fa fa-long-arrow-left" href="../Controller/ControllerPage.php?page=home"></a>
+                                    <?php
+                                    if ($fav == null) {
+                                        echo '<button class="btn btn-success m-3 fa fa-heart-o" id="btnAddFav" onClick="addFav();" value="' . $book['id'] . '"></button>';
+                                    } else {
+                                        echo '<button class="btn btn-danger m-3 fa fa-heart-o" id="btnDeFav" onClick="deFav();" value="' . $book['id'] . '"></button>';
+                                    }
+                                    if ($book['status'] == 0) {
+                                        echo '<button class="btn btn-success fa fa-check" id="btnIssue" onClick="addIssue();" value="' . $book['id'] . '"></button>';
+                                    }
+                                    ?>
+                                </div>
                             </div>
 
                             <!--BOOK INFO-->

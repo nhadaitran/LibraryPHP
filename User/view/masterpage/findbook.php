@@ -37,10 +37,11 @@
                         <tbody>
                             <?php
                             foreach ($listBook as $book) {
+                                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
                                 echo '<tr role="row">';
                                 echo '<td>' . $book['id'] . '</td>';
                                 echo '<td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>';
-                                    echo '<td>' . $book['author'] . '</td>';
+                                echo '<td>' . $book['author'] . '</td>';
                                 if ($book['status'] == 1) {
                                     echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
                                 } else {
@@ -68,4 +69,21 @@
             </div>
         </div>
     </div>
+    <!-- TOAST -->
+    <div class="position-fixed bottom-0 right-0 p-3" id="request_success" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToastRequest" class="toast hide bg-transparent" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+            <div class="toast-header">
+                <img src="https://www.svgrepo.com/show/63321/avatar.svg" alt="User Avatar" style="width:10%" />
+                <strong class="mr-auto">Thủ Thư</strong>
+                <small>vừa mới đây</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                Yêu cầu của bạn đã được gửi cho Admin.
+            </div>
+        </div>
+    </div>
+    <!-- TOAST END -->
 </div>

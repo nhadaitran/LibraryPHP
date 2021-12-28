@@ -27,6 +27,7 @@
                         <tbody>
                             <?php
                             foreach ($listBookFav as $book) {
+                                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
                                 echo '<tr role="row">';
                                 echo '<td>' . $book['id_book'] . '</td>';
                                 echo '<td><a href=?book=' . $book['id_book'] . '>' . $book['name'] . '</a></td>';

@@ -20,6 +20,7 @@ if (isset($listBook['0'])) {
         </tr>
     </thead>';
     foreach ($listBook as $book) {
+        $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
         $html .= '
         <tr role="row">
         <td>' . $book['id'] . '</td>
@@ -38,15 +39,15 @@ if (isset($listBook['0'])) {
     echo $html;
 } else {
     $html = '        
-         <form class="form-row col-md mb-3 mt-3">
+         <form class="form-row col-md mb-3 mt-3" method="post" onSubmit="return requestBook();">
              <div class="col-md">
-                <input class="form-control" type="text" placeholder=" Tiêu Đề Sách..." required="required">
+                <input class="form-control" id="nameRequest" type="text" placeholder=" Tiêu Đề Sách..." required>
              </div>
              <div class="col-md">
-                <input class="form-control" type="text" placeholder=" Tác Giả..." required="required">
+                <input class="form-control" id="authorRequest" type="text" placeholder=" Tác Giả..." required>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-light" type="submit">+ Yêu cầu sách</button>
+                <button class="btn btn-light" type="submit" id="btnRequest">+ Yêu cầu sách</button>
              </div>
          </form>
     ';

@@ -27,7 +27,7 @@ class ControllerPage
     {
         include_once "../Model/ModelFavorite.php";
         $modelFavorite = new ModelFavorite();
-        $listBookFav = $modelFavorite->getAll($user['id']);
+        $listBook = $modelFavorite->getAll($id_student);
 
         include_once "../view/favorite.php";
     }

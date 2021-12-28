@@ -27,7 +27,16 @@ class ModelBook
     public function getAll()
     {
         try {
-            $sql = "SELECT * FROM quanlythuvien.books";
+            if (!empty($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+                $id = $user['id'];
+                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+            FROM quanlythuvien.books b
+            LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book
+            WHERE f.id_student = '$id' OR f.id_student IS NULL";
+            } else {
+                $sql = "SELECT * FROM quanlythuvien.books";
+            }
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             if ($result != null) {
@@ -47,12 +56,27 @@ class ModelBook
                 . " WHERE b.id='$id'";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
-            return $result[0];
+            if ($result != null) {
+                return $result[0];
+            }
+            return null;
         } catch (Exception $e) {
             return null;
         }
     }
 
+    public function insertRequest($id_student, $name, $author)
+    {
+        try {
+            $sql = "INSERT INTO  quanlythuvien.request (id, name, author, daterequest, id_student, id_admin)
+            VALUE (?, ?, ?, ?, ?,?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([null, $name, $author, date("Y-m-d") , $id_student,  null]);
+            return true;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
 
     public function searchBooks($title)
     {
@@ -65,10 +89,10 @@ class ModelBook
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($result as $value) {
-                $book = new Book($value["id"],  $value["name"], $value["author"], $value["id_category"], $value["status"], $value["description"], $value["date"], $value["image"]);
-                array_push($bookArray, $book);
+            if ($result != null) {
+                return $result;
             }
+            return null;
         } catch (Exception $e) {
             return null;
         }

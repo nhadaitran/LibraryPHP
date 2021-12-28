@@ -25,7 +25,7 @@ class ModelFavorite
     public function getAll($id_student)
     {
         try {
-            $sql = "SELECT f.id, f.id_book, b.name, b.author, b.status FROM quanlythuvien.favorite f
+            $sql = "SELECT f.id, f.id_book, b.name, b.author, b.status, b.image FROM quanlythuvien.favorite f
             LEFT JOIN quanlythuvien.books b ON f.id_book = b.id
             WHERE f.id_student='$id_student'";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);

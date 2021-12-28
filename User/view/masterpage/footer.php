@@ -2,7 +2,7 @@
 <footer class="footer">
     <div class="container">
         <div class="text-center">
-            Copyright © 2018
+            Copyright © 2021
         </div>
     </div>
 </footer>
@@ -27,7 +27,7 @@
 <script>
     $(document).ready(function() {
         $("#applyBtn").click(function() {
-            $('.toast').toast('show');
+            $('#liveToast').toast('show');
         });
     });
 </script>

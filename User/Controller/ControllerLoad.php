@@ -33,6 +33,7 @@ if (isset($listBook['0'])) {
             </tr>
         </thead>';
         foreach ($listBook as $book) {
+            $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
             $html .= '
             <tr role="row">
             <td>' . $book['dateissue'] . '</td>                        
@@ -54,6 +55,7 @@ if (isset($listBook['0'])) {
             </tr>
         </thead>';
         foreach ($listBook as $book) {
+            $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
             $html .= '
             <tr role="row">
             <td>' . $book['id_book'] . '</td>
@@ -81,6 +83,7 @@ if (isset($listBook['0'])) {
             </tr>
         </thead>';
         foreach ($listBook as $book) {
+            $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
             $html .= '
             <tr role="row">
             <td>' . $book['datereturn'] . '</td>                        
