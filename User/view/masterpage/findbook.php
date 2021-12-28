@@ -32,6 +32,7 @@
                                 <th scope="col">Tiêu đề sách</th>
                                 <th scope="col">Tác giả</th>
                                 <th scope="col">Trạng Thái</th>
+                                <th scope="col">Yêu Thích</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,11 @@
                                     echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
                                 } else {
                                     echo ' <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                                }                                
+                                if ($book['fid'] != null) {
+                                    echo ' <td><button class="btn btn-danger fa fa-heart-o" id="btnDeFav' . $book['id'] . '" onClick="deFavH(' . $book['id'] . ');"></button></td>';
+                                } else {
+                                    echo ' <td><button class="btn btn-success fa fa-heart-o" id="btnAddFav' . $book['id'] . '" onClick="addFavH(' . $book['id'] . ');"></button></td>';
                                 }
                                 echo '</tr>';
                             }

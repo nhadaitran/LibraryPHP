@@ -1,6 +1,7 @@
 <?php
 include_once "../Model/ModelBook.php";
 $modelBook = new ModelBook();
+session_start();
 $listBook = $modelBook->getAll();
 if (!empty($_POST['search'])) {
     $title = $_POST['search'];
@@ -17,6 +18,7 @@ if (isset($listBook['0'])) {
             <th scope="col">Tiêu đề sách</th>
             <th scope="col">Tác giả</th>
             <th scope="col">Trạng Thái</th>
+            <th scope="col">Yêu Thích</th>
         </tr>
     </thead>';
     foreach ($listBook as $book) {
@@ -32,6 +34,11 @@ if (isset($listBook['0'])) {
         } else {
             $html .= ' 
             <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+        }
+        if ($book['fid'] != null) {
+            $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
+        } else {
+            $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
         }
         $html .= '</tr>';
     }

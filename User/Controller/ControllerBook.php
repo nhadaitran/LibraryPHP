@@ -12,7 +12,7 @@ class ControllerBook
         $book = $modelBook->getByID($id_book);
         $html = '
         <a class="btn btn-light fa fa-long-arrow-left" href="../Controller/ControllerPage.php?page=home"></a>
-        <button class="btn btn-danger m-3 fa fa-heart-o" id="btnDeFav" onClick="deFav();" value="' . $book['id'] . '"></button>';
+        <button class="btn btn-danger m-3 fa fa-heart-o" id="btnDeFav" onClick="deFav(' . $book['id'] . ');"></button>';
         if ($book['status'] == 0) {
             $html .= '<a class="btn btn-success fa fa-check" href="../Controller/ControllerBook.php?book=issue&id=' . $book['id'] . '"></a>';
         }
@@ -31,11 +31,104 @@ class ControllerBook
         $book = $modelBook->getByID($id_book);
         $html = '
         <a class="btn btn-light fa fa-long-arrow-left" href="../Controller/ControllerPage.php?page=home"></a>
-        <button class="btn btn-success m-3 fa fa-heart-o" id="btnAddFav" onClick="addFav();" value="' . $book['id'] . '"></button>';
+        <button class="btn btn-success m-3 fa fa-heart-o" id="btnAddFav" onClick="addFav(' . $book['id'] . ');"></button>';
         if ($book['status'] == 0) {
             $html .= '<a class="btn btn-success fa fa-check" href="../Controller/ControllerBook.php?book=issue&id=' . $book['id'] . '"></a>';
         }
         echo $html;
+    }
+
+    public static function addFavoriteH($id_book, $id_student)
+    {
+        include_once "../Model/ModelFavorite.php";
+        $modelFavorite = new ModelFavorite();
+        $modelFavorite->insert($id_student, $id_book);
+        $fav = $modelFavorite->getBySidAndBid($id_student, $id_book);
+        include_once "../Model/ModelBook.php";
+        $modelBook = new ModelBook();
+        $listBook = $modelBook->getAll();
+        if (isset($listBook['0'])) {
+            $html = '<table class="table table-hover">
+            <thead>
+                <tr>                      
+                    <th scope="col">Mã sách</th>
+                    <th scope="col">Tiêu đề sách</th>
+                    <th scope="col">Tác giả</th>
+                    <th scope="col">Trạng Thái</th>
+                    <th scope="col">Yêu Thích</th>
+                </tr>
+            </thead>';
+            foreach ($listBook as $book) {
+                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
+                $html .= '
+                <tr role="row">
+                <td>' . $book['id'] . '</td>
+                <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
+                <td>' . $book['author'] . '</td>';
+                if ($book['status'] == 1) {
+                    $html .= ' 
+                    <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+                } else {
+                    $html .= ' 
+                    <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                }
+                if ($book['fid'] != null) {
+                    $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
+                } else {
+                    $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
+                }
+                $html .= '</tr>';
+            }
+            $html .= '</table>';
+            echo $html;
+        }
+    }
+
+    public static function delFavoriteH($id_book, $id_student)
+    {
+        include_once "../Model/ModelFavorite.php";
+        $modelFavorite = new ModelFavorite();
+        $fav = $modelFavorite->getBySidAndBid($id_student, $id_book);
+        $modelFavorite->delete($fav['id']);
+
+        include_once "../Model/ModelBook.php";
+        $modelBook = new ModelBook();
+        $listBook = $modelBook->getAll();
+        if (isset($listBook['0'])) {
+            $html = '<table class="table table-hover">
+            <thead>
+                <tr>                      
+                    <th scope="col">Mã sách</th>
+                    <th scope="col">Tiêu đề sách</th>
+                    <th scope="col">Tác giả</th>
+                    <th scope="col">Trạng Thái</th>
+                    <th scope="col">Yêu Thích</th>
+                </tr>
+            </thead>';
+            foreach ($listBook as $book) {
+                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
+                $html .= '
+                <tr role="row">
+                <td>' . $book['id'] . '</td>
+                <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
+                <td>' . $book['author'] . '</td>';
+                if ($book['status'] == 1) {
+                    $html .= ' 
+                    <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+                } else {
+                    $html .= ' 
+                    <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                }
+                if ($book['fid'] != null) {
+                    $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
+                } else {
+                    $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
+                }
+                $html .= '</tr>';
+            }
+            $html .= '</table>';
+            echo $html;
+        }
     }
 
     public static function delFavorite2($id_fav)
@@ -47,8 +140,28 @@ class ControllerBook
             $user = $_SESSION['user'];
         }
         $listBook = $modelFavorite->getAll($user['id']);
-        ob_clean();
-        echo json_encode($listBook, JSON_UNESCAPED_UNICODE);
+        if (isset($listBook['0'])) {
+            $html= '<div class="card-body row d-flex justify-content-around" id="fav_list">';
+            foreach ($listBook as $book) {
+                $book['name'] = strlen($book['name']) > 30 ? substr($book['name'], 0, 30) . "..." : $book['name'];
+                $html .= '<div class="card col-md-auto">';
+                if ($book['image'] != null) {
+                    $html .= '<img class="card-img-top" width="100px" height="150px" src="../../Admin/image/' . $book['image'] . '">';
+                } else {
+                    $html .= '<img class="card-img-top" width="100px" height="150px" src="https://via.placeholder.com/300x400">';
+                }
+                $html .= '
+            <div class="card-body md-auto" style="margin-top: -25px">
+            <h5 class="card-title my-4"><a href=?book=' . $book['id_book'] . '>' . $book['name'] . '</a></h5><hr/>
+            <div class="d-flex justify-content-center">
+            <button class="btn btn-danger rounded fa fa-trash" onClick="delFavorite2(' . $book['id'] . ');"></button>
+            </div></div></div>';
+            }
+            $html .= '</div>';
+            echo $html;
+        } else {
+            echo 'Không tồn tại dữ liệu !';
+        }
     }
 
     public static function addIssue($id_book, $id_student)
@@ -77,7 +190,7 @@ class ControllerBook
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $modelBook->insertRequest($id_student, $name, $author);
-    }    
+    }
 }
 
 if (!empty($_GET['book'])) {
@@ -113,7 +226,20 @@ if (!empty($_GET['book'])) {
                 header("Location:./ControllerPage.php?page=login");
             }
             break;
-
+            case 'favH':
+                if (!empty($user)) {
+                    ControllerBook::addFavoriteH($id_book, $user['id']);
+                } else {
+                    header("Location:./ControllerPage.php?page=login");
+                }
+                break;
+            case 'defavH':
+                if (!empty($user)) {
+                    ControllerBook::delFavoriteH($id_book, $user['id']);
+                } else {
+                    header("Location:./ControllerPage.php?page=login");
+                }
+                break;
         case 'defav2':
             if (!empty($user)) {
                 ControllerBook::delFavorite2($id_fav);

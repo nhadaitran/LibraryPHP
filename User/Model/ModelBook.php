@@ -33,7 +33,7 @@ class ModelBook
                 $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
             FROM quanlythuvien.books b
             LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book
-            WHERE f.id_student = '$id' OR f.id_student IS NULL";
+            WHERE f.id_student = '$id' OR f.id_student IS NULL ORDER BY b.id  DESC";
             } else {
                 $sql = "SELECT * FROM quanlythuvien.books";
             }
@@ -71,45 +71,53 @@ class ModelBook
             $sql = "INSERT INTO  quanlythuvien.request (id, name, author, daterequest, id_student, id_admin)
             VALUE (?, ?, ?, ?, ?,?)";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([null, $name, $author, date("Y-m-d") , $id_student,  null]);
+            $stmt->execute([null, $name, $author, date("Y-m-d"), $id_student,  null]);
             return true;
         } catch (Exception $e) {
             return null;
         }
     }
-
     public function searchBooks($title)
     {
-        $bookArray = array();
-        try {
-            $sql = "SELECT * FROM quanlythuvien.books";
-            if ($title != "") {
-                $sql .= " WHERE name like '%$title%'";
-            }
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {            
+                $user = $_SESSION['user'];
+                $iduser = $user['id'];
+                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+            FROM quanlythuvien.books b
+            LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book";
+                if ($title != "") {
+                    $sql .= " WHERE b.name like '%$title%' AND ( f.id_student = '$iduser' OR f.id_student IS NULL) ORDER BY b.id  DESC";
+                } else {
+                    $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
+                }            
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
             if ($result != null) {
                 return $result;
             }
-            return null;
+            return $sql;
         } catch (Exception $e) {
-            return null;
+            return $sql;
         }
-        return $bookArray;
     }
 
     public function searchBooksByCategory($id)
     {
-        $bookArray = array();
         try {
-            $sql = "SELECT * FROM quanlythuvien.books";
-            if ($id != "0") {
-                $sql .= " WHERE id_category = " . $id;
+            if (!empty($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+                $iduser = $user['id'];
+                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+            FROM quanlythuvien.books b
+            LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book";
+                if ($id != "0") {
+                    $sql .= " WHERE (b.id_category = '$id' AND f.id_student = '$iduser') OR (b.id_category = '$id' AND f.id_student IS NULL) ORDER BY b.id  DESC";
+                } else {
+                    $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
+                }
             }
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
             if ($result != null) {
                 return $result;
             }
@@ -117,6 +125,5 @@ class ModelBook
         } catch (Exception $e) {
             return null;
         }
-        return $bookArray;
     }
 }

@@ -34,8 +34,7 @@ function manage_book() {
     });
 }
 
-function addFav() {
-    var id_book = jQuery('#btnAddFav').val();
+function addFav(id_book) {    
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -46,8 +45,7 @@ function addFav() {
         }
     });
 }
-function deFav() {
-    var id_book = jQuery('#btnDeFav').val();
+function deFav(id_book) {    
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -59,33 +57,36 @@ function deFav() {
     });
 }
 
-function delFavorite2() {
-    var id_fav = jQuery('#btnDelFav').val();
+function addFavH(id_book) {    
+    jQuery.ajax({
+        method: 'get',
+        url: 'ControllerBook.php',
+        data: { id_book: id_book, book: 'favH' },
+        success: function (data) {
+            jQuery('#search_table').html(data);
+        }
+    });
+}
+function deFavH(id_book) {    
+    jQuery.ajax({
+        method: 'get',
+        url: 'ControllerBook.php',
+        data: { id_book: id_book, book: 'defavH' },
+        success: function (data) {
+            jQuery('#search_table').html(data);
+        }
+    });
+}
+
+function delFavorite2(id_fav) {
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
         data: { id_fav: id_fav, book: 'defav2' },
-        cache: false,
-        dataType: 'json',
         success: function (data) {
-            var tableBook = $('#favorite');
-            $("#fav_item").remove();
-            $.each(data, function (key, book) {
-                book['name'] = strlen(book['name']) > 30 ? substr(book['name'], 0, 30) + "..." : book['name'];
-                var row = $('<div class="card col-md-auto">');
-                if ($book['image'] != null) {
-                    row.append($('<img class="card-img-top" width="100px" height="250px" src="../../Admin/image/' + $book['image'] + '">'));
-                } else {
-                    row.append($('<img class="card-img-top" width="100px" height="250px" src="https://via.placeholder.com/300x400">'));
-                }
-                row.append($('<div class="card-body md-auto" style="margin-top: -25px">'));
-                row.append($('<h5 class="card-title my-4"><a href=?book=' + book['id_book'] + '>' + book['name'] + '</a></h5><hr/>'));
-                row.append($('<div class="d-flex justify-content-center">'));
-                row.append($('<button class="btn btn-danger rounded fa fa-trash" onClick="delFavorite2();" id="btnDelFav" value="' + book['id'] + '"></button>'));
-                row.append($('</div></div></div>'));
-                tableBook.append(row);
-            });
-        }
+            $('#fav_list').remove;
+            jQuery('#favorite').html(data);            
+        },
     });
 }
 function addIssue() {
@@ -135,7 +136,7 @@ function updateInfo() {
         success: function (data) {
             jQuery('#liveToast').toast('show');
         }
-        
+
     });
     return false;
 }
