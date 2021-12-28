@@ -64,6 +64,7 @@ function addFavH(id_book) {
         data: { id_book: id_book, book: 'favH' },
         success: function (data) {
             jQuery('#search_table').html(data);
+            manage_book();
         }
     });
 }
@@ -74,6 +75,7 @@ function deFavH(id_book) {
         data: { id_book: id_book, book: 'defavH' },
         success: function (data) {
             jQuery('#search_table').html(data);
+            manage_book();
         }
     });
 }

@@ -1,7 +1,7 @@
 <?php
+session_start();
 include_once "../Model/ModelBook.php";
 $modelBook = new ModelBook();
-session_start();
 $listBook = $modelBook->getAll();
 if (!empty($_POST['search'])) {
     $title = $_POST['search'];

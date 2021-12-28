@@ -15,29 +15,33 @@
                 </div>
 
                 <div class="table-responsive" id="table">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã sách</th>
-                                <th scope="col">Tiêu đề sách</th>
-                                <th scope="col">Tác giả</th>
-                                <th scope="col">Trạng Thái</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             <?php
-                            foreach ($listBookFav as $book) {
-                                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
-                                echo '<tr role="row">';
-                                echo '<td>' . $book['id_book'] . '</td>';
-                                echo '<td><a href=?book=' . $book['id_book'] . '>' . $book['name'] . '</a></td>';
-                                echo '<td>' . $book['author'] . '</td>';
-                                if ($book['status'] == 1) {
-                                    echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
-                                } else {
-                                    echo ' <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                            if (isset($listBookFav['0'])) {
+                                echo '<table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Mã sách</th>
+                                        <th scope="col">Tiêu đề sách</th>
+                                        <th scope="col">Tác giả</th>
+                                        <th scope="col">Trạng Thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>';
+                                foreach ($listBookFav as $book) {
+                                    $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
+                                    echo '<tr role="row">';
+                                    echo '<td>' . $book['id_book'] . '</td>';
+                                    echo '<td><a href=?book=' . $book['id_book'] . '>' . $book['name'] . '</a></td>';
+                                    echo '<td>' . $book['author'] . '</td>';
+                                    if ($book['status'] == 1) {
+                                        echo ' <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+                                    } else {
+                                        echo ' <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                                    }
+                                    echo '</tr>';
                                 }
-                                echo '</tr>';
+                            }else{
+                                echo 'Không Tồn Tại Dữ Liệu ';
                             }
                             ?>
                         </tbody>

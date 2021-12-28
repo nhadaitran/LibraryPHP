@@ -95,9 +95,9 @@ class ModelBook
             if ($result != null) {
                 return $result;
             }
-            return $sql;
+            return null;
         } catch (Exception $e) {
-            return $sql;
+            return null;
         }
     }
 

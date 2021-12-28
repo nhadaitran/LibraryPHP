@@ -47,6 +47,13 @@ class ControllerBook
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
+        if (!empty($_POST['search'])) {
+            $title = $_POST['search'];
+            $listBook = $modelBook->searchBooks($title);
+        } else if (!empty($_POST['category'])) {
+            $id = $_POST['category'];
+            $listBook = $modelBook->searchBooksByCategory($id);
+        }
         if (isset($listBook['0'])) {
             $html = '<table class="table table-hover">
             <thead>
@@ -94,6 +101,13 @@ class ControllerBook
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
+        if (!empty($_POST['search'])) {
+            $title = $_POST['search'];
+            $listBook = $modelBook->searchBooks($title);
+        } else if (!empty($_POST['category'])) {
+            $id = $_POST['category'];
+            $listBook = $modelBook->searchBooksByCategory($id);
+        }
         if (isset($listBook['0'])) {
             $html = '<table class="table table-hover">
             <thead>
