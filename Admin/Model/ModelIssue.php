@@ -47,13 +47,13 @@ class ModelIssue
         }
     }
 
-    public function findByIdIssueOrIdBook($id){
+    public function searchIssue($search){
         try{
             $sql = " SELECT i.id, i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name as nameBook FROM quanlythuvien.issue i "
                 ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
                 ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
                 ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
-                ." WHERE i.status = 0 AND i.id = $id OR bo.id = $id";
+                ." WHERE i.status = 0 AND (i.id = '$search' OR bo.id = '$search' OR i.id_student = '$search' OR a.fullname LIKE '%$search%' OR bo.name LIKE '%$search%' OR st.name LIKE '%$search%' ) ";
             $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             return $result;
@@ -63,3 +63,6 @@ class ModelIssue
 
     }
 }
+
+//$modelIssue = new ModelIssue();
+//var_dump($modelIssue->searchIssue('abc'));

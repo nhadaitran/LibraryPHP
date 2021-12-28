@@ -25,7 +25,7 @@ if(!empty($_GET['action'])){
     switch ($page){
         case 'logout' :
             session_destroy();
-            header('Location: ../view/index.php');
+            header('Location: ../../index.php');
             break;
         default:
             break;

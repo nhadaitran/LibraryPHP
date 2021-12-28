@@ -1,22 +1,14 @@
-
-<div class="tab-pane " id="category">
-    <div class="container-fluid ">
+<div class="container-fluid">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="accordion" id="accordionOne">
 
                         <div class="col-lg d-flex justify-content-center" style="margin:auto">
-                            <div class="form-row col-md-2">
-                                <select name="category" class="form-control" required>
-                                    <option value="id" selected="selected">- - Id thể loại - -</option>
-                                    <option value="name">- - Tên thể loại - -</option>
-                                </select>
-                            </div>
                             <div class="form-row col-md" style="margin-bottom: 3%;">
                                 <form class="form-row col-md">
                                     <div class="col-md">
-                                        <input class="form-control" type="search" placeholder="Tìm kiếm Id thể loại hoặc tên thể loại">
+                                        <input class="form-control" type="search" placeholder="Tìm kiếm bằng ID học sinh">
                                     </div>
                                     <div class="col-md-0">
                                         <button class="btn btn-light" type="submit">Tìm kiếm</button>
@@ -30,20 +22,21 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Số lượng sách</th>
-                                    <th scope="col">Ngày thêm</th>
+                                    <th scope="col">ID Thành viên</th>
+                                    <th scope="col">Tiêu đề</th>                                    
+                                    <th scope="col">Tác giả/ Nhà xuất bản</th>                                    
+                                    <th scope="col">Ngày yêu cầu</th>
                                     <th scope="col">Setting</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Giáo dục</td>
-                                    <td>20</td>
-                                    <td>12/1/2019</td>
+                                    <td>2</td>
+                                    <td>Sách ABC</td>
+                                    <td>Ole</td>                                    
+                                    <td>1/1/2021</td>
                                     <td>
-                                        <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
                                         <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
                                     </td>
                                 </tr>
@@ -69,4 +62,3 @@
             </div>
         </div>
     </div>
-</div>

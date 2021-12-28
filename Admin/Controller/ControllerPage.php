@@ -51,6 +51,15 @@ class ControllerPage{
     }
 
     public static function responseBookPage(){
+
+        include_once "../Model/ModelBook.php";
+        $modelBook = new ModelBook();
+        $listBook = $modelBook->getAllBook();
+
+        include_once "../Model/ModelCategory.php";
+        $modelCategory = new ModelCategory();
+        $listCategory = $modelCategory->getAllCategory();
+
         include_once "../view/book.php";
     }
 

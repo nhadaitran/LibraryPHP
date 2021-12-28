@@ -3,9 +3,9 @@
 class Book
 {
     private $id;
-    private $aid;
     private $name;
     private $author;
+    private $id_category;
     private $status;
     private $description;
     private $date;
@@ -15,21 +15,28 @@ class Book
      * @param $id
      * @param $name
      * @param $author
+     * @param $id_category
      * @param $status
      * @param $description
      * @param $date
      * @param $image
      */
-    public function __construct($id, $name, $author, $status, $description, $date, $image)
+    public function __construct($id, $name, $author, $id_category, $status, $description, $date, $image)
     {
        if($id!=null){
            $this->id = $id;
        }
         $this->name = $name;
         $this->author = $author;
-        $this->status = $status;
+        $this->id_category = $id_category;
+        if($status!=null){
+            $this->status = $status;
+        }
+
         $this->description = $description;
-        $this->date = $date;
+        if($date!=null){
+            $this->date = $date;
+        }
         $this->image = $image;
     }
 
@@ -79,6 +86,22 @@ class Book
     public function setAuthor($author): void
     {
         $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdCategory()
+    {
+        return $this->id_category;
+    }
+
+    /**
+     * @param mixed $id_category
+     */
+    public function setIdCategory($id_category): void
+    {
+        $this->id_category = $id_category;
     }
 
     /**
@@ -144,6 +167,4 @@ class Book
     {
         $this->image = $image;
     }
-
-
 }

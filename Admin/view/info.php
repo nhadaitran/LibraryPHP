@@ -75,7 +75,7 @@
             </div>
             <!--End content-wrapper-->
             <!-- TOAST -->
-            <?php include "masterpageAdmin/toast_confirm.php" ?>
+            <?php include "masterpageAdmin/toastUpdate.php" ?>
             <!-- TOAST END -->
             <!--Start footer-->
             <?php include "masterpageAdmin/footer.php" ?>

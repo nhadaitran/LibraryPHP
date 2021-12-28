@@ -1,14 +1,7 @@
 <!--Start footer-->
-<footer class="footer">
-    <div class="container">
-        <div class="text-center">
-            Copyright © 2018
-        </div>
-    </div>
-</footer>
 <!--End footer-->
 <!-- Bootstrap core JavaScript-->
-<script src="../view/assets/js/jquery.min.js"></script>
+<script src="../view/assets/js/jquery-3.6.0.min.js"></script>
 <script src="../view/assets/js/popper.min.js"></script>
 <script src="../view/assets/js/bootstrap.min.js"></script>
 
@@ -27,4 +20,5 @@
             $('.toast').toast('show');
         });
     });
+
 </script>
