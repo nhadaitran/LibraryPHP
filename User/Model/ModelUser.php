@@ -61,6 +61,18 @@ class ModelUser
         }
     }
 
+    public function updateUser($id,$name,$email,$password)
+    {
+        try {
+            $sql = "UPDATE quanlythuvien.students SET name='$name', password='$password', email='$email' WHERE id='$id'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
     public function __destruct()
     {
         $this->conn = null;

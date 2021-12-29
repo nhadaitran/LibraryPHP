@@ -65,24 +65,50 @@ if (sizeof($_POST) > 0 && $_POST['action'] != null) {
                 ControllerUser::responseHomePage($user);
             }
             break;
-            case 'update':
-                $name = $_POST['name'];
-                $email = $_POST['email'];
-                $old_password = $_POST['old_password'];
-                $new_password = $_POST['new_password'];
-                if (true) {
-                    include_once "../Model/ModelUser.php";
-                    $modelUser = new ModelUser();
-                    if ($modelUser->checkRegister($username, $email) == true) {
-                        if ($modelUser->insertUser($username, $name, $email, $password) == true) {
-                            $user = $modelUser->checkLogin($username, $password);
-                        }
-                    } else {
-                        ControllerUser::responseHomePage($user = -1);
+        case 'update':
+            session_start();
+            if (!empty($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+                $errors = [];
+                $data = [];
+                $new_password=null;
+                if ($_POST['confirm_password'] != "" && $_POST['new_password'] != "" || $_POST['confirm_password'] != null && $_POST['new_password'] != null) {
+                    if ($_POST['confirm_password'] == $_POST['new_password']) {
+                        $new_password = $_POST['new_password'];
+                    } else {                        
+                        echo $error['confirm_password'] = "Mật khẩu xác nhận không giống nhau";
                     }
-                    ControllerUser::responseHomePage($user);
                 }
-                break;
+                include_once "../Model/ModelUser.php";
+                $modelUser = new ModelUser();
+                $old_password = $_POST['old_password'];
+                if ($modelUser->checkLogin($user['username'], $old_password) != null) {
+                    if ($_POST['name'] != "" || $_POST['name'] != null) {
+                        $name = $_POST['name'];
+                    } else {
+                        $name = $user['name'];
+                    }
+                    if ($_POST['email'] != "" || $_POST['email'] != null) {
+                        $email = $_POST['email'];
+                    } else {
+                        $email = $user['email'];
+                    }
+                    if ($new_password != null) {
+                            $modelUser->updateUser($user['id'], $name, $email, $new_password);
+                            $data['success'] = true;
+                    } else if ($new_password == null) {
+                        $modelUser->updateUser($user['id'], $name, $email, $old_password);
+                        $data['success'] = true;
+                    }
+                } else {
+                    echo $error['old_password'] = "Mật khẩu hiện tại không đúng";
+                }
+                $data['error'] = $error;
+                echo json_encode($data);
+            } else {
+                header("Location:./ControllerPage.php?page=login");
+            }
+            break;
         default:
             break;
     }

@@ -1,45 +1,49 @@
 <div class="tab-pane" id="info">
-    <div class="container-fluid">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <?php
-                    $html = '<form  method="post" onSubmit="return updateInfo();">
-                        <div class="form-group col-lg-5">
-                            <label for="input-6">Họ và tên</label>
-                            <input type="text" class="form-control form-control-rounded" id="username" placeholder="' . $user['name'] . '">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="input-7"> Địa chỉ Email</label>
-                            <input type="email" class="form-control form-control-rounded" id="useremail" placeholder="' . $user['email'] . '">
-                        </div>                        
-                        <div class="form-group col-lg-4">
-                            <label for="input-9">Mật khẩu mới</label>
-                            <input type="password" class="form-control form-control-rounded" id="newpass" placeholder="Enter New Password">
-                        </div>
-                        <div class="form-group col-lg-4">
-                            <label for="input-10">Nhập lại mật khẩu mới</label>
-                            <input type="password" class="form-control form-control-rounded" id="cnewpass" placeholder="Confirm New Password">
-                        </div>';
-                        
-                        $html.='
-                        <div class="form-group col-lg-4">
-                            <label for="input-9">Mật khẩu hiện tại</label>
-                            <input type="password" class="form-control form-control-rounded" id="oldpass" placeholder="Enter Yout Password" required>
-                        </div>
-                        <div class="btn-group mr-2 float-right" role="group" aria-label="First group">
-                            <input type="submit" class="btn btn-light btn-round px-5 ml-3 " value="Cập Nhật" id="applyBtn" />
-                        </div>
-                    </form>';
-                    echo $html
-                    ?>
+    <div class="container rounded card mt-5">
+        <div class="row">
+            <?php
+            echo '
+            <div class="col-md-4 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                    <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
+                    <span class="font-weight-bold">' . $user['name'] . '</span>
+                    <span class="text-50">' . $user['email'] . '</span>
                 </div>
             </div>
+            <div class="col-md-8">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="text-right">Chỉnh Sửa Thông Tin</h6>
+                    </div>
+                    <form method="post" onSubmit="return updateInfo();">
+                    <div class="row mt-2">
+                        <div class="col-md-12"><input type="text" id="username" class="form-control" value="' . $user['username'] . '" disabled></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><input type="text" id="name" class="form-control" placeholder="Họ và Tên: ' . $user['name'] . '" value=""></div>
+                        <div class="col-md-6"><input type="email" id="email" class="form-control" placeholder="Email của bạn: ' . $user['email'] . '" value=""></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><a class="" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> Thay Đổi Mật Khẩu </a></div>
+                        </div>
+                        <div id="collapseOne" class="collapse hide row mt-3" aria-labelledby="headingOne" data-parent="#accordionOne ">                            
+                            <div class="col-md-6"><input type="password" id="new_password" class="form-control" placeholder="Mật khẩu mới" value=""></div>
+                            <div class="col-md-6"><input type="password" id="confirm_password" class="form-control" placeholder="Xác nhận mật khẩu mới" value=""></div>                            
+                        </div>
+                        <div class="row mt-5 d-flex justify-content-end">
+                        <div class="col-md-6 "><button class="btn btn-primary profile-button" type="submit" id="applyBtn">Cập Nhật</button></div>
+                        <div class="col-md-6 "><input type="password" id="old_password" class="form-control" placeholder="Xác nhận mật khẩu hiện tại" value=""></div>
+                    </div>
+                    <form>
+                </div>
+            </div>
+        </div>';
+            ?>
         </div>
     </div>
     <!-- TOAST -->
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
-        <div id="liveToast" class="toast hide bg-transparent" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div id="liveToastUpdateInfo" class="toast hide bg-transparent" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
             <div class="toast-header">
                 <img src="https://www.svgrepo.com/show/63321/avatar.svg" alt="User Avatar" style="width:10%">
                 <strong class="mr-auto">Thủ Thư</strong>

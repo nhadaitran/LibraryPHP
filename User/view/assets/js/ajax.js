@@ -123,20 +123,35 @@ function requestBook() {
 }
 
 function updateInfo() {
-    var name = jQuery('#nameRequest').val();
-    var author = jQuery('#authorRequest').val();
-    old_password
-    new_password
+    var name = jQuery('#name').val();
+    var email = jQuery('#email').val();
+    var old_password = jQuery('#old_password').val();
+    var new_password = jQuery('#new_password').val();
+    var confirm_password = jQuery('#confirm_password').val();
     jQuery.ajax({
         method: 'post',
         url: 'ControllerUser.php',
+        dataType: "json",
+        encode: true,
         data: {
-            // name: name,
-            // author: author,
-            // action: 'update'
+            name:name,
+            email:email,
+            old_password:old_password,
+            new_password:new_password,
+            confirm_password:confirm_password,
+            action: "update",
         },
         success: function (data) {
-            jQuery('#liveToast').toast('show');
+            jQuery('#liveToastUpdateUser').toast('show');
+            console.log(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            console.log("Ngu vcl"),
+            console.log(name),
+            console.log(email),
+            console.log(old_password),
+            console.log(new_password),
+            console.log(confirm_password)
         }
 
     });
