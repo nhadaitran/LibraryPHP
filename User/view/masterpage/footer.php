@@ -22,12 +22,3 @@
 
 <!-- Ajax -->
 <script src="../view/assets/js/ajax.js"></script>
-
-<!-- Toast -->
-<script>
-    $(document).ready(function() {
-        $("#applyBtn").click(function() {
-            $('#liveToast').toast('show');
-        });
-    });
-</script>

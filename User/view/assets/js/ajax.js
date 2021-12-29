@@ -34,7 +34,7 @@ function manage_book() {
     });
 }
 
-function addFav(id_book) {    
+function addFav(id_book) {
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -45,7 +45,7 @@ function addFav(id_book) {
         }
     });
 }
-function deFav(id_book) {    
+function deFav(id_book) {
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -57,7 +57,7 @@ function deFav(id_book) {
     });
 }
 
-function addFavH(id_book) {    
+function addFavH(id_book) {
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -68,7 +68,7 @@ function addFavH(id_book) {
         }
     });
 }
-function deFavH(id_book) {    
+function deFavH(id_book) {
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -87,7 +87,7 @@ function delFavorite2(id_fav) {
         data: { id_fav: id_fav, book: 'defav2' },
         success: function (data) {
             $('#fav_list').remove;
-            jQuery('#favorite').html(data);            
+            jQuery('#favorite').html(data);
         },
     });
 }
@@ -134,26 +134,36 @@ function updateInfo() {
         dataType: "json",
         encode: true,
         data: {
-            name:name,
-            email:email,
-            old_password:old_password,
-            new_password:new_password,
-            confirm_password:confirm_password,
+            name: name,
+            email: email,
+            old_password: old_password,
+            new_password: new_password,
+            confirm_password: confirm_password,
             action: "update",
         },
         success: function (data) {
-            jQuery('#liveToastUpdateUser').toast('show');
-            console.log(data);
-        },
-        error: function (jqXHR, textStatus, errorThrown){
-            console.log("Ngu vcl"),
-            console.log(name),
-            console.log(email),
-            console.log(old_password),
-            console.log(new_password),
-            console.log(confirm_password)
-        }
+            if (!data.success) {
+                $(".form-group").removeClass("has-error");
+                $(".help-block").remove();
+                if (data.error.confirm_password) {
+                    $("#confirmpass-group").addClass("has-error");
+                    $("#confirmpass-group").append(
+                        '<h6 class="help-block" style="color:red;">' + data.error.confirm_password + "</h6>"
+                    );
+                }
 
+                if (data.error.old_password) {
+                    $("#oldpass-group").addClass("has-error");
+                    $("#oldpass-group").append(
+                        '<h6 class="help-block" style="color:red;">' + data.error.old_password + "</h6>"
+                    );
+                }
+            } else {
+                jQuery('#liveToastUpdateInfo').toast('show');
+                $(".form-group").removeClass("has-error");
+                $(".help-block").remove();
+            }
+        },
     });
     return false;
 }
