@@ -47,7 +47,7 @@ $user = $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=fav"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="ContactUs.php"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
+                    <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=contact"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>
@@ -64,7 +64,7 @@ $user = $_SESSION['user'];
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=fav"><i class="fa fa-heart mr-2"></i>Yêu Thích</a></li>
                     <li class="dropdown-divider"></li>
-                    <li class="dropdown-item"><a href="ContactUs.php"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
+                    <li class="dropdown-item"><a href="../../User/Controller/ControllerPage.php?page=contact"><i class="fa fa-phone mr-2"></i>Liên hệ</a></li>
                     <li class="dropdown-divider"></li>
                     <li class="dropdown-item"><a href="news.php"><i class="fa fa-newspaper-o mr-2"></i>Tin Tức</a></li>
                     <li class="dropdown-divider"></li>

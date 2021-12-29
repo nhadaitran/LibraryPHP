@@ -2,7 +2,8 @@
 <footer class="footer">
     <div class="container">
         <div class="text-center">
-            Copyright © 2021
+            Copyright © 2021 - 
+            <a href= "../../User/Controller/ControllerPage.php?page=contact">Contact Us</a>
         </div>
     </div>
 </footer>

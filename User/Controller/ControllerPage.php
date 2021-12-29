@@ -43,6 +43,11 @@ class ControllerPage
         include_once "../view/register.php";
     }
 
+    public static function responsePageContact()
+    {
+        include_once "../view/contact.php";
+    }
+
     public static function responsePageBook($id)
     {
         if (!empty($_SESSION['user'])) {
@@ -94,6 +99,9 @@ if (!empty($_GET['page'])) {
             break;
         case 'register':
             ControllerPage::responsePageRegister();
+            break;
+        case 'contact':
+            ControllerPage::responsePageContact();
             break;
         default:
             break;
