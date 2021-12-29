@@ -9,7 +9,6 @@ function search_data() {
         }
     });
 }
-
 function search_cat() {
     var category = jQuery('#category').val();
     jQuery.ajax({
@@ -58,10 +57,17 @@ function deFav(id_book) {
 }
 
 function addFavH(id_book) {
+    var search = jQuery('#search').val();
+    var category = jQuery('#category').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
-        data: { id_book: id_book, book: 'favH' },
+        data: {
+            search: search,
+            category: category,
+            id_book: id_book,
+            book: 'favH'
+        },
         success: function (data) {
             jQuery('#search_table').html(data);
             manage_book();
@@ -69,10 +75,17 @@ function addFavH(id_book) {
     });
 }
 function deFavH(id_book) {
+    var search = jQuery('#search').val();
+    var category = jQuery('#category').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
-        data: { id_book: id_book, book: 'defavH' },
+        data: {
+            search: search,
+            category: category,
+            id_book: id_book,
+            book: 'defavH'
+        },
         success: function (data) {
             jQuery('#search_table').html(data);
             manage_book();
@@ -119,7 +132,6 @@ function requestBook() {
             jQuery('#liveToastRequest').toast('show');
         }
     });
-    return false;
 }
 
 function updateInfo() {

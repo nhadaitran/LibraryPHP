@@ -20,16 +20,16 @@
                     </div>
                 </div>
                 <!-- Content -->
-                <?php include "masterpage/archive/content.php" ?>
+                <?php include_once __DIR__."/content.php" ?>
                 <!-- Related Post Area -->
                 <hr>
                 <h4>Bài đăng liên quan</h4>                
                 <div class="row d-flex justify-content-between mb-3">
                     <div class="col-lg-5">
-                        <?php include "masterpage/archive/related-post.php" ?>
+                        <?php include_once __DIR__."/related-post.php" ?>
                     </div>
                     <div class="col-lg-5">
-                        <?php include "masterpage/archive/related-post.php" ?>
+                        <?php include_once __DIR__."/related-post.php" ?>
                     </div>
                 </div>
             </div>

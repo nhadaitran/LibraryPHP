@@ -11,8 +11,8 @@
             <p>Admin | 2 hours ago</p>
         </div>
     </div>
-    <?php include "single-right-archive.php" ?>
-    <?php include "single-right-archive.php" ?>    
+    <?php include_once __DIR__."/single-right-archive.php" ?>
+    <?php include_once __DIR__."/single-right-archive.php" ?>    
 </div>
 <!-- TIN NOI BAT -->
 

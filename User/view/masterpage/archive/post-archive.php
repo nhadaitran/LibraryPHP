@@ -13,4 +13,4 @@
     </div>
 </div>
 <!-- Main Content -->
-<?php include "post-archive-content.php" ?>
+<?php include_once __DIR__."/post-archive-content.php" ?>

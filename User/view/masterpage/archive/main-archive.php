@@ -47,10 +47,10 @@
                         <!-- Right single caption -->
                         <div class="card col-xl-6 col-lg-12 bg-transparent">
                             <div class="row">
-                            <?php include "single-main-archive.php" ?>
-                            <?php include "single-main-archive.php" ?>
-                            <?php include "single-main-archive.php" ?>
-                            <?php include "single-main-archive.php" ?>
+                            <?php include_once __DIR__."/single-main-archive.php" ?>
+                            <?php include_once __DIR__."/single-main-archive.php" ?>
+                            <?php include_once __DIR__."/single-main-archive.php" ?>
+                            <?php include_once __DIR__."/single-main-archive.php" ?>
                             </div>
                         </div>
                     </div>

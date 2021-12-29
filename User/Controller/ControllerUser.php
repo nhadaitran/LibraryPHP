@@ -77,7 +77,6 @@ class ControllerUser
         echo json_encode($data);
     }
 }
-
 if (sizeof($_POST) > 0 && $_POST['action'] != null) {
     $action = $_POST['action'];
     switch ($action) {

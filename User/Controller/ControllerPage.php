@@ -48,6 +48,16 @@ class ControllerPage
         include_once "../view/contact.php";
     }
 
+    public static function responsePageNews()
+    {
+        include_once "../view/news.php";
+    }
+
+    public static function responsePageNewsPost($id)
+    {
+        include_once "../view/news_post.php";
+    }
+
     public static function responsePageBook($id)
     {
         if (!empty($_SESSION['user'])) {
@@ -102,6 +112,15 @@ if (!empty($_GET['page'])) {
             break;
         case 'contact':
             ControllerPage::responsePageContact();
+            break;
+        case 'news':
+            ControllerPage::responsePageNews();
+            break;
+        case 'newspost':
+            if (!empty ($_GET['news'])) {
+                $id= $_GET['news'];
+                ControllerPage::responsePageNewsPost($id);
+            }
             break;
         default:
             break;

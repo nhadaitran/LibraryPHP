@@ -6,8 +6,8 @@
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <img class="rounded-circle mt-5" src="https://via.placeholder.com/110x110" alt="user avatar" width="90">
-                    <span class="font-weight-bold">' . $user['name'] . '</span>
-                    <span class="text-50">' . $user['email'] . '</span>
+                    <span class="font-weight-bold" id="_username">' . $user['name'] . '</span>
+                    <span class="text-50" id="_useremail">' . $user['email'] . '</span>
                 </div>
             </div>
             <div class="col-md-8">
@@ -31,7 +31,7 @@
                             <div class="col-md-6 form-group" id="confirmpass-group"><input type="password" id="confirm_password" class="form-control" placeholder="Xác nhận mật khẩu mới" value=""></div>                            
                         </div>
                         <div class="row mt-5 d-flex justify-content-end">
-                        <div class="col-md-6 form-group"><button class="btn btn-primary profile-button" type="submit" id="applyBtn">Cập Nhật</button></div>
+                        <div class="col-md-6 form-group"><button class="btn btn-primary profile-button" type="submit">Cập Nhật</button></div>
                         <div class="col-md-6 form-group" id="oldpass-group"><input type="password" id="old_password" class="form-control" placeholder="Xác nhận mật khẩu hiện tại" value=""></div>
                     </div>
                     <form>

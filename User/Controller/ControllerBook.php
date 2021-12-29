@@ -43,15 +43,15 @@ class ControllerBook
         include_once "../Model/ModelFavorite.php";
         $modelFavorite = new ModelFavorite();
         $modelFavorite->insert($id_student, $id_book);
-        $fav = $modelFavorite->getBySidAndBid($id_student, $id_book);
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
-        if (!empty($_POST['search'])) {
-            $title = $_POST['search'];
+        if (!empty($_GET['search'])) {
+            $title = $_GET['search'];
             $listBook = $modelBook->searchBooks($title);
-        } else if (!empty($_POST['category'])) {
-            $id = $_POST['category'];
+        }
+        if (!empty($_GET['category'])) {
+            $id = $_GET['category'];
             $listBook = $modelBook->searchBooksByCategory($id);
         }
         if (isset($listBook['0'])) {
@@ -101,11 +101,12 @@ class ControllerBook
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
-        if (!empty($_POST['search'])) {
-            $title = $_POST['search'];
+        if (!empty($_GET['search'])) {
+            $title = $_GET['search'];
             $listBook = $modelBook->searchBooks($title);
-        } else if (!empty($_POST['category'])) {
-            $id = $_POST['category'];
+        }
+        if (!empty($_GET['category'])) {
+            $id = $_GET['category'];
             $listBook = $modelBook->searchBooksByCategory($id);
         }
         if (isset($listBook['0'])) {
@@ -155,7 +156,7 @@ class ControllerBook
         }
         $listBook = $modelFavorite->getAll($user['id']);
         if (isset($listBook['0'])) {
-            $html= '<div class="card-body row d-flex justify-content-around" id="fav_list">';
+            $html = '<div class="card-body row d-flex justify-content-around" id="fav_list">';
             foreach ($listBook as $book) {
                 $book['name'] = strlen($book['name']) > 30 ? substr($book['name'], 0, 30) . "..." : $book['name'];
                 $html .= '<div class="card col-md-auto">';
@@ -240,20 +241,20 @@ if (!empty($_GET['book'])) {
                 header("Location:./ControllerPage.php?page=login");
             }
             break;
-            case 'favH':
-                if (!empty($user)) {
-                    ControllerBook::addFavoriteH($id_book, $user['id']);
-                } else {
-                    header("Location:./ControllerPage.php?page=login");
-                }
-                break;
-            case 'defavH':
-                if (!empty($user)) {
-                    ControllerBook::delFavoriteH($id_book, $user['id']);
-                } else {
-                    header("Location:./ControllerPage.php?page=login");
-                }
-                break;
+        case 'favH':
+            if (!empty($user)) {
+                ControllerBook::addFavoriteH($id_book, $user['id']);
+            } else {
+                header("Location:./ControllerPage.php?page=login");
+            }
+            break;
+        case 'defavH':
+            if (!empty($user)) {
+                ControllerBook::delFavoriteH($id_book, $user['id']);
+            } else {
+                header("Location:./ControllerPage.php?page=login");
+            }
+            break;
         case 'defav2':
             if (!empty($user)) {
                 ControllerBook::delFavorite2($id_fav);
