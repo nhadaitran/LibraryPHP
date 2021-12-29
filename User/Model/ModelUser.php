@@ -47,6 +47,22 @@ class ModelUser
         }
     }
 
+    public function checkEmail($email)
+    {
+        try {
+
+            $sql = "SELECT * FROM quanlythuvien.students WHERE email = '${email}' ";
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            if (sizeof($result) >= 1) {
+                return false;
+            }
+            return true;
+        } catch (Exception $e) {
+            return true;
+        }
+    }
+
     public function insertUser($username, $name, $email, $password)
     {
         try {

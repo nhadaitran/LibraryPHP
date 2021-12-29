@@ -151,7 +151,12 @@ function updateInfo() {
                         '<h6 class="help-block" style="color:red;">' + data.error.confirm_password + "</h6>"
                     );
                 }
-
+                if (data.error.email) {
+                    $("#email-group").addClass("has-error");
+                    $("#email-group").append(
+                        '<h6 class="help-block" style="color:red;">' + data.error.email + "</h6>"
+                    );
+                }
                 if (data.error.old_password) {
                     $("#oldpass-group").addClass("has-error");
                     $("#oldpass-group").append(

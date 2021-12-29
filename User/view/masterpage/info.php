@@ -5,7 +5,7 @@
             echo '
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
+                    <img class="rounded-circle mt-5" src="https://via.placeholder.com/110x110" alt="user avatar" width="90">
                     <span class="font-weight-bold">' . $user['name'] . '</span>
                     <span class="text-50">' . $user['email'] . '</span>
                 </div>

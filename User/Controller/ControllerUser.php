@@ -48,17 +48,22 @@ class ControllerUser
                 $name = $user['name'];
             }
             if ($_POST['email'] != "" || $_POST['email'] != null) {
-                $email = $_POST['email'];
+                if ($modelUser->checkEmail($_POST['email'])) {
+                    $email = $_POST['email'];
+                } else {
+                    $email = null;
+                    $error['email'] = "Email đã có người đăng ký";
+                }
             } else {
                 $email = $user['email'];
             }
-            if ($new_password != null && $new_password !=-1) {
+            if ($new_password != null && $new_password != -1 && $email != null) {
                 $modelUser->updateUser($user['id'], $name, $email, $new_password);
                 $_SESSION['user']['name'] = $name;
                 $_SESSION['user']['email'] = $email;
                 $_SESSION['user']['password'] = $new_password;
                 $data['success'] = true;
-            } else if ($new_password == null) {
+            } else if ($new_password == null && $email != null) {
                 $modelUser->updateUser($user['id'], $name, $email, $old_password);
                 $_SESSION['user']['name'] = $name;
                 $_SESSION['user']['email'] = $email;
