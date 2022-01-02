@@ -14,6 +14,21 @@
                     </div>
                 </div>
                 <div class="table-responsive">
+                    <table >
+                        <tr>
+                            <form id="" action="#" method="post" class="row">
+                                <td>
+                                    <label>Tên thể loại:</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="nameBook" class="form-control form-control-rounded" id="input-6">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary type="button" >Thêm</button>
+                                </td>
+                            </form>
+                        </tr>
+                    </table>
                     <table class="table table-hover">
                         <thead>
                         <tr>

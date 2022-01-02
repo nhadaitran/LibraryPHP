@@ -72,7 +72,6 @@
                                     .'<td>'.$book["dateAdd"].'</td>'
                                     .'<td>'
                                     .'<a href="ControllerPage.php?page=editBook&idBook='.$idBook.'" class="btn btn-primary zmdi zmdi-edit"  type="button"></a>'
-                                    .'<button id=""  data-toggle="modal" data-target="#exampleModal" class="deleteBook btn btn-danger zmdi zmdi-delete" value="'.$book["id"].'" type="button"></button>'
                                     .'</td>'
                                     .'</tr>';
                             }

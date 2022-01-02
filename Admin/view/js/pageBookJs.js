@@ -22,27 +22,26 @@
                 row.append($('<td>'+element['dateAdd']+'</td>'));
                 row.append("<td>"
                     +"<button  class='btn btn-primary zmdi zmdi-edit' value='"+element['id']+"'  type='button'/>"
-                    +"<button id='' data-toggle='modal' value='"+element['id']+"'data-target='#exampleModal' class='deleteBook btn btn-danger zmdi zmdi-delete' type='button'/>"
                     +"</td>");
                 tableBook.append(row);
             });
         }
     })
 }
-
-    function deleteBook(idBook,action){
-    $.ajax({
-        type: 'GET',
-        url: 'ControllerBook.php',
-        data: {idBook:idBook , action: action},
-        cache: false,
-        dataType:'json',
-        success: function (data) {
-
-        }
-    });
-
-}
+//
+//     function deleteBook(idBook,action){
+//     $.ajax({
+//         type: 'GET',
+//         url: 'ControllerBook.php',
+//         data: {idBook:idBook , action: action},
+//         cache: false,
+//         dataType:'json',
+//         success: function (data) {
+//
+//         }
+//     });
+//
+// }
 
 
 //Search book by input
@@ -60,20 +59,20 @@
         searchBook(search,'searchBookByCategory');
     })
 
-    //delete book
-    var btnDeleteModel =  $("#btnDeleteModel");
-    var btndeleteBook = $(".deleteBook");
-    btndeleteBook.on('click',function () {
-        var idBook=btndeleteBook.val();
-        btnDeleteModel.val(idBook);
-        btnDeleteModel.on('click',function (){
-            var idBook=btnDeleteModel.val();
-            deleteBook(idBook,'deleteBook');
-            $('#btnCancelModel').trigger('click');
-            $('.toast').toast('show');
-            searchBook(0,'searchBookByCategory');
-        })
-    })
+    // //delete book
+    // var btnDeleteModel =  $("#btnDeleteModel");
+    // var btndeleteBook = $(".deleteBook");
+    // btndeleteBook.on('click',function () {
+    //     var idBook=btndeleteBook.val();
+    //     btnDeleteModel.val(idBook);
+    //     btnDeleteModel.on('click',function (){
+    //         var idBook=btnDeleteModel.val();
+    //         deleteBook(idBook,'deleteBook');
+    //         $('#btnCancelModel').trigger('click');
+    //         $('.toast').toast('show');
+    //         searchBook(0,'searchBookByCategory');
+    //     })
+    // })
 
     //form save book
     var formSaveBook = $("#formSaveBook");

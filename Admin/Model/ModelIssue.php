@@ -53,7 +53,7 @@ class ModelIssue
                 ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
                 ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
                 ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
-                ." WHERE i.status = 0 AND (i.id = '$search' OR bo.id = '$search' OR i.id_student = '$search' OR a.fullname LIKE '%$search%' OR bo.name LIKE '%$search%' OR st.name LIKE '%$search%' ) ";
+                ." WHERE i.status = 0 AND (i.id = '$search' OR a.fullname LIKE '%$search%' OR bo.name LIKE '%$search%' OR st.name LIKE '%$search%' ) ";
             $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             return $result;
