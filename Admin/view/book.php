@@ -118,6 +118,6 @@
 
 </body>
     <script>
-        <?php include_once "assets/js/tableBookJs.js"?>
+        <?php include_once "js/pageBookJs.js"?>
     </script>
 </html>

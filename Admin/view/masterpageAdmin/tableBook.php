@@ -61,6 +61,7 @@
                                 if($book['status']==1){
                                     $status="Đã mượn";
                                 }
+                                $idBook = $book["id"];
 
                                 echo '<tr class="trBook">'
                                     ."<th scope='row'>".$book["id"].'</th>'
@@ -70,8 +71,8 @@
                                     .'<td>'.$status.'</td>'
                                     .'<td>'.$book["dateAdd"].'</td>'
                                     .'<td>'
-                                    .'<button class="btn btn-primary zmdi zmdi-edit"  type="button"></button>'
-                                    .'<button id="deleteBook"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger zmdi zmdi-delete" value="'.$book["id"].'" type="button"></button>'
+                                    .'<a href="ControllerPage.php?page=editBook&idBook='.$idBook.'" class="btn btn-primary zmdi zmdi-edit"  type="button"></a>'
+                                    .'<button id=""  data-toggle="modal" data-target="#exampleModal" class="deleteBook btn btn-danger zmdi zmdi-delete" value="'.$book["id"].'" type="button"></button>'
                                     .'</td>'
                                     .'</tr>';
                             }

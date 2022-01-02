@@ -22,7 +22,7 @@
                 row.append($('<td>'+element['dateAdd']+'</td>'));
                 row.append("<td>"
                     +"<button  class='btn btn-primary zmdi zmdi-edit' value='"+element['id']+"'  type='button'/>"
-                    +"<button id='deleteBook' data-toggle='modal' data-target='#exampleModal' class='btn btn-danger zmdi zmdi-delete' type='button'/>"
+                    +"<button id='' data-toggle='modal' value='"+element['id']+"'data-target='#exampleModal' class='deleteBook btn btn-danger zmdi zmdi-delete' type='button'/>"
                     +"</td>");
                 tableBook.append(row);
             });
@@ -62,7 +62,7 @@
 
     //delete book
     var btnDeleteModel =  $("#btnDeleteModel");
-    var btndeleteBook = $("#deleteBook");
+    var btndeleteBook = $(".deleteBook");
     btndeleteBook.on('click',function () {
         var idBook=btndeleteBook.val();
         btnDeleteModel.val(idBook);
@@ -82,5 +82,32 @@
             type: formSaveBook.attr('method'),
             url: formSaveBook.attr('action'),
             data: formSaveBook.serialize(),
+        })
+    })
+
+    var inputSearchCategory = $("#inputSearchCategory");
+    inputSearchCategory.on('input propertychange',function (){
+        var value=inputSearchCategory.val();
+        $.ajax({
+            type: 'GET',
+            url: 'ControllerCategory.php',
+            data: {search:value , action: 'searchCategory'},
+            cache: false,
+            dataType:'json',
+            success: function (data) {
+                var tableBook = $('#tableCategory');
+                $(".trCategory").remove();
+                $.each(data, function(key, element) {
+                    var row = $('<tr class="trCategory"></tr>');
+                    row.append($('<td>'+element['id']+'</td>'));
+                    row.append($('<td>'+element['name']+'</td>'));
+                    row.append($('<td>'+element['countBook']+'</td>'));
+                    row.append("<td>"
+                        +"<button class='btn btn-primary zmdi zmdi-edit' type='button'/>"
+                        +"<button class='btn btn-danger zmdi zmdi-delete' type='button'/>"
+                        +"</td>");
+                    tableBook.append(row);
+                });
+            }
         })
     })

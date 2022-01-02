@@ -97,6 +97,24 @@ class ModelBook
         }
     }
 
+    public function findBookById($id){
+        try {
+
+            $sql = "SELECT * FROM quanlythuvien.books WHERE id = '$id' ";
+            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
+            $result=$stmt->fetchAll();
+            if(sizeof($result)==1){
+//                foreach ($result as $value){
+//                    return new Admin($value["aid"], $value["fullname"], $value["username"], $value["password"], $value["email"]);
+//                }
+                return $result[0];
+            }
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
     public function searchBook($search)
     {
         try {
@@ -140,6 +158,18 @@ class ModelBook
             $sql = "DELETE FROM quanlythuvien.books WHERE id=? ";
             $stmt= $this->conn->prepare($sql);
             $stmt->execute([$id]);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function updateBook($book){
+        try {
+
+            $sql = "UPDATE quanlythuvien.books SET name=?, author=?, id_category=?, description=? WHERE id=? ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([$book->getName(), $book->getAuthor(), $book->getIdCategory(), $book->getDescription(), $book->getId()]);
         } catch (Exception $e) {
             echo $e->getMessage();
             return null;

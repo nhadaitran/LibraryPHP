@@ -70,6 +70,19 @@ class ControllerPage{
     public static function responseInfoPage(){
         include_once "../view/info.php";
     }
+
+    public static function responseEditBook($id){
+
+        include_once "../Model/ModelBook.php";
+        $modelBook = new ModelBook();
+        $book = $modelBook->findBookById($id);
+
+        include_once "../Model/ModelCategory.php";
+        $modelCategory = new ModelCategory();
+        $listCategory = $modelCategory->getAllCategory();
+
+        include_once "../view/editBook.php";
+    }
 }
 
 
@@ -126,6 +139,19 @@ if(!empty($_GET['page'])){
         case 'info':
             if(!empty($admin)){
                 ControllerPage::responseInfoPage();
+            }else{
+                header("Location:./ControllerAdmin.php?action=logout");
+            }
+            break;
+        case 'editBook':
+            if(!empty($admin)){
+                if(!empty($_GET['idBook'])){
+                    $idBook = $_GET['idBook'];
+                    ControllerPage::responseEditBook($idBook);
+                }
+                else{
+                    header("Location:./ControllerAdmin.php?action=logout");
+                }
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
