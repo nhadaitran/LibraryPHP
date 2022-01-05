@@ -132,6 +132,7 @@ function requestBook() {
             jQuery('#liveToastRequest').toast('show');
         }
     });
+    return false;
 }
 
 function updateInfo() {
@@ -183,4 +184,63 @@ function updateInfo() {
         },
     });
     return false;
+}
+load_pagination();
+function load_pagination(query = '', page_number = 1) {
+    var form_data = new FormData();
+
+    form_data.append('query', query);
+
+    form_data.append('page', page_number);
+
+    var ajax_request = new XMLHttpRequest();
+
+    ajax_request.open('POST', 'ControllerPagination.php');
+
+    ajax_request.send(form_data);
+
+    ajax_request.onreadystatechange = function () {
+        if (ajax_request.readyState == 4 && ajax_request.status == 200) {
+            var response = JSON.parse(ajax_request.responseText);
+
+            var html = '';
+
+            if (response.data.length > 0) {
+                html += '<table class="table table-hover">';
+                html += '<thead>';
+                html += '<tr>';
+                html += '<th scope="col">Mã sách</th>';
+                html += '<th scope="col">Tiêu đề sách</th>';
+                html += '<th scope="col">Tác giả</th>';
+                html += '<th scope="col">Trạng Thái</th>';
+                html += '<th scope="col">Yêu Thích</th>';
+                html += '</tr>';
+                html += '</thead>';
+                for (var count = 0; count < response.data.length; count++) {
+                    if(response.data[count].name.length > 90){
+                        response.data[count].name = response.data[count].name.substring(response.data[count].name,0,90) + "..."
+                    }
+                    html += '<tr>';
+                    html += '<td>' + response.data[count].id + '</td>';
+                    html += '<td><a href=?book=' + response.data[count].id + '>' + response.data[count].name + '</td>';
+                    html += '<td>' + response.data[count].author + '</td>';
+                    if (response.data[count].status == 1) {
+                        html += '<td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+                    } else {
+                        html += '<td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                    }
+                    if (response.data[count].fid != null) {
+                        html += ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' + response.data[count].id + ');"></button></td>';
+                    } else {
+                        html += ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' + response.data[count].id + ');"></button></td>';
+                    }
+                    html += '</tr>';
+                }
+                html += '</table>';
+            }
+            jQuery('#search_table').html(html);
+            jQuery('#pagination_link').html(response.pagination);
+        }
+
+    }
 }

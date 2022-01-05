@@ -24,6 +24,19 @@ class ModelBook
         $this->conn = null;
     }
 
+    public function countBook()
+    {
+        try {
+
+            $sql = "SELECT COUNT(id) as countBook FROM quanlythuvien.books";
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result[0]['countBook'];
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
     public function getAll()
     {
         try {
@@ -34,6 +47,31 @@ class ModelBook
             FROM quanlythuvien.books b
             LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book
             WHERE f.id_student = '$id' OR f.id_student IS NULL ORDER BY b.id  DESC";
+            } else {
+                $sql = "SELECT * FROM quanlythuvien.books";
+            }
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            if ($result != null) {
+                return $result;
+            }
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getLimit($start, $limit)
+    {
+        try {
+            if (!empty($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+                $id = $user['id'];
+                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+            FROM quanlythuvien.books b
+            LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book
+            WHERE f.id_student = '$id' OR f.id_student IS NULL ORDER BY b.id  DESC
+            LIMIT $start , $limit";
             } else {
                 $sql = "SELECT * FROM quanlythuvien.books";
             }
