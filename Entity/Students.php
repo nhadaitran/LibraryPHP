@@ -7,6 +7,7 @@ class Students
     private $username;
     private $password;
     private $email;
+    private $lock;
 
     /**
      * @param $id
@@ -106,6 +107,21 @@ class Students
         $this->email = $email;
     }
 
+       /**
+     * @return mixed
+     */
+    public function getLock()
+    {
+        return $this->lock;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setLock($lock): void
+    {
+        $this->lock = $lock;
+    }
 
 
 }

@@ -64,6 +64,10 @@ class ControllerPage{
     }
 
     public static function responseBookMemberPage(){
+        include_once "../Model/ModelUser.php";
+        $ModelUser = new ModelUser();
+        $memberList = $ModelUser->getAllMember();
+
         include_once "../view/member.php";
     }
 

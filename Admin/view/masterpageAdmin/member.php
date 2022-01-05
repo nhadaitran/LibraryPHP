@@ -5,15 +5,12 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-row col-md" style="margin-bottom: 3%;">
-                        <form class="form-row col-md">
-                            <div class="col-md">
-                                <input class="form-control" type="search" placeholder="Nhập ID Thành viên...">
-                            </div>
-                            <div class="col-md-0">
-                                <button class="btn btn-light" type="submit">Tìm kiếm</button>
-                            </div>
-                        </form>
+                        <div class="col-md">
+                            <input id="inputSearchMember" name="idMember" class="timkiem form-control" type="text" placeholder="Nhập ID Thành viên...">
+                        </div>
+
                     </div>
+                    
 
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -24,39 +21,43 @@
                                     <th scope="col">Username</th>
                                     <th scope="col">Password</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Sem</th>
-                                    <th scope="col">Branch</th>
+                                    <th scope="col">Lock</th>
                                     <th scope="col">Setting</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody id="tableMember">
+                                <?php
+                                if (!empty($memberList)) {
+                                    foreach ($memberList as $member) {
+                                        echo '<tr class="trMember">
+                                            <th scope="row">' . $member['id'] . '</th>
+                                            <td>' . $member['name'] . '</td>
+                                            <td>' . $member['username'] . '</td>
+                                            <td>' . $member['password'] . '</td>
+                                            <td>' . $member['email'] . '</td>
+                                            <td>' . $member['lock'] . '</td>
+                                            <td>
+                                            <form action="../../Controller/ControllerMember.php" method="GET">
+                                                <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
+                                                <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
+                                                <a href="../Controller/ControllerMember.php?action=lock&id='. $member['id'].'" class="btn btn-warning zmdi zmdi-lock" type="button"></a>
+                                            </form>
+                                            </td>
+                                        </tr>';
+                                    }
+                                }
+                                ?>
+                                <!-- <tr>
                                     <th scope="row">121</th>
                                     <td>Mark Otto</td>
                                     <td>paulinus</td>
                                     <td>2123</td>
                                     <td>paulinus@email.com</td>
-                                    <td>Sem 1</td>
-                                    <td>IT</td>
                                     <td>
                                         <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
                                         <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
                                     </td>
-                                </tr>
-                                
-                                <tr>
-                                    <th scope="row">121</th>
-                                    <td>Mark Otto</td>
-                                    <td>paulinus</td>
-                                    <td>2123</td>
-                                    <td>paulinus@email.com</td>
-                                    <td>Sem 1</td>
-                                    <td>IT</td>
-                                    <td>
-                                        <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
-                                        <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
-                                    </td>
-                                </tr>
+                                </tr> -->
 
                             </tbody>
                         </table>
