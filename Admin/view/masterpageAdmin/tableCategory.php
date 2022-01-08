@@ -16,15 +16,15 @@
                 <div class="table-responsive">
                     <table >
                         <tr>
-                            <form id="" action="#" method="post" class="row">
+                            <form id="" action="ControllerCategory.php" method="POST" class="row">
                                 <td>
                                     <label>Tên thể loại:</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="nameBook" class="form-control form-control-rounded" id="input-6">
+                                    <input type="text" name="nameCategory" class="form-control form-control-rounded" id="input-6">
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary type="button" >Thêm</button>
+                                    <button name="action" value="saveCategory" class="btn btn-primary type="submit">Thêm</button>
                                 </td>
                             </form>
                         </tr>

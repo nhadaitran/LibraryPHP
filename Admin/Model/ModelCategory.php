@@ -31,6 +31,16 @@ class ModelCategory
             return null;
         }
     }
+    public function saveCategory($nameCategory){
+        try {
+            $sql = " INSERT INTO quanlythuvien.category(name)"
+                . "VALUES('$nameCategory')";
+            $this->conn->exec($sql);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
     public function searchCategory($search){
         try {
 

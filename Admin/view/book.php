@@ -26,10 +26,10 @@
                             <div class="card-body">
                                 <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
                                     <li class="nav-item">
-                                        <a href="javascript:void();" data-target="#book" data-toggle="pill" class="nav-link active"><i class="zmdi zmdi-bookmark-outline"></i><span class="hidden-xs">Sách</span></a>
+                                        <a href="javascript:void();" data-target="#book" data-toggle="pill" class="nav-link  <?php if(!isset($_GET['category'])) echo 'active'?>"><i class="zmdi zmdi-bookmark-outline"></i><span class="hidden-xs">Sách</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="javascript:void();" data-target="#category" data-toggle="pill" class="nav-link"><i class="zmdi zmdi-storage"></i><span class="hidden-xs">Thể loại</span></a>
+                                        <a href="javascript:void();" data-target="#category" data-toggle="pill" class="nav-link <?php if(isset($_GET['category'])&&$_GET['category']=='save') echo 'active'?> "><i class="zmdi zmdi-storage"></i><span class="hidden-xs">Thể loại</span></a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="javascript:void();" data-target="#request" data-toggle="pill" class="nav-link"><i class="icon-envelope-open"></i> <span class="hidden-xs">Phản hồi</span></a>
@@ -42,7 +42,7 @@
 
                                                             <!--start table book-->
 
-                                    <div class="tab-pane active" id="book">
+                                    <div class="tab-pane  <?php if(!isset($_GET['category'])) echo 'active'?>" id="book">
 
                                         <?php include_once "masterpageAdmin/tableBook.php" ?>
 
@@ -53,7 +53,7 @@
 
                                                             <!--start table category-->
 
-                                    <div class="tab-pane " id="category">
+                                    <div class="tab-pane <?php if(isset($_GET['category'])&&$_GET['category']=='save') echo 'active'?> " id="category">
 
                                         <?php include_once "masterpageAdmin/tableCategory.php" ?>
 

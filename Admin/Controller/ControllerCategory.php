@@ -26,6 +26,27 @@ if (sizeof($_GET) > 0) {
                     ControllerCategory::searchCategory($search);
                 }
                 break;
+            case 'saveCategory':
+                if(isset($_GET['nameCategory'])){
+                    $nameCategory = $_GET['nameCategory'];
+                    $modelCategory = new ModelCategory();
+                    $modelCategory->saveCategory($nameCategory);
+                    header("Location:./ControllerPage.php?page=book&category=save");
+                }
+        }
+    }
+}
+if(sizeof($_POST>0)){
+    if (!empty($_POST['action'])) {
+        $action = $_POST['action'];
+        switch ($action) {
+            case 'saveCategory':
+                if(isset($_POST['nameCategory'])){
+                    $nameCategory = $_POST['nameCategory'];
+                    $modelCategory = new ModelCategory();
+                    $modelCategory->saveCategory($nameCategory);
+                    header("Location:./ControllerPage.php?page=book&category=save");
+                }
         }
     }
 }
