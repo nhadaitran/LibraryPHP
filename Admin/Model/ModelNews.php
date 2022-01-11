@@ -14,7 +14,7 @@ class ModelNews
 
     public function __destruct()
     {
-        $this->conn=null;
+        DPO::closeSession();
     }
 
     public function getAllNews(){

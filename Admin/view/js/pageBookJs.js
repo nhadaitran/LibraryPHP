@@ -94,6 +94,7 @@
             cache: false,
             dataType:'json',
             success: function (data) {
+                console.log(data);
                 var tableBook = $('#tableCategory');
                 $(".trCategory").remove();
                 $.each(data, function(key, element) {

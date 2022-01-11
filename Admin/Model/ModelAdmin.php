@@ -19,13 +19,11 @@ class ModelAdmin
     {
         try {
 
-            $sql = "SELECT * FROM quanlythuvien.admin WHERE username = '${username}' AND password = '${password}' ";
-            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
-            $result=$stmt->fetchAll();
+            $sql = "SELECT * FROM quanlythuvien.admin"
+                   ." WHERE username = :username AND password = :password ";
+            $param = array(":username"=>$username,":password"=>$password);
+            $result = DPO::getData($sql,$param);
             if(sizeof($result)==1){
-//                foreach ($result as $value){
-//                    return new Admin($value["aid"], $value["fullname"], $value["username"], $value["password"], $value["email"]);
-//                }
                 return $result[0];
             }
             return null;
@@ -36,7 +34,7 @@ class ModelAdmin
 
     public function __destruct()
     {
-       $this->conn=null;
+        DPO::closeSession();
     }
 
 }

@@ -16,40 +16,20 @@ class ModelBook
 
     public function __destruct()
     {
-        $this->conn = null;
+        DPO::closeSession();
     }
 
     public function countBook()
     {
         try {
-
             $sql = "SELECT COUNT(id) as countBook FROM quanlythuvien.books";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             return $result[0]['countBook'];
         } catch (Exception $e) {
             return null;
         }
     }
 
-//    public function saveBook($book){
-//        try {
-//
-//            $nameBook = $book->getName();
-//            $author = $book->getAuthor();
-//            $idCategory = $book->getIdCategory();
-//            $description = $book->getDescription();
-//            $urlImage = $book->getImage();
-//            $date = date('Y-m-d');
-//
-//            $sql = " INSERT INTO quanlythuvien.books(name,author,id_category,description,image,date)"
-//                    ."VALUES('$nameBook', '$author', '$idCategory', '$description','$urlImage', '$date')";
-//            $this->conn->exec($sql);
-//        } catch (Exception $e) {
-//            echo $e->getMessage();
-//           return null;
-//        }
-//    }
     public function saveBook($book)
     {
         try {
@@ -58,14 +38,12 @@ class ModelBook
             $author = $book->getAuthor();
             $idCategory = $book->getIdCategory();
             $description = $book->getDescription();
-            $urlImage = $book->getImage();
             $date = date('Y-m-d');
 
             $sql = " INSERT INTO quanlythuvien.books(name,author,id_category,description,date)"
                 . "VALUES('$nameBook', '$author', '$idCategory', '$description', '$date')";
             $this->conn->exec($sql);
         } catch (Exception $e) {
-            echo $e->getMessage();
             return null;
         }
     }
@@ -75,10 +53,9 @@ class ModelBook
         try {
 
             $sql = "UPDATE quanlythuvien.books SET image=? WHERE name=? ";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$urlImage, $nameBook]);
+            $param = array($urlImage, $nameBook);
+            DPO::updateData($sql,$param);
         } catch (Exception $e) {
-            echo $e->getMessage();
             return null;
         }
     }
@@ -89,8 +66,7 @@ class ModelBook
 
             $sql = "SELECT b.id, b.name AS nameBook, b.author, b.status, b.date AS dateAdd, ca.name AS nameCategory FROM quanlythuvien.books b"
                 . " JOIN quanlythuvien.category ca on b.id_category = ca.id ";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             return $result;
         } catch (Exception $e) {
             return null;
@@ -100,13 +76,10 @@ class ModelBook
     public function findBookById($id){
         try {
 
-            $sql = "SELECT * FROM quanlythuvien.books WHERE id = '$id' ";
-            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
-            $result=$stmt->fetchAll();
+            $sql = "SELECT * FROM quanlythuvien.books WHERE id =:id ";
+            $param = array(":id"=>$id);
+            $result= DPO::getData($sql,$param);
             if(sizeof($result)==1){
-//                foreach ($result as $value){
-//                    return new Admin($value["aid"], $value["fullname"], $value["username"], $value["password"], $value["email"]);
-//                }
                 return $result[0];
             }
             return null;
@@ -121,9 +94,9 @@ class ModelBook
             if (!empty($search)) {
                 $sql = "SELECT b.id, b.name AS nameBook, b.author, b.status, b.date AS dateAdd, b.image, ca.name AS nameCategory FROM quanlythuvien.books b"
                     . " JOIN quanlythuvien.category ca on b.id_category = ca.id "
-                    . " WHERE b.id = '$search' OR b.name LIKE '%$search%' OR b.author LIKE '%$search%' ";
-                $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-                $result = $stmt->fetchAll();
+                    . " WHERE b.id =:search OR b.name LIKE '%$search%' OR b.author LIKE '%$search%' ";
+                $param = array(":search"=>$search);
+                $result = DPO::getData($sql,$param);
                 return $result;
             } else {
                 return $this->getAllBook();
@@ -133,17 +106,17 @@ class ModelBook
         }
     }
 
-    public function searchBookByCategory($id)
+    public function searchBookByCategory($idCategory)
     {
         try {
-            if ($id == 0) {
+            if ($idCategory == 0) {
                 return $this->getAllBook();
             } else {
                 $sql = "SELECT b.id, b.name AS nameBook, b.author, b.status, b.date AS dateAdd, ca.name AS nameCategory FROM quanlythuvien.books b"
                     . " JOIN quanlythuvien.category ca on b.id_category = ca.id "
-                    . " WHERE b.id_category = $id";
-                $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-                $result = $stmt->fetchAll();
+                    . " WHERE b.id_category =:idCategory ";
+                $param = array("idCategory"=>$idCategory);
+                $result = DPO::getData($sql,$param);
                 return $result;
             }
         } catch (Exception $e) {
@@ -166,12 +139,10 @@ class ModelBook
 
     public function updateBook($book){
         try {
-
             $sql = "UPDATE quanlythuvien.books SET name=?, author=?, id_category=?, description=? WHERE id=? ";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([$book->getName(), $book->getAuthor(), $book->getIdCategory(), $book->getDescription(), $book->getId()]);
+            $param = array($book->getName(), $book->getAuthor(), $book->getIdCategory(), $book->getDescription(), $book->getId());
+            DPO::updateData($sql,$param);
         } catch (Exception $e) {
-            echo $e->getMessage();
             return null;
         }
     }
