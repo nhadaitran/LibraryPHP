@@ -47,18 +47,18 @@
                         </thead>
                         <tbody id="tableReturn">
                         <?php
-                        if(!empty($returnList)){
-                            foreach ($returnList as $return){
+                        if(!empty($data["returnList"])){
+                            foreach ($data["returnList"] as $return){
                                 echo '<tr class="trReturn">';
                                 echo "<th scope='row'>" . $return['id'] . "</th>";
                                 echo "<td>" . $return['nameAdmin'] . "</td>";
                                 echo "<td>" . $return['nameStudent'] . "</td>";
                                 echo "<td>" . $return['nameBook'] . "</td>";
                                 echo "<td>" . $return['datereturn'] . "</td>";
-                                echo " <td>
-                                                                                       <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
-                                                                                       <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
-                                                                                  </td>";
+                                echo "<td>
+                                           <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
+                                           <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
+                                       </td>";
                                 echo "</tr>";
                             }
                         }

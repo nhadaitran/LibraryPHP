@@ -16,8 +16,8 @@
                         <label for="input-8">Thể loại</label>
                         <select name="category" class="form-control form-control-rounded">
                             <?php
-                            if(!empty($listCategory)){
-                                foreach ($listCategory as $category){
+                            if(!empty($data['listCategory'])){
+                                foreach ($data['listCategory'] as $category){
                                     echo  '<option value="'.$category['id'].'">'.'- - '.$category['name']. ' - -'.'</option>';
                                 }
                             }

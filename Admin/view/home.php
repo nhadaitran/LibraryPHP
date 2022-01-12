@@ -24,7 +24,7 @@
                             <div class="row row-group m-0">
                                 <div class="col-12 col-lg-6 col-xl-3 border-light">
                                     <div class="card-body">
-                                        <h5 class="text-white mb-0"> <?php echo $countBook; ?> <span class="float-right"><i class="fa fa-book"></i></span></h5>
+                                        <h5 class="text-white mb-0"> <?php echo $data['countBook']; ?> <span class="float-right"><i class="fa fa-book"></i></span></h5>
                                         <div class="progress my-3" style="height:3px;">
                                             <div class="progress-bar" style="width:55%"></div>
                                         </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-12 col-lg-6 col-xl-3 border-light">
                                     <div class="card-body">
-                                        <h5 class="text-white mb-0"><?php echo $countUser; ?> <span class="float-right"><i class="fa fa-user"></i></span></h5>
+                                        <h5 class="text-white mb-0"><?php echo $data['countUser']; ?> <span class="float-right"><i class="fa fa-user"></i></span></h5>
                                         <div class="progress my-3" style="height:3px;">
                                             <div class="progress-bar" style="width:55%"></div>
                                         </div>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-12 col-lg-6 col-xl-3 border-light">
                                     <div class="card-body">
-                                        <h5 class="text-white mb-0"> <?php echo $countIssue; ?> <span class="float-right"><i class="fa fa-mail-forward"></i></span></h5>
+                                        <h5 class="text-white mb-0"> <?php echo $data['countIssue'];?> <span class="float-right"><i class="fa fa-mail-forward"></i></span></h5>
                                         <div class="progress my-3" style="height:3px;">
                                             <div class="progress-bar" style="width:55%"></div>
                                         </div>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-12 col-lg-6 col-xl-3 border-light">
                                     <div class="card-body">
-                                        <h5 class="text-white mb-0"><?php echo $countReturn;?> <span class="float-right"><i class="fa fa-mail-reply"></i></span></h5>
+                                        <h5 class="text-white mb-0"><?php echo $data['countReturn'] ;?> <span class="float-right"><i class="fa fa-mail-reply"></i></span></h5>
                                         <div class="progress my-3" style="height:3px;">
                                             <div class="progress-bar" style="width:55%"></div>
                                         </div>

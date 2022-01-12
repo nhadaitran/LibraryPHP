@@ -76,8 +76,8 @@
                                                                 <tbody>
 
                                                                 <?php
-                                                                    if(!empty($newCategoriesList)){
-                                                                        foreach ($newCategoriesList as $newCategories){
+                                                                    if(!empty($data['newCategoriesList'])){
+                                                                        foreach ($data['newCategoriesList'] as $newCategories){
                                                                         echo "<tr>"
                                                                             .'<th scope="row">'.$newCategories['id'].'</th>'
                                                                             ."<td>".$newCategories['name']."</td>"
@@ -159,8 +159,8 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php
-                                                                        if(!empty($newList)){
-                                                                            foreach ($newList as $new){
+                                                                        if(!empty($data['newList'])){
+                                                                            foreach ($data['newList'] as $new){
                                                                                 echo "<tr>"
                                                                                         .'<th scope="row">'.$new['id'].'</th>'
                                                                                         .'<td>'.$new['title'].'</td>'

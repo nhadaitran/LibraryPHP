@@ -1,66 +1,82 @@
 <?php
+include_once "./BaseController.php";
+class ControllerPage extends BaseController {
 
-class ControllerPage{
-
-    public static function responsePageHome(){
+    public function responsePageHome(){
+        $data = [];
 
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $countBook = $modelBook->countBook();
 
+        $data["countBook"] = $countBook;
         include_once "../Model/ModelUser.php";
         $modeUser = new ModelUser();
         $countUser = $modeUser->countUser();
+        $data["countUser"] = $countUser;
 
         include_once "../Model/ModelIssue.php";
         $modeIssue = new ModelIssue();
         $countIssue = $modeIssue->countIssue();
+        $data["countIssue"] = $countIssue;
 
         include_once "../Model/ModelReturn.php";
         $modeReturn = new ModelReturn();
         $countReturn = $modeReturn->countReturn();
+        $data["countReturn"] = $countReturn;
 
-        include_once "../view/home.php";
+        $this->view("home",$data);
     }
 
-    public static function responseTransactionPage(){
+    public function responseTransactionPage(){
+
+        $data = [];
 
         include_once "../Model/ModelIssue.php";
         $modelIssue = new ModelIssue();
         $issueList = $modelIssue->getAllIssue();
+        $data["issueList"] = $issueList;
 
         include_once "../Model/ModelReturn.php";
         $modelReturn = new ModelReturn();
         $returnList = $modelReturn->getAllReturn();
+        $data["returnList"] = $returnList;
 
-        include_once "../view/transaction.php";
+        $this->view("transaction",$data);
     }
 
-    public static function responseDirectoryManagementPage(){
+    public  function responseDirectoryManagementPage(){
+
+        $data = [];
 
         include_once "../Model/ModelNewCategories.php";
         $modelNewCategories = new ModelNewCategories();
         $newCategoriesList = $modelNewCategories->getAllNewCategroies();
+        $data['newCategoriesList'] = $newCategoriesList;
 
         include_once "../Model/ModelNews.php";
         $modelNew = new ModelNews();
         $newList = $modelNew -> getAllNews();
+        $data['newList'] =   $newList;
 
-
-        include_once "../view/directorymanagement.php";
+        $this->view("directorymanagement",$data);
     }
 
-    public static function responseBookPage(){
+    public  function responseBookPage(){
+
+        $data = [];
 
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAllBook();
+        $data['listBook'] =  $listBook;
 
         include_once "../Model/ModelCategory.php";
         $modelCategory = new ModelCategory();
         $listCategory = $modelCategory->getAllCategory();
+        $data['listCategory'] =  $listCategory;
 
-        include_once "../view/book.php";
+        $this->view("book",$data);
     }
 
     public static function responseBookMemberPage(){
@@ -71,21 +87,25 @@ class ControllerPage{
         include_once "../view/member.php";
     }
 
-    public static function responseInfoPage(){
-        include_once "../view/info.php";
+    public function responseInfoPage(){
+        $this->view("info",null);
     }
 
-    public static function responseEditBook($id){
+    public function responseEditBook($id){
+
+        $data = [];
 
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $book = $modelBook->findBookById($id);
+        $data['book'] = $book;
 
         include_once "../Model/ModelCategory.php";
         $modelCategory = new ModelCategory();
         $listCategory = $modelCategory->getAllCategory();
+        $data['listCategory'] = $listCategory;
 
-        include_once "../view/editBook.php";
+        $this->view("editBook",$data);
     }
 }
 
@@ -94,14 +114,15 @@ class ControllerPage{
 
 if(!empty($_GET['page'])){
     $page = $_GET['page'];
-    session_start();
+    $ControllerPage = new ControllerPage();
+        session_start();
     if(!empty($_SESSION['admin'])){
         $admin=$_SESSION['admin'];
     }
     switch ($page){
         case 'home':
             if(!empty($admin)){
-                ControllerPage::responsePageHome();
+                $ControllerPage->responsePageHome();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
@@ -110,7 +131,7 @@ if(!empty($_GET['page'])){
 
         case 'transaction':
             if(!empty($admin)){
-                ControllerPage::responseTransactionPage();
+                $ControllerPage->responseTransactionPage();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
@@ -118,7 +139,7 @@ if(!empty($_GET['page'])){
 
         case 'directorymanagement':
             if(!empty($admin)){
-                ControllerPage::responseDirectoryManagementPage();
+                $ControllerPage->responseDirectoryManagementPage();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
@@ -126,7 +147,7 @@ if(!empty($_GET['page'])){
 
         case 'book':
             if(!empty($admin)){
-                ControllerPage::responseBookPage();
+                $ControllerPage->responseBookPage();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
@@ -142,7 +163,7 @@ if(!empty($_GET['page'])){
 
         case 'info':
             if(!empty($admin)){
-                ControllerPage::responseInfoPage();
+                $ControllerPage->responseInfoPage();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }
@@ -151,7 +172,7 @@ if(!empty($_GET['page'])){
             if(!empty($admin)){
                 if(!empty($_GET['idBook'])){
                     $idBook = $_GET['idBook'];
-                    ControllerPage::responseEditBook($idBook);
+                    $ControllerPage->responseEditBook($idBook);
                 }
                 else{
                     header("Location:./ControllerAdmin.php?action=logout");

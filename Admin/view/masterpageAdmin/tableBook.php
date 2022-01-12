@@ -8,8 +8,8 @@
                             <select id="selectCategory" class="form-control" required>
                                 <option value="0">- - All - -</option>
                                 <?php
-                                if(!empty($listCategory)){
-                                    foreach ($listCategory as $category){
+                                if(!empty($data['listCategory'])){
+                                    foreach ($data['listCategory'] as $category){
                                         echo  '<option value="'.$category['id'].'">'.'- - '.$category['name']. ' - -'.'</option>';
                                     }
                                 }
@@ -55,8 +55,8 @@
                         <tbody id="tableBook">
                         <?php
 
-                        if(!empty($listBook)){
-                            foreach ($listBook as $book){
+                        if(!empty($data['listBook'])){
+                            foreach ($data['listBook'] as $book){
                                 $status = "Chưa mượn";
                                 if($book['status']==1){
                                     $status="Đã mượn";

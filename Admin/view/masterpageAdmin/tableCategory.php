@@ -40,8 +40,8 @@
                         </thead>
                         <tbody id="tableCategory">
                         <?php
-                        if(!empty($listCategory)){
-                            foreach ($listCategory as $category){
+                        if(!empty($data['listCategory'])){
+                            foreach ($data['listCategory'] as $category){
                                 echo '<tr class="trCategory">'
                                     .'<th scope="row">'.$category['id'].'</th>'
                                     .'<td>'.$category["name"].'</td>'

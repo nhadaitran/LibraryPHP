@@ -45,8 +45,8 @@
                         </thead>
                         <tbody id="tableIssue">
                         <?php
-                        if(!empty($issueList)){
-                            foreach ($issueList as $issue){
+                        if(!empty($data["issueList"])){
+                            foreach ($data["issueList"] as $issue){
                                 echo '<tr class="trIssue">';
                                 echo "<th scope='row'>" . $issue['id'] . "</th>";
                                 echo "<td>" . $issue['nameAdmin'] . "</td>";

@@ -1,3 +1,8 @@
+<?php
+$book = $data["book"];
+$listCategory = $data["listCategory"];
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
