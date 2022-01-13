@@ -48,6 +48,7 @@ class ControllerMember
 //method get: Tìm kiếm username và id, name
 if (sizeof($_GET) > 0) {
     if (!empty($_GET['action'])) {
+       $ControllerMember = new ControllerMember(); 
         $action = $_GET['action'];
         switch ($action) {
             case 'searchIdNameMember':
@@ -59,12 +60,14 @@ if (sizeof($_GET) > 0) {
             case 'lock':
                 //   khóa/mở tài khoản
                 $id = $_GET['id'];
-                $n = ControllerMember::selectLockMember($id); 
+                $n = $ControllerMember->selectLockMember($id); 
+                // var_dump($n);
+                // exit();
                 if($n==null){                
-                    ControllerMember::updateLockMember($id);
+                    $ControllerMember->updateLockMember($id);
                     header("Location: ../Controller/ControllerPage.php?page=member");
                 }else{
-                    ControllerMember::updateUnLockMember($id);
+                    $ControllerMember->updateUnLockMember($id);
                     header("Location: ../Controller/ControllerPage.php?page=member");
                 }
                 break;

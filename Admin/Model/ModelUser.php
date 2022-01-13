@@ -17,7 +17,8 @@ class ModelUser
         DPO::closeSession();
     }
 
-    public function countUser(){
+    public function countUser()
+    {
         try {
             $sql = "SELECT COUNT(id) as countStudent FROM quanlythuvien.students";
             $result = DPO::getAllData($sql);
@@ -38,27 +39,33 @@ class ModelUser
         }
     }
 
-    public function findByIdNameMember($id)
+    public function findByIdNameMember($search)
     {
         try {
-            $sql = " SELECT s.id, s.username, s.password, s.email, s.name, s.lock FROM quanlythuvien.students s"
-                . " WHERE s.username LIKE '%$id%' OR s.id ='$id' or s.name LIKE '%$id%'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            return $result;
+
+            if (!empty($search)) {
+                $sql = " SELECT s.id, s.username, s.password, s.email, s.name, s.lock FROM quanlythuvien.students s"
+                    . " WHERE s.username LIKE '%$search%' OR s.id =:search or s.name LIKE '%$search%'";
+                $param = array(":search" => $search);
+                $result = DPO::getData($sql, $param);
+                return $result;
+            } else {
+                return $this->getAllMember();
+            }
         } catch (Exception $e) {
             return null;
         }
     }
+    
+    
     public function selectLockMember($id)
     {
         try {
 
             $sql = " SELECT s.lock FROM quanlythuvien.students s"
                 . " WHERE s.id ='$id' and s.lock ='1'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            return $result;
+                $result = DPO::getAllData($sql);
+                return $result;
         } catch (Exception $e) {
             return null;
         }
@@ -69,9 +76,8 @@ class ModelUser
         try {
             $sql = " UPDATE quanlythuvien.students s set s.lock=1 "
                 . " WHERE s.id ='$id'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $stmt->execute();
-            return true;
+            $stmt = $this->conn->query($sql);
+            $stmt->execute([$id]);
         } catch (Exception $e) {
             return false;
         }
@@ -82,9 +88,8 @@ class ModelUser
         try {
             $sql = " UPDATE quanlythuvien.students s set s.lock=0 "
                 . " WHERE s.id ='$id'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $stmt->execute();
-            return true;
+            $stmt = $this->conn->query($sql);
+            $stmt->execute([$id]);
         } catch (Exception $e) {
             return false;
         }
