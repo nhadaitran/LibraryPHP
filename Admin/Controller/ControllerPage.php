@@ -8,8 +8,8 @@ class ControllerPage extends BaseController {
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $countBook = $modelBook->countBook();
-
         $data["countBook"] = $countBook;
+
         include_once "../Model/ModelUser.php";
         $modeUser = new ModelUser();
         $countUser = $modeUser->countUser();
@@ -79,12 +79,16 @@ class ControllerPage extends BaseController {
         $this->view("book",$data);
     }
 
-    public static function responseBookMemberPage(){
-        include_once "../Model/ModelUser.php";
-        $ModelUser = new ModelUser();
-        $memberList = $ModelUser->getAllMember();
+    public function responseBookMemberPage(){
 
-        include_once "../view/member.php";
+        $data = [];
+
+        include_once "../Model/ModelUser.php";
+        $modelUser = new ModelUser();
+        $memberList = $modelUser->getAllMember();
+        $data["memberList"] = $memberList;
+        
+        $this->view("member",$data);
     }
 
     public function responseInfoPage(){
@@ -155,7 +159,7 @@ if(!empty($_GET['page'])){
 
         case 'member':
             if(!empty($admin)){
-                ControllerPage::responseBookMemberPage();
+                $ControllerPage->responseBookMemberPage();
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");
             }

@@ -31,8 +31,7 @@ class ModelUser
     {
         try {
             $sql = " SELECT s.id, s.username, s.password, s.email, s.name, s.lock FROM quanlythuvien.students s ";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             return $result;
         } catch (Exception $e) {
             return null;

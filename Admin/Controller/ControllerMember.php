@@ -73,22 +73,3 @@ if (sizeof($_GET) > 0) {
 }
 
 
-
-//method post
-if (sizeof($_POST) > 0 && $_POST['action'] != null) {
-    $action = $_POST['action'];
-    switch ($action) {
-        case 'xoa':
-            break;
-        case 'lock':
-            $id = $_GET['id'];
-            ControllerMember::updateLockMember($id);
-            break;
-
-        case 'sua':
-            echo 'register';
-            break;
-        default:
-            break;
-    }
-}

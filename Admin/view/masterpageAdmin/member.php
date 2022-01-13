@@ -27,8 +27,8 @@
                             </thead>
                             <tbody id="tableMember">
                                 <?php
-                                if (!empty($memberList)) {
-                                    foreach ($memberList as $member) {
+                                if (!empty($data["memberList"])) {
+                                    foreach ($data["memberList"] as $member) {
                                         echo '<tr class="trMember">
                                             <th scope="row">' . $member['id'] . '</th>
                                             <td>' . $member['name'] . '</td>
@@ -47,17 +47,6 @@
                                     }
                                 }
                                 ?>
-                                <!-- <tr>
-                                    <th scope="row">121</th>
-                                    <td>Mark Otto</td>
-                                    <td>paulinus</td>
-                                    <td>2123</td>
-                                    <td>paulinus@email.com</td>
-                                    <td>
-                                        <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
-                                        <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
-                                    </td>
-                                </tr> -->
 
                             </tbody>
                         </table>
