@@ -72,7 +72,7 @@ class ModelIssue
 
     public function updateIssue($id,$idAD){
         try{
-            $sql = "UPDATE quanlythuvien.issue SET id_admin = :idAD, status = 1 WHERE id = :id";
+            $sql = "UPDATE quanlythuvien.issue SET id_admin = :idAD WHERE id = :id";
             $param = array(":idAD"=>$idAD,":id"=>$id);
             $result = DPO::updateData($sql,$param);
             return $result;

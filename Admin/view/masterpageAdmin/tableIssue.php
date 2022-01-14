@@ -52,10 +52,10 @@
                                     echo "<td>" . $issue['nameStudent'] . "</td>";
                                     echo "<td>" . $issue['nameBook'] . "</td>";
                                     echo "<td>" . $issue['dateissue'] . "</td>";
-                                    if ($issue['status'] == 0)
+                                    if (!$issue['nameAdmin'])
                                         echo "<td>" . "Chờ duyệt" . "</td>";
                                     else
-                                        echo "<td>" . "Đã duyệt" . "</td>";
+                                        echo "<td>" . "Đang mượn" . "</td>";
                                     if (empty($issue['nameAdmin']))
                                         echo "<td>" . "Chưa có" . "</td>";
                                     else

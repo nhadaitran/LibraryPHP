@@ -16,10 +16,10 @@ inputSearchIssue.on('input propertychange',function (){
                 row.append($('<td>'+element['nameStudent']+'</td>'));
                 row.append($('<td>'+element['nameBook']+'</td>'));
                 row.append($('<td>'+element['dateissue']+'</td>'));
-                if(element['status']==0)
+                if(element['nameAdmin']=="")
                 row.append($('<td>'+'Chờ duyệt'+'</td>'));
                 else
-                row.append($('<td>'+'Đã duyệt'+'</td>'));
+                row.append($('<td>'+'Đang mượn'+'</td>'));
                 if(element['nameAdmin']!="")
                 row.append($('<td>'+element['nameAdmin']+'</td>'));
                 else
