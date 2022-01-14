@@ -32,12 +32,22 @@ class ModelIssue
     }
     public function getAllIssue(){
         try {
-            $sql = " SELECT i.id, i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name as nameBook FROM quanlythuvien.issue i "
+            $sql = " SELECT i.id, i.status,i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name  as nameBook FROM quanlythuvien.issue i "
                     ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
                     ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
-                    ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
-                    ." WHERE i.status = 0";
+                    ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id ";
             $result = DPO::getAllData($sql);
+            return $result;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function getIssue($id){
+        try {
+            $sql = " SELECT * FROM quanlythuvien.issue WHERE id = :id";
+            $param = array(":id" => $id);
+            $result = DPO::getData($sql,$param);
             return $result;
         } catch (Exception $e) {
             return null;
@@ -58,6 +68,30 @@ class ModelIssue
             return null;
         }
 
+    }
+
+    public function updateIssue($id,$idAD){
+        try{
+            $sql = "UPDATE quanlythuvien.issue SET id_admin = :idAD, status = 1 WHERE id = :id";
+            $param = array(":idAD"=>$idAD,":id"=>$id);
+            $result = DPO::updateData($sql,$param);
+            return $result;
+        }
+        catch(Exception $e){
+            return null;
+        }
+    }
+
+    public function deleteIssue($id){
+        try{
+            $sql = "DELETE FROM quanlythuvien.issue WHERE id = :id";
+            $param = array(":id"=>$id);
+            $result = DPO::updateData($sql,$param);
+            return $result;
+        }
+        catch(Exception $e){
+            return null;
+        }
     }
 }
 //

@@ -146,4 +146,14 @@ class ModelBook
             return null;
         }
     }
+
+    public function updateStatusBook($id,$status){
+        try {
+            $sql = "UPDATE quanlythuvien.books SET status=:status WHERE id=:id ";
+            $param = array(":status"=>$status,":id"=>$id);
+            DPO::updateData($sql,$param);
+        } catch (Exception $e) {
+            return null;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 
 include_once "../Model/ModelIssue.php";
-
+include_once "../Model/ModelBook.php";
 
 class ControllerIssue{
 
@@ -39,5 +39,27 @@ if(sizeof($_GET)>0){
                 }
                 break;
         }
+    }
+}
+
+if(isset($_POST['action'])){
+    session_start();
+    $idAD = $_SESSION['admin']['id'];
+    $action = $_POST['action'];
+    $id = $_POST['id'];
+    switch ($action){
+        case 'yes':
+            $modelIssue = new ModelIssue();
+            $result = $modelIssue->updateIssue($id,$idAD);
+            header("Location: ./ControllerPage.php?page=transaction");
+            break;
+        case 'no':
+            $modelIssue = new ModelIssue();
+            $issue = $modelIssue->getIssue($id);
+            $modelBook = new ModelBook();
+            $result=$modelBook->updateStatusBook($issue[0]['id_book'],0);
+            $result = $modelIssue->deleteIssue($id);
+            header("Location: ./ControllerPage.php?page=transaction");
+            break;
     }
 }

@@ -33,7 +33,7 @@
                                 <div class="tab-content p-3">
 
 
-                                                    <!--tart table Isuue-->
+                                                    <!--start table Isuue-->
                                     <div class="tab-pane active" id="issue">
 
                                             <?php include_once "masterpageAdmin/tableIssue.php"?>
@@ -50,8 +50,6 @@
 
                                     </div>
                                                     <!--end table return-->
-
-
                                 </div>
                             </div>
                         </div>

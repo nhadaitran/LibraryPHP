@@ -13,14 +13,25 @@ inputSearchIssue.on('input propertychange',function (){
             $.each(data, function(key, element) {
                 var row = $('<tr class="trIssue"></tr>');
                 row.append($('<td>'+element['id']+'</td>'));
-                row.append($('<td>'+element['nameAdmin']+'</td>'));
                 row.append($('<td>'+element['nameStudent']+'</td>'));
                 row.append($('<td>'+element['nameBook']+'</td>'));
                 row.append($('<td>'+element['dateissue']+'</td>'));
-                row.append("<td>"
-                    +"<button class='btn btn-primary zmdi zmdi-edit' type='button'/>"
-                    +"<button class='btn btn-danger zmdi zmdi-delete' type='button'/>"
-                    +"</td>");
+                if(element['status']==0)
+                row.append($('<td>'+'Chờ duyệt'+'</td>'));
+                else
+                row.append($('<td>'+'Đã duyệt'+'</td>'));
+                if(element['nameAdmin']!="")
+                row.append($('<td>'+element['nameAdmin']+'</td>'));
+                else
+                row.append($('<td>'+'Chưa có'+'</td>'));
+                if(element['status']==0){
+                    row.append("<td><form action='ControllerIssue.php' method='post'><input type='text' hidden name='id' value='"+element['id']+"'>"
+                    +"<button type='submit' class='btn btn-success' name='action' value='yes'>Yes</button>"
+                    +"<button type='submit' class='btn btn-danger' name='action' value='no'>No</button>"
+                    +" </form></td>");
+                }
+                else
+                row.append($('<td>'+'None'+'</td>'));
                 tableIssue.append(row);
             });
         }

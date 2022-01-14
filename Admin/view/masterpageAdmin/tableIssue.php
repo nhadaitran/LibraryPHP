@@ -4,14 +4,13 @@
             <div class="card-body">
                 <div class="accordion" id="accordionOne">
                     <div class="col-lg d-flex justify-content-center" style="margin:auto">
-                        <button class="btn btn-light mb-5" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
+                        <button class="btn btn-light mb-5" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             + Thêm
                         </button>
                         <div class="form-row col-md" style="margin-bottom: 3%;">
                             <div class="form-row col-md">
                                 <div class="col-md">
-                                    <input id="inputSearchIssue"  name="search" class="form-control" type="text" placeholder="Nhập Thông Tin Cần Tìm...">
+                                    <input id="inputSearchIssue" name="search" class="form-control" type="text" placeholder="Nhập Thông Tin Cần Tìm...">
                                 </div>
                             </div>
                         </div>
@@ -32,40 +31,54 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table  class="table table-hover">
+                    <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name Admin</th>
-                            <th scope="col">Name Student</th>
-                            <th scope="col">Name Book</th>
-                            <th scope="col">Date issue</th>
-                            <th scope="col">Setting</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name Student</th>
+                                <th scope="col">Name Book</th>
+                                <th scope="col">Date issue</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Approved by</th>
+                                <th scope="col">Action</th>
+                            </tr>
                         </thead>
                         <tbody id="tableIssue">
-                        <?php
-                        if(!empty($data["issueList"])){
-                            foreach ($data["issueList"] as $issue){
-                                echo '<tr class="trIssue">';
-                                echo "<th scope='row'>" . $issue['id'] . "</th>";
-                                echo "<td>" . $issue['nameAdmin'] . "</td>";
-                                echo "<td>" . $issue['nameStudent'] . "</td>";
-                                echo "<td>" . $issue['nameBook'] . "</td>";
-                                echo "<td>" . $issue['dateissue'] . "</td>";
-                                echo "<td>
-                                          <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
-                                          <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
-                                      </td>";
-                                echo "</tr>";
+                            <?php
+                            if (!empty($data["issueList"])) {
+                                foreach ($data["issueList"] as $issue) {
+                                    echo '<tr class="trIssue">';
+                                    echo "<th scope='row'>" . $issue['id'] . "</th>";
+                                    echo "<td>" . $issue['nameStudent'] . "</td>";
+                                    echo "<td>" . $issue['nameBook'] . "</td>";
+                                    echo "<td>" . $issue['dateissue'] . "</td>";
+                                    if ($issue['status'] == 0)
+                                        echo "<td>" . "Chờ duyệt" . "</td>";
+                                    else
+                                        echo "<td>" . "Đã duyệt" . "</td>";
+                                    if (empty($issue['nameAdmin']))
+                                        echo "<td>" . "Chưa có" . "</td>";
+                                    else
+                                        echo "<td>" . $issue['nameAdmin'] . "</td>";
+                                    if ($issue['status'] == 0) {
+                                        $id = $issue['id'];
+                                        echo "
+                                    <td>
+                                    <form action='ControllerIssue.php' method='post'>
+                                    <input type='text' hidden name='id' value='$id'>
+                                        <button type='submit' class='btn btn-success' name='action' value='yes'>Yes</button>
+                                        <button type='submit' class='btn btn-danger' name='action' value='no'>No</button>
+                                        </form>
+                                    </td>";
+                                    } else
+                                        echo "<td>" . "None" . "</td>";
+                                    echo "</tr>";
+                                }
                             }
-                        }
-                        ?>
+                            ?>
                         </tbody>
                     </table>
-
                 </div>
-
                 <nav class="mt-3">
                     <ul class="pagination justify-content-center">
                         <li class="page-item">
