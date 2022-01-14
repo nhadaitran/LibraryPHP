@@ -70,10 +70,10 @@ class ModelIssue
 
     }
 
-    public function updateIssue($id,$idAD){
+    public function updateIssue($id,$idAD,$status){
         try{
-            $sql = "UPDATE quanlythuvien.issue SET id_admin = :idAD WHERE id = :id";
-            $param = array(":idAD"=>$idAD,":id"=>$id);
+            $sql = "UPDATE quanlythuvien.issue SET id_admin = :idAD, status = :status WHERE id = :id";
+            $param = array(":idAD"=>$idAD,":id"=>$id,":status"=>$status);
             $result = DPO::updateData($sql,$param);
             return $result;
         }

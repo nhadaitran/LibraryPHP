@@ -56,4 +56,17 @@ class ModelReturn
             return null;
         }
     }
+
+    public function insertReturn($id_issue, $id_admin)
+    {
+        try {
+            $sql = "INSERT INTO  quanlythuvien.returns (id, datereturn, id_issue, id_admin)
+            VALUE (?, ?, ?, ?)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([null, date("Y-m-d"), $id_issue, $id_admin]);
+            return true;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
 }

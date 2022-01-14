@@ -36,7 +36,7 @@ if (sizeof($_GET) > 0) {
         }
     }
 }
-if(sizeof($_POST>0)){
+if(sizeof($_POST)>0){
     if (!empty($_POST['action'])) {
         $action = $_POST['action'];
         switch ($action) {

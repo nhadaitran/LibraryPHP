@@ -52,11 +52,12 @@ class ModelIssue
             return null;
         }
     }
+    
     public function insert($id_student, $id_book)
     {
         try {
             $sql = "INSERT INTO  quanlythuvien.issue (id, dateissue, id_student, id_book, id_admin, status)
-            VALUE (?, ?, ?, ?, ?,?)";
+            VALUE (?, ?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([null, date("Y-m-d"), $id_student, $id_book, null, 0]);
             return true;

@@ -16,22 +16,28 @@ inputSearchIssue.on('input propertychange',function (){
                 row.append($('<td>'+element['nameStudent']+'</td>'));
                 row.append($('<td>'+element['nameBook']+'</td>'));
                 row.append($('<td>'+element['dateissue']+'</td>'));
-                if(element['nameAdmin']=="")
+                if(element['nameAdmin']==null)
                 row.append($('<td>'+'Chờ duyệt'+'</td>'));
+                else if(element['status']==1)
+                row.append($('<td>'+'Đã trả'+'</td>'));
                 else
                 row.append($('<td>'+'Đang mượn'+'</td>'));
-                if(element['nameAdmin']!="")
+                if(element['nameAdmin']!=null)
                 row.append($('<td>'+element['nameAdmin']+'</td>'));
                 else
                 row.append($('<td>'+'Chưa có'+'</td>'));
-                if(element['status']==0){
-                    row.append("<td><form action='ControllerIssue.php' method='post'><input type='text' hidden name='id' value='"+element['id']+"'>"
-                    +"<button type='submit' class='btn btn-success' name='action' value='yes'>Yes</button>"
-                    +"<button type='submit' class='btn btn-danger' name='action' value='no'>No</button>"
-                    +" </form></td>");
+                if(element['nameAdmin']==null){
+                    row.append($("<td><form action='ControllerIssue.php' method='post'><input type='text' hidden name='id' value='"+element['id']+"'>"
+                    +"<button type='submit' class='btn btn-success' name='action' value='yes'>Cho mượn</button>"
+                    +"<button type='submit' class='btn btn-danger' name='action' value='no'>Hủy</button>"
+                    +" </form></td>"));
                 }
-                else
+                else if(element['status']==1)
                 row.append($('<td>'+'None'+'</td>'));
+                else
+                row.append($("<td><form action='ControllerIssue.php' method='post'><input type='text' hidden name='id' value='"+element['id']+"'>"
+                +"<button type='submit' class='btn btn-success' name='action' value='tra'>Trả sách</button>"
+                +" </form></td>"));
                 tableIssue.append(row);
             });
         }

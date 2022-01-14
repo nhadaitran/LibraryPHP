@@ -54,24 +54,37 @@
                                     echo "<td>" . $issue['dateissue'] . "</td>";
                                     if (!$issue['nameAdmin'])
                                         echo "<td>" . "Chờ duyệt" . "</td>";
+                                    else if($issue['status']==1)
+                                        echo "<td>" . "Đã trả" . "</td>";
                                     else
                                         echo "<td>" . "Đang mượn" . "</td>";
                                     if (empty($issue['nameAdmin']))
                                         echo "<td>" . "Chưa có" . "</td>";
                                     else
                                         echo "<td>" . $issue['nameAdmin'] . "</td>";
-                                    if ($issue['status'] == 0) {
+                                    if (!$issue['nameAdmin']) {
                                         $id = $issue['id'];
                                         echo "
                                     <td>
                                     <form action='ControllerIssue.php' method='post'>
                                     <input type='text' hidden name='id' value='$id'>
-                                        <button type='submit' class='btn btn-success' name='action' value='yes'>Yes</button>
-                                        <button type='submit' class='btn btn-danger' name='action' value='no'>No</button>
+                                        <button type='submit' class='btn btn-success' name='action' value='yes'>Cho mượn</button>
+                                        <button type='submit' class='btn btn-danger' name='action' value='no'>Hủy</button>
                                         </form>
                                     </td>";
-                                    } else
-                                        echo "<td>" . "None" . "</td>";
+                                    }
+                                    else if($issue['status']==1)
+                                    echo "<td>" . "None" . "</td>";
+                                    else
+                                    {
+                                        $id = $issue['id'];
+                                        echo "<td>
+                                        <form action='ControllerIssue.php' method='post'>
+                                        <input type='text' hidden name='id' value='$id'>
+                                            <button type='submit' class='btn btn-success' name='action' value='tra'>Trả sách</button>
+                                            </form>
+                                        </td>";
+                                    }
                                     echo "</tr>";
                                 }
                             }

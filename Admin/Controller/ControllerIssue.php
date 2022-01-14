@@ -2,6 +2,7 @@
 
 include_once "../Model/ModelIssue.php";
 include_once "../Model/ModelBook.php";
+include_once "../Model/ModelReturn.php";
 
 class ControllerIssue{
 
@@ -50,16 +51,25 @@ if(isset($_POST['action'])){
     switch ($action){
         case 'yes':
             $modelIssue = new ModelIssue();
-            $result = $modelIssue->updateIssue($id,$idAD);
+            $modelIssue->updateIssue($id,$idAD,0);
             header("Location: ./ControllerPage.php?page=transaction");
             break;
         case 'no':
             $modelIssue = new ModelIssue();
             $issue = $modelIssue->getIssue($id);
             $modelBook = new ModelBook();
-            $result=$modelBook->updateStatusBook($issue[0]['id_book'],0);
-            $result = $modelIssue->deleteIssue($id);
+            $modelBook->updateStatusBook($issue[0]['id_book'],0);
+            $modelIssue->deleteIssue($id);
             header("Location: ./ControllerPage.php?page=transaction");
             break;
+        case 'tra':
+            $modelIssue = new ModelIssue();
+            $issue = $modelIssue->getIssue($id);
+            $modelIssue->updateIssue($id,$idAD,1);
+            $modelBook = new ModelBook();
+            $modelBook->updateStatusBook($issue[0]['id_book'],0);
+            $modelReturn = new ModelReturn();
+            $return = $modelReturn->insertReturn($id,$idAD);
+            header("Location: ./ControllerPage.php?page=transaction");
     }
 }
