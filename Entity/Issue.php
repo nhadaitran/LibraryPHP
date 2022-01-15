@@ -17,7 +17,7 @@ class Issue
      */
     public function __construct($id, $dateissue, $sid, $bid, $aid)
     {
-       if(id!=null){
+       if($id!=null){
            $this->id = $id;
        }
         $this->dateissue = $dateissue;

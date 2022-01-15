@@ -111,6 +111,23 @@ class ControllerPage extends BaseController {
 
         $this->view("editBook",$data);
     }
+
+    public function responseEditNews($id){
+
+        $data = [];
+
+        include_once "../Model/ModelNews.php";
+        $modelNews = new ModelNews();
+        $news = $modelNews->findNewsById($id);
+        $data['news'] = $news;
+
+        include_once "../Model/ModelNewCategories.php";
+        $modelCategory = new ModelNewCategories();
+        $listCategory = $modelCategory->getAllNewCategroies();
+        $data['listCategory'] = $listCategory;
+
+        $this->view("editNews",$data);
+    }
 }
 
 
@@ -180,6 +197,20 @@ if(!empty($_GET['page'])){
                 }
                 else{
                     header("Location:./ControllerAdmin.php?action=logout");
+                }
+            }else{
+                header("Location:./ControllerAdmin.php?action=logout");
+            }
+            break;
+        case 'editNews':
+            if(!empty($admin)){
+                if(!empty($_GET['idNews'])){
+                    $idNews = $_GET['idNews'];
+                    $ControllerPage->responseEditNews($idNews);
+                }
+                else{
+                    $idNews = "";
+                    $ControllerPage->responseEditNews($idNews);
                 }
             }else{
                 header("Location:./ControllerAdmin.php?action=logout");

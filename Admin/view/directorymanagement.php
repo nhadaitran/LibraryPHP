@@ -33,17 +33,17 @@
                         <div class="card-body">
                             <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
                                 <li class="nav-item">
-                                    <a href="javascript:void();" data-target="#directory" data-toggle="pill" class="nav-link active"><i class="zmdi zmdi-bookmark-outline"></i><span class="hidden-xs">Loại danh mục</span></a>
+                                    <a href="javascript:void();" data-target="#directory" data-toggle="pill" class="nav-link <?php if(!isset($_GET['savePost'])) echo 'active' ?>"><i class="zmdi zmdi-bookmark-outline"></i><span class="hidden-xs">Loại danh mục</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="javascript:void();" data-target="#post" data-toggle="pill" class="nav-link"><i class="zmdi zmdi-storage"></i><span class="hidden-xs">Bài viết</span></a>
+                                    <a href="javascript:void();" data-target="#post" data-toggle="pill" class="nav-link <?php if(isset($_GET['savePost'])) echo 'active' ?>"><i class="zmdi zmdi-storage"></i><span class="hidden-xs">Bài viết</span></a>
                                 </li>
 
                             </ul>
                             <div class="tab-content p-3">
 
                                 <!--start table new category-->
-                                <div class="tab-pane active" id="directory">
+                                <div class="tab-pane <?php if(!isset($_GET['savePost'])) echo 'active' ?>" id="directory">
                                     <div class="container-fluid">
                                         <div class="col-lg-12">
                                             <div class="card">
@@ -105,10 +105,10 @@
                                                                             . '<th scope="row">' . $newCategories['id'] . '</th>'
                                                                             . "<td>" . $newCategories['name'] . "</td>"
                                                                             . "<td>"
-                                                                            ."<form id='' action='ControllerNewsCategories.php' method='POST' class='row'>"
-                                                                            .'<input type="text" hidden name="id" value="'.$id.'">'
+                                                                            . "<form id='' action='ControllerNewsCategories.php' method='POST' class='row'>"
+                                                                            . '<input type="text" hidden name="id" value="' . $id . '">'
                                                                             . '<button name="action" value="delete" class="btn btn-danger zmdi zmdi-delete" type="submit"/>'
-                                                                            .'</form>'
+                                                                            . '</form>'
                                                                             . '</td>'
                                                                             . '</tr>';
                                                                     }
@@ -140,7 +140,7 @@
                                 <!--End table new category-->
 
                                 <!-- start table news-->
-                                <div class="tab-pane" id="post">
+                                <div class="tab-pane <?php if(isset($_GET['savePost'])) echo 'active' ?>" id="post">
                                     <div class="container-fluid">
                                         <div class="col-lg-12">
                                             <div class="card">
@@ -168,6 +168,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="table-responsive">
+                                                        <table>
+                                                            <tr>
+                                                                
+                                                                    <td><a href="./ControllerPage.php?page=editNews&&idNews">
+                                                                        <button class="btn btn-primary" type=" button">Thêm</button>
+                                                                        </a>
+                                                                    </td>
+                                                                
+                                                            </tr>
+                                                        </table>
                                                         <table class="table table-hover">
                                                             <thead>
                                                                 <tr>
@@ -184,6 +194,7 @@
                                                                 <?php
                                                                 if (!empty($data['newList'])) {
                                                                     foreach ($data['newList'] as $new) {
+                                                                        $id = $new['id'];
                                                                         echo "<tr>"
                                                                             . '<th scope="row">' . $new['id'] . '</th>'
                                                                             . '<td>' . $new['title'] . '</td>'
@@ -192,8 +203,13 @@
                                                                             . '<td>' . $new['description'] . '</td>'
                                                                             . '<td>' . $new['name'] . '</td>'
                                                                             . '<td>'
-                                                                            . '<button class="btn btn-primary zmdi zmdi-edit" type="button"/>'
-                                                                            . '<button class="btn btn-danger zmdi zmdi-delete" type="button"/>'
+                                                                            . "<form id='' action='ControllerNews.php' method='POST' class='row'>"
+                                                                            . '<input type="text" hidden name="id" value="' . $id . '">'
+                                                                            .'<a href="./ControllerPage.php?page=editNews&&idNews='.$id.'">'
+                                                                            . '<button class="btn btn-primary zmdi zmdi-edit" type="button"></button>'
+                                                                            .'</a>'
+                                                                            . '<button name="action" value="delete" class="btn btn-danger zmdi zmdi-delete" type="submit"/>'
+                                                                            . '</form>'
                                                                             . '</td>'
                                                                             . '</tr>';
                                                                     }

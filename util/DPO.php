@@ -51,6 +51,7 @@
         }
         public static function updateData($sql,$param = array()){
             try{
+               
                 $stmt = self::$conn->prepare($sql);
                 $stmt->execute($param);
                 $result = $stmt->rowCount();
