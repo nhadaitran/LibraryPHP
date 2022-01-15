@@ -69,4 +69,33 @@ class ModelReturn
             return null;
         }
     }
+    public function reportReturn(){
+        try{
+            $sql =" SELECT re.id, a.fullname AS nameAdmin, st.name AS nameStudent, b.name AS nameBook, re.datereturn FROM quanlythuvien.returns re "
+                ." JOIN quanlythuvien.issue isu ON  re.id_issue = isu.id "
+                ." JOIN quanlythuvien.admin a ON re.id_admin = a.id "
+                ." JOIN quanlythuvien.books b ON isu.id_book = b.id "
+                ." JOIN quanlythuvien.students st ON st.id = isu.id_student "
+                ." WHERE isu.status = 1 AND b.status = 0";
+            $result = DPO::getAllData($sql);
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+    }
+    public function reportReturnByDay(){
+        try{
+            $sql =" SELECT re.id, a.fullname AS nameAdmin, st.name AS nameStudent, b.name AS nameBook, re.datereturn FROM quanlythuvien.returns re "
+                ." JOIN quanlythuvien.issue isu ON  re.id_issue = isu.id "
+                ." JOIN quanlythuvien.admin a ON re.id_admin = a.id "
+                ." JOIN quanlythuvien.books b ON isu.id_book = b.id "
+                ." JOIN quanlythuvien.students st ON st.id = isu.id_student "
+                ." WHERE isu.status = 1 AND b.status = 0"
+                ." AND DAY(CURDATE()) = DAY(re.datereturn) AND MONTH(CURDATE()) = MONTH(re.datereturn) AND YEAR(CURDATE()) = YEAR(re.datereturn)";
+            $result = DPO::getAllData($sql);
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+    }
 }

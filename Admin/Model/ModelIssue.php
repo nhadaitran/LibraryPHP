@@ -94,7 +94,32 @@ class ModelIssue
             return null;
         }
     }
+
+    public function reportIssue(){
+        try{
+            $sql = " SELECT i.id, IF( i.status = 0,'Đang mượn','Đã trả') AS status,i.dateissue, st.name as nameStudent, COALESCE(a.fullname,'Đang chờ duyệt') as nameAdmin, bo.name  as nameBook FROM quanlythuvien.issue i "
+                ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
+                ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
+                ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
+                ." WHERE i.status = 0";
+            $result = DPO::getAllData($sql);
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+    }
+    public function reportIssueByDay(){
+        try{
+            $sql = " SELECT i.id, IF( i.status = 0,'Đang mượn','Đã trả') AS status,i.dateissue, st.name as nameStudent, COALESCE(a.fullname,'Đang chờ duyệt') as nameAdmin, bo.name  as nameBook FROM quanlythuvien.issue i "
+                ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
+                ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
+                ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
+                ." WHERE i.status = 0"
+                ." AND DAY(CURDATE()) = DAY(i.dateissue) AND MONTH(CURDATE()) = MONTH(i.dateissue) AND YEAR(CURDATE()) = YEAR(i.dateissue)";
+            $result = DPO::getAllData($sql);
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+    }
 }
-//
-//$modelIssue = new ModelIssue();
-//var_dump($modelIssue->searchIssue('1'));

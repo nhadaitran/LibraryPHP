@@ -14,27 +14,27 @@
                         <tbody id="tableIssue">
                             <tr>
                                 <td>Xuất báo cáo sách</td>
-                                <td> <a href="ControllerBook.php?action=reportBook" type='submit' class='btn btn-secondary'>Xuất excel</a></td>
+                                <td> <a href="ControllerBook.php?action=reportBook&report=all" type='submit' class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo sách mới thêm trong tháng</td>
-                                <td> <button class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerBook.php?action=reportBook&report=month" class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo mượn </td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerIssue.php?action=reportIssue&report=all"  class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo mượn trong ngày</td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerIssue.php?action=reportIssue&report=day"  class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo trả sách</td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerReturn.php?action=reportReturn&report=all"  class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo trả sách trong ngày</td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerReturn.php?action=reportReturn&report=day"  class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
 
                         </tbody>

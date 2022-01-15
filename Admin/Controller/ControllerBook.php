@@ -2,7 +2,8 @@
 
 include_once "../Model/ModelBook.php";
 include_once "../../Entity/Book.php";
-include "../../util/Contraints.php";
+include_once "../../util/Contraints.php";
+include_once '../vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -34,14 +35,8 @@ class ControllerBook
             return null;
         }
     }
-
-    //API
-    public static function reportBook(){
+    public static function createFileExcelBook($listBook,$nameFile){
         try{
-            require '../vendor/autoload.php';
-            $modelBook = new ModelBook();
-            $listBook = $modelBook ->reportBook();
-
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             //Tạo style cho file excel
@@ -73,12 +68,24 @@ class ControllerBook
             ob_clean();
             $writer = new Xlsx($spreadsheet);
             header('Content-type: application/vnd.ms-excel');
-            header('Content-Disposition: attachment; filename="ReportBook.xls"');
+            header('Content-Disposition: attachment; filename="'.$nameFile.'.xls"');
             $writer->save('php://output');
-
         }catch (Exception $e){
             return null;
         }
+    }
+
+    //API
+    public static function reportBook(){
+        $modelBook = new ModelBook();
+        $listBook = $modelBook ->reportBook();
+        self::createFileExcelBook($listBook,"reportBook");
+    }
+    //API
+    public static function reportBookByMonth(){
+        $modelBook = new ModelBook();
+        $listBook = $modelBook ->reportBookByMonth();
+        self::createFileExcelBook($listBook,"reportBookByMonth");
     }
 }
 
@@ -201,7 +208,17 @@ if(sizeof($_GET)>0){
                 ControllerBook::deleteBook($idBook);
                 break;
             case "reportBook":
-                ControllerBook::reportBook();
+                if(!empty($_GET['report'])){
+                    $report = $_GET['report'];
+                    switch ($report){
+                        case "all":
+                            ControllerBook::reportBook();
+                            break;
+                        case "month":
+                            ControllerBook::reportBookByMonth();
+                            break;
+                    }
+                }
                 break;
         }
     }

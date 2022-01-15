@@ -168,4 +168,16 @@ class ModelBook
             return null;
         }
     }
+    public function reportBookByMonth(){
+        try{
+            $sql = " SELECT bo.id, bo.name, bo.author, ca.name AS nameCategory, IF(bo.status = 0,'chưa mượn','đã mượn') AS status, bo.date "
+                ." FROM quanlythuvien.books bo "
+                ." JOIN quanlythuvien.category ca ON bo.id_category = ca.id "
+                ." WHERE MONTH(CURDATE()) = MONTH(bo.date) AND YEAR(CURDATE()) = YEAR(CURDATE())";
+            $result = DPO::getAllData($sql);
+            return $result;
+        }catch (Exception $e){
+            return null;
+        }
+    }
 }
