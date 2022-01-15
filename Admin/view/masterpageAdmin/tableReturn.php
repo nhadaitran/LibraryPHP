@@ -42,7 +42,8 @@
                             <th scope="col">Name Student</th>
                             <th scope="col">Name Book</th>
                             <th scope="col">Date return</th>
-                            <th scope="col">Setting</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody id="tableReturn">
@@ -55,9 +56,9 @@
                                 echo "<td>" . $return['nameStudent'] . "</td>";
                                 echo "<td>" . $return['nameBook'] . "</td>";
                                 echo "<td>" . $return['datereturn'] . "</td>";
+                                echo "<td>" . "Đã trả" . "</td>";
                                 echo "<td>
-                                           <button class='btn btn-primary zmdi zmdi-edit' type='button'/>
-                                           <button class='btn btn-danger zmdi zmdi-delete' type='button'/>
+                                          None
                                        </td>";
                                 echo "</tr>";
                             }

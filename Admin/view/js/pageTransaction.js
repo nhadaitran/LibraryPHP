@@ -64,9 +64,9 @@ inputSearchReturn.on('input propertychange',function (){
                 row.append($('<td>'+element['nameStudent']+'</td>'));
                 row.append($('<td>'+element['nameBook']+'</td>'));
                 row.append($('<td>'+element['datereturn']+'</td>'));
+                row.append($('<td>'+'Đã trả'+'</td>'));
                 row.append("<td>"
-                    +"<button class='btn btn-primary zmdi zmdi-edit' type='button'/>"
-                    +"<button class='btn btn-danger zmdi zmdi-delete' type='button'/>"
+                    +"None"
                     +"</td>");
                 tableReturn.append(row);
             });
