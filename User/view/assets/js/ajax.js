@@ -69,8 +69,9 @@ function addFavH(id_book) {
             book: 'favH'
         },
         success: function (data) {
-            jQuery('#search_table').html(data);
-            manage_book();
+            // jQuery('#search_table').html(data);
+            // manage_book();
+            load_pagination();
         }
     });
 }
@@ -87,8 +88,9 @@ function deFavH(id_book) {
             book: 'defavH'
         },
         success: function (data) {
-            jQuery('#search_table').html(data);
-            manage_book();
+            // jQuery('#search_table').html(data);
+            // manage_book();
+            load_pagination();
         }
     });
 }

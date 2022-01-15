@@ -6,7 +6,6 @@ class ControllerBook
         include_once "../Model/ModelFavorite.php";
         $modelFavorite = new ModelFavorite();
         $modelFavorite->insert($id_student, $id_book);
-        $fav = $modelFavorite->getBySidAndBid($id_student, $id_book);
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $book = $modelBook->getByID($id_book);
@@ -43,52 +42,52 @@ class ControllerBook
         include_once "../Model/ModelFavorite.php";
         $modelFavorite = new ModelFavorite();
         $modelFavorite->insert($id_student, $id_book);
-        include_once "../Model/ModelBook.php";
-        $modelBook = new ModelBook();
-        $listBook = $modelBook->getAll();
-        if (!empty($_GET['search'])) {
-            $title = $_GET['search'];
-            $listBook = $modelBook->searchBooks($title);
-        }
-        if (!empty($_GET['category'])) {
-            $id = $_GET['category'];
-            $listBook = $modelBook->searchBooksByCategory($id);
-        }
-        if (isset($listBook['0'])) {
-            $html = '<table class="table table-hover">
-            <thead>
-                <tr>                      
-                    <th scope="col">Mã sách</th>
-                    <th scope="col">Tiêu đề sách</th>
-                    <th scope="col">Tác giả</th>
-                    <th scope="col">Trạng Thái</th>
-                    <th scope="col">Yêu Thích</th>
-                </tr>
-            </thead>';
-            foreach ($listBook as $book) {
-                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
-                $html .= '
-                <tr role="row">
-                <td>' . $book['id'] . '</td>
-                <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
-                <td>' . $book['author'] . '</td>';
-                if ($book['status'] == 1) {
-                    $html .= ' 
-                    <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
-                } else {
-                    $html .= ' 
-                    <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
-                }
-                if ($book['fid'] != null) {
-                    $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
-                } else {
-                    $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
-                }
-                $html .= '</tr>';
-            }
-            $html .= '</table>';
-            echo $html;
-        }
+        // include_once "../Model/ModelBook.php";
+        // $modelBook = new ModelBook();
+        // $listBook = $modelBook->getAll();
+        // if (!empty($_GET['search'])) {
+        //     $title = $_GET['search'];
+        //     $listBook = $modelBook->searchBooks($title);
+        // }
+        // if (!empty($_GET['category'])) {
+        //     $id = $_GET['category'];
+        //     $listBook = $modelBook->searchBooksByCategory($id);
+        // }
+        // if (isset($listBook['0'])) {
+        //     $html = '<table class="table table-hover">
+        //     <thead>
+        //         <tr>                      
+        //             <th scope="col">Mã sách</th>
+        //             <th scope="col">Tiêu đề sách</th>
+        //             <th scope="col">Tác giả</th>
+        //             <th scope="col">Trạng Thái</th>
+        //             <th scope="col">Yêu Thích</th>
+        //         </tr>
+        //     </thead>';
+        //     foreach ($listBook as $book) {
+        //         $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
+        //         $html .= '
+        //         <tr role="row">
+        //         <td>' . $book['id'] . '</td>
+        //         <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
+        //         <td>' . $book['author'] . '</td>';
+        //         if ($book['status'] == 1) {
+        //             $html .= ' 
+        //             <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+        //         } else {
+        //             $html .= ' 
+        //             <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+        //         }
+        //         if ($book['fid'] != null) {
+        //             $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
+        //         } else {
+        //             $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
+        //         }
+        //         $html .= '</tr>';
+        //     }
+        //     $html .= '</table>';
+        //     echo $html;
+        // }
     }
 
     public static function delFavoriteH($id_book, $id_student)
@@ -96,54 +95,54 @@ class ControllerBook
         include_once "../Model/ModelFavorite.php";
         $modelFavorite = new ModelFavorite();
         $fav = $modelFavorite->getBySidAndBid($id_student, $id_book);
-        $modelFavorite->delete($fav['id']);
+        // $modelFavorite->delete($fav['id']);
 
-        include_once "../Model/ModelBook.php";
-        $modelBook = new ModelBook();
-        $listBook = $modelBook->getAll();
-        if (!empty($_GET['search'])) {
-            $title = $_GET['search'];
-            $listBook = $modelBook->searchBooks($title);
-        }
-        if (!empty($_GET['category'])) {
-            $id = $_GET['category'];
-            $listBook = $modelBook->searchBooksByCategory($id);
-        }
-        if (isset($listBook['0'])) {
-            $html = '<table class="table table-hover">
-            <thead>
-                <tr>                      
-                    <th scope="col">Mã sách</th>
-                    <th scope="col">Tiêu đề sách</th>
-                    <th scope="col">Tác giả</th>
-                    <th scope="col">Trạng Thái</th>
-                    <th scope="col">Yêu Thích</th>
-                </tr>
-            </thead>';
-            foreach ($listBook as $book) {
-                $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
-                $html .= '
-                <tr role="row">
-                <td>' . $book['id'] . '</td>
-                <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
-                <td>' . $book['author'] . '</td>';
-                if ($book['status'] == 1) {
-                    $html .= ' 
-                    <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
-                } else {
-                    $html .= ' 
-                    <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
-                }
-                if ($book['fid'] != null) {
-                    $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
-                } else {
-                    $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
-                }
-                $html .= '</tr>';
-            }
-            $html .= '</table>';
-            echo $html;
-        }
+        // include_once "../Model/ModelBook.php";
+        // $modelBook = new ModelBook();
+        // $listBook = $modelBook->getAll();
+        // if (!empty($_GET['search'])) {
+        //     $title = $_GET['search'];
+        //     $listBook = $modelBook->searchBooks($title);
+        // }
+        // if (!empty($_GET['category'])) {
+        //     $id = $_GET['category'];
+        //     $listBook = $modelBook->searchBooksByCategory($id);
+        // }
+        // if (isset($listBook['0'])) {
+        //     $html = '<table class="table table-hover">
+        //     <thead>
+        //         <tr>                      
+        //             <th scope="col">Mã sách</th>
+        //             <th scope="col">Tiêu đề sách</th>
+        //             <th scope="col">Tác giả</th>
+        //             <th scope="col">Trạng Thái</th>
+        //             <th scope="col">Yêu Thích</th>
+        //         </tr>
+        //     </thead>';
+        //     foreach ($listBook as $book) {
+        //         $book['name'] = strlen($book['name']) > 90 ? substr($book['name'], 0, 90) . "..." : $book['name'];
+        //         $html .= '
+        //         <tr role="row">
+        //         <td>' . $book['id'] . '</td>
+        //         <td><a href=?book=' . $book['id'] . '>' . $book['name'] . '</a></td>
+        //         <td>' . $book['author'] . '</td>';
+        //         if ($book['status'] == 1) {
+        //             $html .= ' 
+        //             <td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+        //         } else {
+        //             $html .= ' 
+        //             <td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+        //         }
+        //         if ($book['fid'] != null) {
+        //             $html .= ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' . $book['id'] . ');"></button></td>';
+        //         } else {
+        //             $html .= ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' . $book['id'] . ');"></button></td>';
+        //         }
+        //         $html .= '</tr>';
+        //     }
+        //     $html .= '</table>';
+        //     echo $html;
+        // }
     }
 
     public static function delFavorite2($id_fav)

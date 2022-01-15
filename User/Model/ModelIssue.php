@@ -57,8 +57,8 @@ class ModelIssue
         try {
             $sql = "INSERT INTO  quanlythuvien.issue (id, dateissue, id_student, id_book, id_admin, status)
             VALUE (?, ?, ?, ?, ?,?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([null, date("Y-m-d"), $id_student, $id_book, null, 0]);
+            $param = array(null, date("Y-m-d"), $id_student, $id_book, null, 0);
+            DPO::updateData($sql, $param);
             return true;
         } catch (Exception $e) {
             return null;
@@ -76,5 +76,4 @@ class ModelIssue
             return null;
         }
     }
-    
 }

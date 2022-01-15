@@ -27,10 +27,8 @@ class ModelBook
     public function countBook()
     {
         try {
-
             $sql = "SELECT COUNT(id) as countBook FROM quanlythuvien.books";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             return $result[0]['countBook'];
         } catch (Exception $e) {
             return null;
@@ -50,8 +48,7 @@ class ModelBook
             } else {
                 $sql = "SELECT * FROM quanlythuvien.books";
             }
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
@@ -75,8 +72,7 @@ class ModelBook
             } else {
                 $sql = "SELECT * FROM quanlythuvien.books";
             }
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
@@ -105,8 +101,7 @@ class ModelBook
             } else {
                 $sql = "SELECT * FROM quanlythuvien.books";
             }
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
@@ -122,8 +117,7 @@ class ModelBook
             $sql = "SELECT b.id, b.name as bname, b.author, b.description, b.status, b.image, c.name as cname FROM quanlythuvien.books b "
                 . " LEFT JOIN quanlythuvien.category c ON b.id_category = c.id "
                 . " WHERE b.id='$id'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result[0];
             }
@@ -138,8 +132,8 @@ class ModelBook
         try {
             $sql = "INSERT INTO  quanlythuvien.request (id, name, author, daterequest, id_student, id_admin)
             VALUE (?, ?, ?, ?, ?,?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([null, $name, $author, date("Y-m-d"), $id_student,  null]);
+            $param = array(null, $name, $author, date("Y-m-d"), $id_student,  null);            
+            DPO::updateData($sql,$param);
             return true;
         } catch (Exception $e) {
             return null;
@@ -158,8 +152,7 @@ class ModelBook
             } else {
                 $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
             }
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
@@ -184,8 +177,7 @@ class ModelBook
                     $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
                 }
             }
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
