@@ -7,7 +7,7 @@
     <title>Book Library</title>
     <!-- loader-->
     <link href="../view/assets/css/pace.min.css" rel="stylesheet"/>
-    <script src="../view/assets/js/pace.min.js"></script>
+
     <!--favicon-->
     <link rel="icon" href="../view/assets/images/favicon.ico" type="image/x-icon">
     <!-- Vector CSS -->
@@ -24,4 +24,6 @@
     <link href="../view/assets/css/sidebar-menu.css" rel="stylesheet"/>
     <!-- Custom Style-->
     <link href="../view/assets/css/app-style.css" rel="stylesheet"/>
+    <!--pagination-->
+
 </head>

@@ -20,5 +20,6 @@
             $('.toast').toast('show');
         });
     });
-
 </script>
+<script src="../view/assets/js/pagination.min.js"></script>
+<script src="../view/assets/js/pace.min.js"></script>

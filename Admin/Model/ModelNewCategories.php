@@ -27,6 +27,30 @@ class ModelNewCategories
             return null;
         }
     }
+
+    public function insertNewsCategories($name){
+        try{
+            $sql = " INSERT INTO quanlythuvien.newscategories (name) values (:name) ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':name',$name);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e){
+            return null;
+        }
+    }
+
+    public function deleteNewsCategories($id){
+        try{
+            $sql = " DELETE FROM quanlythuvien.newscategories WHERE id=:id ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id',$id);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e){
+            return null;
+        }
+    }
 }
 
 
