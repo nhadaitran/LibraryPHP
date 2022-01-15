@@ -27,15 +27,10 @@
                                 <li class="nav-item">
                                     <a href="javascript:void();" data-target="#member" data-toggle="pill" class="nav-link active"><i class="zmdi zmdi-assignment-account"></i> <span class="hidden-xs">Danh sách thành viên</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="javascript:void();" data-target="#editmem" data-toggle="pill" class="nav-link"><i class="zmdi zmdi-edit"></i> <span class="hidden-xs">Chỉnh sửa thành viên</span></a>
-                                </li>
                             </ul>
                             <div class="tab-content p-3">
 
                                 <?php include "masterpageAdmin/member.php" ?>
-
-                                <?php include "masterpageAdmin/memberedit.php" ?>
 
                             </div>
                         </div>
