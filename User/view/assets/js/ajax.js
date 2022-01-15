@@ -72,7 +72,7 @@ function addFavH(id_book) {
         },
         success: function (data) {
             // jQuery('#search_table').html(data);
-            // manage_book();
+            manage_book();
             load_pagination();
         }
     });
@@ -91,7 +91,7 @@ function deFavH(id_book) {
         },
         success: function (data) {
             // jQuery('#search_table').html(data);
-            // manage_book();
+            manage_book();
             load_pagination();
         }
     });

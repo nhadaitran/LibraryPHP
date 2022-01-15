@@ -9,7 +9,9 @@ class ControllerUser
             header('Location:../view/login.php?error=1');
         } else if ($user == -1) {
             header('Location:../view/register.php?error=1');
-        } else {
+        } else if ($user['lock']=='1'){
+            header('Location:../view/login.php?error=2');
+        }else {
             session_start();
             $_SESSION['user'] = $user;
             header("Location:./ControllerPage.php?page=home");

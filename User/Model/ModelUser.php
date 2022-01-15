@@ -20,8 +20,7 @@ class ModelUser
         try {
 
             $sql = "SELECT * FROM quanlythuvien.students WHERE username = '${username}' AND password = '${password}' ";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if (sizeof($result) == 1) {
                 return $result[0];
             }
@@ -35,9 +34,8 @@ class ModelUser
     {
         try {
 
-            $sql = "SELECT * FROM quanlythuvien.students WHERE username = '${username}' OR email = '${email}' ";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $sql = "SELECT * FROM quanlythuvien.students WHERE username = '$username' OR email = '$email' ";
+            $result = DPO::getAllData($sql);
             if (sizeof($result) >= 1) {
                 return false;
             }
@@ -51,9 +49,8 @@ class ModelUser
     {
         try {
 
-            $sql = "SELECT * FROM quanlythuvien.students WHERE email = '${email}' ";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $sql = "SELECT * FROM quanlythuvien.students WHERE email = '$email' ";
+            $result = DPO::getAllData($sql);
             if (sizeof($result) >= 1) {
                 return false;
             }
@@ -80,9 +77,9 @@ class ModelUser
     public function updateUser($id,$name,$email,$password)
     {
         try {
-            $sql = "UPDATE quanlythuvien.students SET name='$name', password='$password', email='$email' WHERE id='$id'";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
+            $sql = "UPDATE quanlythuvien.students SET name=?, password=?, email=? WHERE id=?";
+            $param = array($name,$password,$email,$id);
+            DPO::updateData($sql, $param);
             return true;
         } catch (Exception $e) {
             return null;

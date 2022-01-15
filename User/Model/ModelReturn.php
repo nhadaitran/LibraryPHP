@@ -29,8 +29,7 @@ class ModelReturn
             LEFT JOIN quanlythuvien.issue i ON r.id_issue = i.id
             LEFT JOIN quanlythuvien.books b ON i.id_book = b.id
             WHERE i.id_student='$id_student'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
