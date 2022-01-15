@@ -34,6 +34,7 @@ function manage_book() {
 }
 
 function addFav(id_book) {
+    var id_book = jQuery('#btnAddFav').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -45,6 +46,7 @@ function addFav(id_book) {
     });
 }
 function deFav(id_book) {
+    var id_book = jQuery('#btnDeFav').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -69,8 +71,9 @@ function addFavH(id_book) {
             book: 'favH'
         },
         success: function (data) {
-            jQuery('#search_table').html(data);
+            // jQuery('#search_table').html(data);
             manage_book();
+            load_pagination();
         }
     });
 }
@@ -87,8 +90,9 @@ function deFavH(id_book) {
             book: 'defavH'
         },
         success: function (data) {
-            jQuery('#search_table').html(data);
+            // jQuery('#search_table').html(data);
             manage_book();
+            load_pagination();
         }
     });
 }
@@ -132,6 +136,7 @@ function requestBook() {
             jQuery('#liveToastRequest').toast('show');
         }
     });
+    return false;
 }
 
 function updateInfo() {
@@ -183,4 +188,75 @@ function updateInfo() {
         },
     });
     return false;
+}
+load_pagination();
+function load_pagination(query = '', page_number = 1) {
+    var form_data = new FormData();
+
+    form_data.append('query', query);
+
+    form_data.append('page', page_number);
+
+    var ajax_request = new XMLHttpRequest();
+
+    ajax_request.open('POST', 'ControllerPagination.php');
+
+    ajax_request.send(form_data);
+
+    ajax_request.onreadystatechange = function () {
+        if (ajax_request.readyState == 4 && ajax_request.status == 200) {
+            var response = JSON.parse(ajax_request.responseText);
+
+            var html = '';
+
+            if (response.data != null) {
+                html += '<table class="table table-hover">';
+                html += '<thead>';
+                html += '<tr>';
+                html += '<th scope="col">Mã sách</th>';
+                html += '<th scope="col">Tiêu đề sách</th>';
+                html += '<th scope="col">Tác giả</th>';
+                html += '<th scope="col">Trạng Thái</th>';
+                html += '<th scope="col">Yêu Thích</th>';
+                html += '</tr>';
+                html += '</thead>';
+                for (var count = 0; count < response.data.length; count++) {
+                    if (response.data[count].name.length > 90) {
+                        response.data[count].name = response.data[count].name.substring(response.data[count].name, 0, 90) + "..."
+                    }
+                    html += '<tr>';
+                    html += '<td>' + response.data[count].id + '</td>';
+                    html += '<td><a href=?book=' + response.data[count].id + '>' + response.data[count].name + '</td>';
+                    html += '<td>' + response.data[count].author + '</td>';
+                    if (response.data[count].status == 1) {
+                        html += '<td><button class="btn btn-danger btn-sm" disabled="disable">not available</button></td>';
+                    } else {
+                        html += '<td><button class="btn btn-success btn-sm" disabled="disable">available</button></td>';
+                    }
+                    if (response.data[count].fid != null) {
+                        html += ' <td><button class="btn btn-danger fa fa-heart-o"onClick="deFavH(' + response.data[count].id + ');"></button></td>';
+                    } else {
+                        html += ' <td><button class="btn btn-success fa fa-heart-o" onClick="addFavH(' + response.data[count].id + ');"></button></td>';
+                    }
+                    html += '</tr>';
+                }
+                html += '</table>';
+                jQuery('#pagination_link').html(response.pagination);
+            } else {
+                html += '<form class="form-row col-md mb-3 mt-3" method="post" onSubmit="return requestBook();">';
+                html += '<div class="col-md">';
+                html += '<input class="form-control" id="nameRequest" type="text" placeholder=" Tiêu Đề Sách..." required>';
+                html += '</div>';
+                html += '<div class="col-md">';
+                html += '<input class="form-control" id="authorRequest" type="text" placeholder=" Tác Giả..." required>';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '<button class="btn btn-light" type="submit" id="btnRequest">+ Yêu cầu sách</button>';
+                html += '</div>';
+                html += '</form>';
+            }
+            jQuery('#search_table').html(html);
+        }
+
+    }
 }

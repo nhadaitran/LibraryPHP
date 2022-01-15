@@ -20,8 +20,7 @@ class ModelAdmin
         try {
 
             $sql = "SELECT * FROM quanlythuvien.admin WHERE username = '${username}' AND password = '${password}' ";
-            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
-            $result=$stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if(sizeof($result)==1){
                 return $result[0];
             }

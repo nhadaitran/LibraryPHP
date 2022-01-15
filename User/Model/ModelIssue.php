@@ -28,8 +28,7 @@ class ModelIssue
             $sql = "SELECT i.id, i.dateissue, i.id_book, i.id_student, b.name, b.author FROM quanlythuvien.issue i
             LEFT JOIN quanlythuvien.books b ON i.id_book = b.id
             WHERE i.id_student='$id_student' AND i.status='0' AND i.id_admin IS NOT NULL";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result;
             }
@@ -42,8 +41,7 @@ class ModelIssue
     {
         try {
             $sql = "SELECT * FROM quanlythuvien.issue WHERE id_student='$id_student' AND id_book='$id_book' AND status='0'";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             if ($result != null) {
                 return $result[0];
             }
@@ -52,14 +50,13 @@ class ModelIssue
             return null;
         }
     }
-    
     public function insert($id_student, $id_book)
     {
         try {
             $sql = "INSERT INTO  quanlythuvien.issue (id, dateissue, id_student, id_book, id_admin, status)
-            VALUE (?, ?, ?, ?, ?, ?)";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([null, date("Y-m-d"), $id_student, $id_book, null, 0]);
+            VALUE (?, ?, ?, ?, ?,?)";
+            $param = array(null, date("Y-m-d"), $id_student, $id_book, null, 0);
+            DPO::updateData($sql, $param);
             return true;
         } catch (Exception $e) {
             return null;
@@ -69,13 +66,12 @@ class ModelIssue
     public function updateBookIssue($id_book)
     {
         try {
-            $sql = "UPDATE quanlythuvien.books SET status=1 WHERE id='$id_book'";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
+            $sql = "UPDATE quanlythuvien.books SET status=1 WHERE id=?";
+            $param = array($id_book);
+            DPO::updateData($sql, $param);
             return true;
         } catch (Exception $e) {
             return null;
         }
     }
-    
 }

@@ -34,23 +34,37 @@
                         <div class="card col-xl-6 col-lg-12 bg-transparent">
                             <div class="mt-3 mb-3">
                                 <div class="card-img">
+                                    <?php
+                                        $newLast = $listNews[0];
+                                    ?>
                                     <img class="img-fluid " src="https://via.placeholder.com/800x400" alt="">
                                 </div>
                                 <div>
-                                    <a href="javascript:void();" class="badge badge-success">Thể loại</a>
-                                    <h4><a href="news_post.php">Tiêu đề</a></h4>
-                                    <p>Nội dung bản tin</p>
-                                    <span>Đăng bởi Admin - Jun 19, 2020</span>
+                                    <div class="badge badge-success"><?php echo $newLast["nameCategory"] ?></div>
+                                    <h4><a href="news_post.php"><?php echo $newLast["title"] ?></a></h4>
+                                    <span><?php echo $newLast["nameAdmin"]." - ".$newLast["datenews"] ?></span>
                                 </div>
                             </div>
                         </div>
                         <!-- Right single caption -->
                         <div class="card col-xl-6 col-lg-12 bg-transparent">
                             <div class="row">
-                            <?php include_once __DIR__."/single-main-archive.php" ?>
-                            <?php include_once __DIR__."/single-main-archive.php" ?>
-                            <?php include_once __DIR__."/single-main-archive.php" ?>
-                            <?php include_once __DIR__."/single-main-archive.php" ?>
+                                <?php
+                                    foreach ($listNews as $News){
+                                        echo '<div class="card col-xl-12 col-lg-6 col-md-6 col-sm-10 bg-transparent">'
+                                            .'<div class="row">'
+                                            .'<div class="col-md-3 card-img">'
+                                            .'<img class="img-fluid " src="https://via.placeholder.com/150x150" alt="">'
+                                            .'</div>'
+                                            .'<div class="col-md-9 p-1">'
+                                            .'<div class="badge badge-success">'.$News["nameCategory"].'</div>'
+                                            .'<h4><a href="news_post.php">'.$News["title"].'</a></h4>'
+                                            .'<span>'.$News["nameAdmin"]." - ".$News["datenews"].'</span>'
+                                            .'</div>'
+                                            .'</div>'
+                                            .'</div>';
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

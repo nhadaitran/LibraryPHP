@@ -51,11 +51,13 @@
                             </div>
                         </div>
                         <p style="color: red">
-                            <?php if ((!empty($_GET['error'])) && ($_GET['error']==1)){
-                                echo "Sai tên đăng nhập hoặc mật khẩu";
-                            }
-                            if ((!empty($_GET['error'])) && ($_GET['error']==2)){
-                                echo "Tài khoản đã bị khóa";
+                            <?php 
+                            if (!empty($_GET['error'])) { 
+                                if ($_GET['error']==1){
+                                    echo "Sai tên đăng nhập hoặc mật khẩu";
+                                }else{
+                                    echo "Tài khoản đã bị khoá. Liên hệ Admin để xử lý.";
+                                }
                             }
                             ?>
                         </p>

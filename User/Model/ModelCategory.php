@@ -29,8 +29,7 @@ class ModelCategory
         $catArray = array();
         try {
             $sql = "SELECT * FROM quanlythuvien.category";
-            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+            $result = DPO::getAllData($sql);
             foreach ($result as $value) {
                 $cat = new Category ($value["id"], $value["name"]);
                 array_push($catArray, $cat);
