@@ -22,3 +22,5 @@
     });
 
 </script>
+<script src="../view/assets/js/pace.min.js"></script>
+<script src="../view/assets/js/pagination.min.js"></script>
