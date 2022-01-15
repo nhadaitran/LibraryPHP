@@ -51,13 +51,15 @@ if (isset($_POST['action'])) {
             if ($_FILES['fileImage']['error'] == 0 && !empty($_FILES['fileImage'])) {
                 $modelNews = new ModelNews();
                 $oldNews = $modelNews->findNewsById($id);
+
+                if(!empty($oldNews['image']))
                 unlink('../image/' . $oldNews['image']);
 
                 $fileNameImageTemp = $_FILES['fileImage']['name'];
                 $urlImageTemp = $_FILES['fileImage']['tmp_name'];
-
+                
                 $fileType = substr($fileNameImageTemp, strrpos($fileNameImageTemp, '.'));
-
+                
                 $nameImage = $string = str_replace(' ', '', $title);
                 $nameImage = Contraints::vn_to_str($nameImage);
                 $nameImage = strtolower($nameImage);
@@ -66,7 +68,6 @@ if (isset($_POST['action'])) {
                 move_uploaded_file($urlImageTemp, "../image/" . $_FILES['fileImage']['name']);
 
                 rename("../image/" . $_FILES['fileImage']['name'], "../image/" . $nameImage);
-                $news = new  News(3, "image", 1, "titile2", "des", date('d-m-y'), 1);
                 $modelNews = new ModelNews();
                 $news = new News($id, $nameImage, $category, $title, $description, $date, $idAD);
                 $modelNews->updateNews($news);
