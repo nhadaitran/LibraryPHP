@@ -23,8 +23,8 @@ class ModelNews
             $sql = " SELECT n.id, n.title, n.datenews, n.description, nc.name, a.fullname FROM quanlythuvien.news n"
                     ." JOIN quanlythuvien.newscategories nc ON n.id_newscategory = nc.id"
                     ." JOIN quanlythuvien.admin a ON n.id_admin = a.id ";
-            $stmt = $this->conn->query($sql,PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
+
+            $result = DPO::getAllData($sql);
             return $result;
         } catch (Exception $e) {
             return null;

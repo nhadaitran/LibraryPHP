@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/Admin/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/Admin/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/Admin/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/Admin/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/Admin/vendor/composer" />
+    </include_path>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7">
     <option name="suggestChangeDefaultLanguageLevel" value="false" />
   </component>
