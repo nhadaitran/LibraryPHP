@@ -38,8 +38,7 @@
                                             <td>' . $member['lock'] . '</td>
                                             <td>
                                             <form action="../../Controller/ControllerMember.php" method="GET">
-                                                <button class="btn btn-primary zmdi zmdi-edit" type="button"></button>
-                                                <button class="btn btn-danger zmdi zmdi-delete" type="button"></button>
+                                                
                                                 <a href="../Controller/ControllerMember.php?action=lock&id='. $member['id'].'" class="btn btn-warning zmdi zmdi-lock" type="button"></a>
                                             </form>
                                             </td>

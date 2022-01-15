@@ -21,10 +21,7 @@ var inputSearchMember = $("#inputSearchMember");
                     row.append($('<td>' + element['email'] + '</td>'));
                     row.append($('<td>' + element['lock'] + '</td>'));
                     row.append("<td>" +
-                        // "<button class='btn btn-primary zmdi zmdi-edit' type='button'/>" +
-                        "<a href='../Controller/ControllerMember.php?action=edit&id="+element['id']+"' class='btn btn-primary zmdi zmdi-edit' type='button'></a>" +
-                        // "<button class='btn btn-danger zmdi zmdi-delete' type='button'/>" +
-                        "<a href='../Controller/ControllerMember.php?action=delete&id="+element['id']+"' class='btn btn-danger zmdi zmdi-delete' type='button'></a>" +
+                        
                         // "<button class='btn btn-warning zmdi zmdi-lock' type='button'/>" +
                         "<a href='../Controller/ControllerMember.php?action=lock&id="+element['id']+"' class='btn btn-warning zmdi zmdi-lock' type='button'></a>" +
                      "</td>");
