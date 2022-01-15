@@ -35,7 +35,8 @@ class ModelIssue
             $sql = " SELECT i.id, i.status,i.dateissue, st.name as nameStudent, a.fullname as nameAdmin, bo.name  as nameBook FROM quanlythuvien.issue i "
                     ." LEFT JOIN quanlythuvien.admin a ON i.id_admin = a.id "
                     ." LEFT JOIN quanlythuvien.students st ON i.id_student = st.id "
-                    ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id ";
+                    ." LEFT JOIN quanlythuvien.books bo ON i.id_book = bo.id "
+                    ." WHERE i.status = 0";
             $result = DPO::getAllData($sql);
             return $result;
         } catch (Exception $e) {

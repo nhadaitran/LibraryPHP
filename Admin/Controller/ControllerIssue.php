@@ -17,7 +17,7 @@ class ControllerIssue{
     //API
     public static function searchAllIssue(){
         $modelIsuue = new ModelIssue();
-        $issueList = $modelIsuue ->getAllIssue();
+        $issueList = $modelIsuue->getAllIssue();
         ob_clean();
         echo json_encode($issueList,JSON_UNESCAPED_UNICODE);
     }

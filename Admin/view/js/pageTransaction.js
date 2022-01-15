@@ -8,6 +8,7 @@ inputSearchIssue.on('input propertychange',function (){
         cache: false,
         dataType:'json',
         success: function (data) {
+            console.log(data);
             var tableIssue = $('#tableIssue');
             $(".trIssue").remove();
             $.each(data, function(key, element) {
