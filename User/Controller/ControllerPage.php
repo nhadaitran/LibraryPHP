@@ -4,6 +4,11 @@ class ControllerPage
 {
     public static function responsePageHome()
     {
+
+        include_once "../Model/ModelNews.php";
+        $modelNews = new ModelNews();
+        $listNews = $modelNews->getAllNews();
+
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
