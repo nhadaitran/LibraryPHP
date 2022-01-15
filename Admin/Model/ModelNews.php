@@ -81,8 +81,4 @@ class ModelNews
     }
 }
 
-//$model = new ModelNews();
-//$news = new  News(3, "image2", 1, "titile2", "des", date('d-m-y'), 1);
-//$model->updateNews($news);
-
 
