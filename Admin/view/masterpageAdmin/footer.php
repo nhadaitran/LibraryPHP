@@ -20,7 +20,13 @@
             $('.toast').toast('show');
         });
     });
+<<<<<<< HEAD
 
 </script>
 <script src="../view/assets/js/pace.min.js"></script>
 <script src="../view/assets/js/pagination.min.js"></script>
+=======
+</script>
+<script src="../view/assets/js/pagination.min.js"></script>
+<script src="../view/assets/js/pace.min.js"></script>
+>>>>>>> 7f8c9bed27023ffad0368bf56d42fdae2f693969

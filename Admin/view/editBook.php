@@ -76,7 +76,7 @@ $listCategory = $data["listCategory"];
                                                     </div>
                                                     <div class="form-group col-lg-5">
                                                         <label for="input-10">Nội dung</label><br/>
-                                                        <textarea value="<?php echo $book['description']?>"  name="decription" rows="4" cols="50" ></textarea>
+                                                        <textarea name="decription" rows="4" cols="50" ><?php echo $book['description']?></textarea>
                                                     </div>
 
                                                     <div class="form-group col-lg-2">
