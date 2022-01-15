@@ -1,5 +1,6 @@
 <?php
 include_once "../../util/DPO.php";
+include_once "../../Entity/News.php";
 class ModelNews
 {
     private $conn;
@@ -71,15 +72,17 @@ class ModelNews
 
     public function updateNews($news){
         try{
-            $sql = "UPDATE quanlythuvien.news SET image=:image, id_newscategory=:id_newscategory, title=:title, description=:description, datenews=:datenew, id_admin=:news WHERE id =:id";
+            $sql = "UPDATE quanlythuvien.news SET image=:image,id_newscategory=:id_newscategory,title=:title, description=:description, datenews=:datenews, id_admin=:id_admin WHERE id =:id";
             $param = array(":image"=>$news->getImage(),":id_newscategory"=>$news->getIdNewcategory(),":title"=>$news->getTitle(),":description"=>$news->getDescription(),":datenews"=>$news->getDateNew(),":id_admin"=>$news->getIdAdmin(),":id"=>$news->getId());
             DPO::updateData($sql,$param);
         } catch (Exception $e){
             return null;
         }
     }
-
-
 }
+
+//$model = new ModelNews();
+//$news = new  News(3, "image2", 1, "titile2", "des", date('d-m-y'), 1);
+//$model->updateNews($news);
 
 

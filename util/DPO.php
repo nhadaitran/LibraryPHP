@@ -43,6 +43,7 @@
                 $stmt = self::$conn->prepare($sql);
                 $stmt->execute($param);
                 $result = $stmt->fetchAll();
+
                 return $result;
             }catch (Exception $e){
                 return null;
@@ -51,7 +52,7 @@
         }
         public static function updateData($sql,$param = array()){
             try{
-               
+
                 $stmt = self::$conn->prepare($sql);
                 $stmt->execute($param);
                 $result = $stmt->rowCount();

@@ -2,6 +2,7 @@
 include_once "../Model/ModelNews.php";
 include_once "../../Entity/News.php";
 include "../../util/Contraints.php";
+
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
     switch ($action) {
@@ -65,20 +66,18 @@ if (isset($_POST['action'])) {
                 move_uploaded_file($urlImageTemp, "../image/" . $_FILES['fileImage']['name']);
 
                 rename("../image/" . $_FILES['fileImage']['name'], "../image/" . $nameImage);
-
+                $news = new  News(3, "image", 1, "titile2", "des", date('d-m-y'), 1);
                 $modelNews = new ModelNews();
                 $news = new News($id, $nameImage, $category, $title, $description, $date, $idAD);
-                
                 $modelNews->updateNews($news);
-                header("Location: ../Controller/ControllerPage.php?page=directorymanagement&&savePost");
+
             } else {
                 $modelNews = new ModelNews();
                 $oldNews = $modelNews->findNewsById($id);
                 $news = new News($id, $oldNews['image'], $category, $title, $description, $date, $idAD);
                 $modelNews->updateNews($news);
-                header("Location: ../Controller/ControllerPage.php?page=directorymanagement&&savePost");
             }
-
+            header("Location: ../Controller/ControllerPage.php?page=directorymanagement&&savePost");
             break;
         case 'delete':
             $id = $_POST['id'];
