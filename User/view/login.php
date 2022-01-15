@@ -51,7 +51,13 @@
                             </div>
                         </div>
                         <p style="color: red">
-                            <?php if (!empty($_GET['error'])) echo "Sai tên đăng nhập hoặc mật khẩu"  ?>
+                            <?php if ((!empty($_GET['error'])) && ($_GET['error']==1)){
+                                echo "Sai tên đăng nhập hoặc mật khẩu";
+                            }
+                            if ((!empty($_GET['error'])) && ($_GET['error']==2)){
+                                echo "Tài khoản đã bị khóa";
+                            }
+                            ?>
                         </p>
                         <div class="form-row">
                             <div class="form-group col-6">

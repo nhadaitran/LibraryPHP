@@ -5,9 +5,15 @@ class ControllerUser
 {
     public static function responseHomePage($user)
     {
+        // var_dump($user);
+        // exit();
         if ($user == null) {
             header('Location:../view/login.php?error=1');
-        } else if ($user == -1) {
+        }else if ($user == -2) {
+            header('Location:../view/login.php?error=2');
+            exit();
+        } 
+        else if ($user == -1) {
             header('Location:../view/register.php?error=1');
         } else {
             session_start();
@@ -93,7 +99,17 @@ if (sizeof($_POST) > 0 && $_POST['action'] != null) {
                     ControllerUser::responseAdminHome($user);
                 } else {
                     $user = $modelUser->checkLogin($username, $password);
-                    ControllerUser::responseHomePage($user);
+                    if($user != null){
+                        $userLock = $modelUser->checkLoginLock($username, $password);
+                        if($userLock!=null){
+                            ControllerUser::responseHomePage($userLock); 
+                        }
+                        else{
+                                                        
+                            ControllerUser::responseHomePage($userLock = -2);
+                        }                        
+                    }
+                    ControllerUser::responseHomePage($user);    
                 }
             }
             break;

@@ -19,7 +19,22 @@ class ModelUser
     {
         try {
 
-            $sql = "SELECT * FROM quanlythuvien.students WHERE username = '${username}' AND password = '${password}' ";
+            $sql = "SELECT * FROM quanlythuvien.students s WHERE username = '${username}' AND password = '${password}' ";
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            if (sizeof($result) == 1) {
+                return $result[0];
+            }
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
+    public function checkLoginLock($username, $password)
+    {
+        try {
+            $sql = "SELECT * FROM quanlythuvien.students s WHERE username = '${username}' AND password = '${password}' AND s.lock = 0 ";
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             if (sizeof($result) == 1) {
