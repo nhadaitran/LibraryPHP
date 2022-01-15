@@ -67,9 +67,9 @@
                                     <a class="btn btn-light fa fa-long-arrow-left" href="../Controller/ControllerPage.php?page=home"></a>
                                     <?php
                                     if ($fav == null) {
-                                        echo '<button class="btn btn-success m-3 fa fa-heart-o" id="btnAddFav" onClick="addFav(' . $book['id'] . ');"></button>';
+                                        echo '<button class="btn btn-success m-3 fa fa-heart-o" id="btnAddFav" onClick="addFav();" value="' . $book['id'] . '"></button>';
                                     } else {
-                                        echo '<button class="btn btn-danger m-3 fa fa-heart-o" id="btnDeFav" onClick="deFav(' . $book['id'] . ');"></button>';
+                                        echo '<button class="btn btn-danger m-3 fa fa-heart-o" id="btnDeFav" onClick="deFav();" value="' . $book['id'] . '"></button>';
                                     }
                                     if ($book['status'] == 0) {
                                         echo '<button class="btn btn-success fa fa-check" id="btnIssue" onClick="addIssue();" value="' . $book['id'] . '"></button>';

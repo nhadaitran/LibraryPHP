@@ -34,6 +34,7 @@ function manage_book() {
 }
 
 function addFav(id_book) {
+    var id_book = jQuery('#btnAddFav').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
@@ -45,6 +46,7 @@ function addFav(id_book) {
     });
 }
 function deFav(id_book) {
+    var id_book = jQuery('#btnDeFav').val();
     jQuery.ajax({
         method: 'get',
         url: 'ControllerBook.php',
