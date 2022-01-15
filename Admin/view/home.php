@@ -3,18 +3,19 @@
 <html lang="en">
     <?php include_once __DIR__."/masterpageAdmin/header.php" ?>
     <body class="bg-theme bg-theme2">
-        <!-- Start wrapper-->
+                            <!-- Start wrapper-->
         <div id="wrapper">
-
-            <!--Start sidebar-wrapper-->
+                            <!--Start sidebar-wrapper-->
             <?php include_once __DIR__."/masterpageAdmin/menuleft.php" ?>
-            <!--End sidebar-wrapper-->
+                            <!--End sidebar-wrapper-->
 
-            <!--Start topbar header-->
+                            <!--Start topbar header-->
             <?php include_once __DIR__."/masterpageAdmin/menutop.php" ?>
-            <!--End topbar header-->
+                            <!--End topbar header-->
 
             <div class="content-wrapper">
+
+                <!-- start container-fluid-->
                 <div class="container-fluid">
 
                     <!--Start Dashboard Content-->
@@ -61,22 +62,47 @@
                             </div>
                         </div>
                     </div>
-                    <!--End Row-->
 
                     <!--End Dashboard Content-->
+
+                    <!--Start table report-->
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                                    <li class="nav-item">
+                                        <a href="javascript:void();" data-target="#book" data-toggle="pill" class="nav-link  active"><i class="zmdi zmdi-account-calendar"></i><span class="hidden-xs">Report</span></a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content p-3">
+                                    <div class="tab-pane active" id="book">
+                                        <?php include_once "masterpageAdmin/tableReport.php" ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End table report-->
+
                 </div>
                 <!-- End container-fluid-->
 
-            </div><!--End content-wrapper-->
-            <!--Start Back To Top Button-->
+            </div>
+            <!--End content-wrapper-->
+
+
+
+
+                            <!--Start Back To Top Button-->
             <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-            <!--End Back To Top Button-->
+                            <!--End Back To Top Button-->
 
-            <!--Start footer-->
+                            <!--Start footer-->
             <?php include_once __DIR__."/masterpageAdmin/footer.php" ?>
-            <!--End footer-->
+                                <!--End footer-->
 
-        </div><!--End wrapper-->
+        </div>
+                            <!--End wrapper-->
 
     </body>
 </html>

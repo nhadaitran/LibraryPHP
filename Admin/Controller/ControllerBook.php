@@ -4,7 +4,8 @@ include_once "../Model/ModelBook.php";
 include_once "../../Entity/Book.php";
 include "../../util/Contraints.php";
 
-
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ControllerBook
 {
@@ -29,6 +30,15 @@ class ControllerBook
         try{
             $modelBook = new ModelBook();
             $modelBook ->deleteBook($idBook);
+        }catch (Exception $e){
+            return null;
+        }
+    }
+
+    //API
+    public static function reportBook(){
+        try{
+
         }catch (Exception $e){
             return null;
         }
@@ -153,11 +163,12 @@ if(sizeof($_GET)>0){
                 $idBook = $_GET['idBook'];
                 ControllerBook::deleteBook($idBook);
                 break;
-            case 'editBook':
+            case "reportBook":
+                ControllerBook::reportBook();
                 break;
         }
     }
 }
 
-
+ControllerBook::reportBook();
 
