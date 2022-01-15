@@ -38,6 +38,43 @@ class ControllerBook
     //API
     public static function reportBook(){
         try{
+            require '../vendor/autoload.php';
+            $modelBook = new ModelBook();
+            $listBook = $modelBook ->reportBook();
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            //Tạo style cho file excel
+
+            $sheet->getColumnDimension("B")->setAutoSize(true);
+            $sheet->getColumnDimension("C")->setAutoSize(true);
+            $sheet->getColumnDimension("D")->setAutoSize(true);
+            $sheet->getColumnDimension("E")->setAutoSize(true);
+            $sheet->getColumnDimension("F")->setAutoSize(true);
+
+            $sheet->setTitle("Report sách");
+            $sheet->setCellValue('A1', 'ID');
+            $sheet->setCellValue('B1', 'NAME BOOK');
+            $sheet->setCellValue('C1', 'AUTHOR');
+            $sheet->setCellValue('D1', 'CATEGORY');
+            $sheet->setCellValue('E1', 'STATUS');
+            $sheet->setCellValue('F1', 'DATE');
+
+            $numRow = 2;
+            foreach ($listBook as $Book) {
+                $sheet->setCellValue('A' . $numRow, $Book["id"]);
+                $sheet->setCellValue('B' . $numRow, $Book["name"]);
+                $sheet->setCellValue('C' . $numRow, $Book["author"]);
+                $sheet->setCellValue('D' . $numRow, $Book["nameCategory"]);
+                $sheet->setCellValue('E' . $numRow, $Book["status"]);
+                $sheet->setCellValue('F' . $numRow, $Book["date"]);
+                $numRow++;
+            }
+            ob_clean();
+            $writer = new Xlsx($spreadsheet);
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename="ReportBook.xls"');
+            $writer->save('php://output');
 
         }catch (Exception $e){
             return null;
@@ -169,6 +206,4 @@ if(sizeof($_GET)>0){
         }
     }
 }
-
-ControllerBook::reportBook();
 

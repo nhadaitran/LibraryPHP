@@ -14,11 +14,11 @@
                         <tbody id="tableIssue">
                             <tr>
                                 <td>Xuất báo cáo sách</td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <a href="ControllerBook.php?action=reportBook" type='submit' class='btn btn-secondary'>Xuất excel</a></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo sách mới thêm trong tháng</td>
-                                <td> <button type='submit' class='btn btn-secondary'>Xuất excel</button></td>
+                                <td> <button class='btn btn-secondary'>Xuất excel</button></td>
                             </tr>
                             <tr>
                                 <td>Xuất báo cáo mượn </td>
