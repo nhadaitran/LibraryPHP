@@ -205,7 +205,7 @@ function load_pagination(query = '', page_number = 1) {
 
             var html = '';
 
-            if (response.data.length > 0) {
+            if (response.data != null) {
                 html += '<table class="table table-hover">';
                 html += '<thead>';
                 html += '<tr>';
@@ -217,8 +217,8 @@ function load_pagination(query = '', page_number = 1) {
                 html += '</tr>';
                 html += '</thead>';
                 for (var count = 0; count < response.data.length; count++) {
-                    if(response.data[count].name.length > 90){
-                        response.data[count].name = response.data[count].name.substring(response.data[count].name,0,90) + "..."
+                    if (response.data[count].name.length > 90) {
+                        response.data[count].name = response.data[count].name.substring(response.data[count].name, 0, 90) + "..."
                     }
                     html += '<tr>';
                     html += '<td>' + response.data[count].id + '</td>';
@@ -237,9 +237,21 @@ function load_pagination(query = '', page_number = 1) {
                     html += '</tr>';
                 }
                 html += '</table>';
+                jQuery('#pagination_link').html(response.pagination);
+            } else {
+                html += '<form class="form-row col-md mb-3 mt-3" method="post" onSubmit="return requestBook();">';
+                html += '<div class="col-md">';
+                html += '<input class="form-control" id="nameRequest" type="text" placeholder=" Tiêu Đề Sách..." required>';
+                html += '</div>';
+                html += '<div class="col-md">';
+                html += '<input class="form-control" id="authorRequest" type="text" placeholder=" Tác Giả..." required>';
+                html += '</div>';
+                html += '<div class="col-md-2">';
+                html += '<button class="btn btn-light" type="submit" id="btnRequest">+ Yêu cầu sách</button>';
+                html += '</div>';
+                html += '</form>';
             }
             jQuery('#search_table').html(html);
-            jQuery('#pagination_link').html(response.pagination);
         }
 
     }

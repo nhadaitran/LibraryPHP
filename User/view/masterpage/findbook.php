@@ -17,7 +17,7 @@
                             </div>
 
                             <div class="form-row col-md">
-                                <input class="form-control" type="text" name="search" id="search" placeholder="Tìm kiếm bằng tiêu đề sách..." onkeyup="search_data()">
+                                <input class="form-control" type="text" name="search" id="search" placeholder="Tìm kiếm bằng tiêu đề sách..." onkeyup="load_pagination(this.value)">
                             </div>
 
                         </div>

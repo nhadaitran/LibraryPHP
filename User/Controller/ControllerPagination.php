@@ -15,12 +15,17 @@ if (isset($_POST["query"])) {
     } else {
         $start = 0;
     }
-
     session_start();
     include_once "../Model/ModelBook.php";
     $modelBook = new ModelBook();
     $total_data = $modelBook->countBook();
-    $data = $modelBook->getLimit($start, $limit);
+
+    if ($_POST["query"] == "") {
+        $data = $modelBook->getLimit($start, $limit);
+    } else {
+        $para = $_POST["query"];
+        $data = $modelBook->getLimitSearch($para,$start, $limit);
+    }
 
     $pagination_html = '
 	<div align="center">
@@ -29,7 +34,7 @@ if (isset($_POST["query"])) {
 
     $total_links = ceil($total_data / $limit);
 
-    $previous_link = '';
+    $previous_link = ''; 
 
     $next_link = '';
 

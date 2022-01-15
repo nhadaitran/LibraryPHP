@@ -86,6 +86,36 @@ class ModelBook
         }
     }
 
+    public function getLimitSearch($para, $start, $limit)
+    {
+        try {
+            if (!empty($_SESSION['user'])) {
+                $user = $_SESSION['user'];
+                $id = $user['id'];
+                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+            FROM quanlythuvien.books b
+            LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book";
+                if ($para != "") {
+                    $sql .= " WHERE b.name like '%$para%' AND ( f.id_student = '$id' OR f.id_student IS NULL) ORDER BY b.id  DESC";
+                } else {
+                    $sql .= " WHERE f.id_student = '$id' OR f.id_student IS NULL ORDER BY b.id  DESC";
+                }
+                $sql .= "
+            LIMIT $start , $limit";
+            } else {
+                $sql = "SELECT * FROM quanlythuvien.books";
+            }
+            $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            if ($result != null) {
+                return $result;
+            }
+            return null;
+        } catch (Exception $e) {
+            return null;
+        }
+    }
+
     public function getByID($id)
     {
         try {
@@ -117,17 +147,17 @@ class ModelBook
     }
     public function searchBooks($title)
     {
-        try {            
-                $user = $_SESSION['user'];
-                $iduser = $user['id'];
-                $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
+        try {
+            $user = $_SESSION['user'];
+            $iduser = $user['id'];
+            $sql = "SELECT b.id, b.name, b.author, b.id_category, b.status, b.description, b.date, b.image, f.id as fid 
             FROM quanlythuvien.books b
             LEFT JOIN quanlythuvien.favorite f ON b.id = f.id_book";
-                if ($title != "") {
-                    $sql .= " WHERE b.name like '%$title%' AND ( f.id_student = '$iduser' OR f.id_student IS NULL) ORDER BY b.id  DESC";
-                } else {
-                    $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
-                }            
+            if ($title != "") {
+                $sql .= " WHERE b.name like '%$title%' AND ( f.id_student = '$iduser' OR f.id_student IS NULL) ORDER BY b.id  DESC";
+            } else {
+                $sql .= " WHERE f.id_student = '$iduser' OR f.id_student IS NULL ORDER BY b.id  DESC";
+            }
             $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
             if ($result != null) {
