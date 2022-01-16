@@ -183,18 +183,20 @@
                                                                 <tr>
                                                                     <th scope="col">id</th>
                                                                     <th scope="col">Title</th>
-                                                                    <th scope="col">Date Add New</th>
+                                                                    <th scope="col">Date Add</th>
                                                                     <th scope="col">Name Admin</th>
                                                                     <th scope="col">Decription</th>
-                                                                    <th scope="col">Category New</th>
+                                                                    <th scope="col">Category</th>
                                                                     <th scope="col">Setting</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <?php
+                                                                <?php                                                                
                                                                 if (!empty($data['newList'])) {
                                                                     foreach ($data['newList'] as $new) {
                                                                         $id = $new['id'];
+                                                                        $new['title'] = strlen($new['title']) > 30 ? substr($new['title'], 0, 30) . "..." : $new['title'];
+                                                                        $new['description'] = strlen($new['description']) > 30 ? substr($new['description'], 0, 30) . "..." : $new['description'];
                                                                         echo "<tr>"
                                                                             . '<th scope="row">' . $new['id'] . '</th>'
                                                                             . '<td>' . $new['title'] . '</td>'

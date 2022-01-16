@@ -16,12 +16,12 @@
 
         <li>
             <a href="ControllerPage.php?page=transaction">
-                <i class="zmdi zmdi-assignment-returned"></i> <span>Quản lý giao dịch</span>
+                <i class="zmdi zmdi-assignment-returned"></i> <span>Quản lý mượn / trả</span>
             </a>
         </li>
         <li>
             <a href="ControllerPage.php?page=directorymanagement">
-                <i class="zmdi zmdi-assignment-returned"></i> <span>Quản lý danh mục</span>
+                <i class="zmdi zmdi-assignment-returned"></i> <span>Quản lý bài viết</span>
             </a>
         </li>
         <li>

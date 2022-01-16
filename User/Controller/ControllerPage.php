@@ -9,6 +9,7 @@ class ControllerPage
         $modelNews = new ModelNews();
         $listNews = $modelNews->getAllNews();
 
+
         include_once "../Model/ModelBook.php";
         $modelBook = new ModelBook();
         $listBook = $modelBook->getAll();
@@ -55,12 +56,11 @@ class ControllerPage
 
     public static function responsePageNews()
     {
-        include_once "../view/news.php";
-    }
-
-    public static function responsePageNewsPost($id)
-    {
-        include_once "../view/news_post.php";
+        include_once "../Model/ModelNews.php";
+        $modelNews = new ModelNews();
+        $listNews = $modelNews->getAllNews();
+        $listNewsCa = $modelNews->getAllNewsCa();        
+        include_once "../view/news.php";   
     }
 
     public static function responsePageBook($id)
@@ -77,6 +77,15 @@ class ControllerPage
         $book = $modelBook->getByID($id);
         include_once "../view/book.php";
     }
+
+    public static function responsePageNewsPost($id)
+    {
+        include_once "../Model/ModelNews.php";
+        $modelNews = new modelNews();
+        $news = $modelNews->getNews($id);
+        $listNewsCa = $modelNews->getAllNewsCa();                
+        include_once "../view/news_post.php";
+    }
 }
 
 if (!empty($_GET['book'])) {
@@ -87,6 +96,19 @@ if (!empty($_GET['book'])) {
     }
     if (!empty($user)) {
         ControllerPage::responsePageBook($id);
+    } else {
+        ControllerPage::responsePageLogin();
+    }
+}
+
+if (!empty($_GET['news'])) {
+    $id = $_GET['news'];
+    session_start();
+    if (!empty($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+    if (!empty($user)) {
+        ControllerPage::responsePageNewsPost($id);
     } else {
         ControllerPage::responsePageLogin();
     }
@@ -120,12 +142,6 @@ if (!empty($_GET['page'])) {
             break;
         case 'news':
             ControllerPage::responsePageNews();
-            break;
-        case 'newspost':
-            if (!empty ($_GET['news'])) {
-                $id= $_GET['news'];
-                ControllerPage::responsePageNewsPost($id);
-            }
             break;
         default:
             break;
